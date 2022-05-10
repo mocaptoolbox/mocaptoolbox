@@ -74,6 +74,8 @@ Linux/Windows: Currently not tested but should be compatible.
 
 WiiDataCapture is a software that displays and saves acceleration data of up to 8 Nintendo Wiimotes. Version 2.2 also features audio playback (from line in input or computer) and audio recording.
 
+Download [WiiDataCapture 2.2](https://www.jyu.fi/hytk/fi/laitokset/mutku/en/research/materials/mocaptoolbox/WiiDataCaptureDownload2.1)
+
 #### Compatibility
 The WiiDataCapture 2.2 utility runs on Mac OS X until v10.12 (Sierra) with both Osculator 2 and 3. If the Wiimote refuses to pair with the computer, try restarting the computer.
 #### System Requirements
