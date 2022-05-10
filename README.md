@@ -1,10 +1,10 @@
 # MoCap Toolbox
 
-## The MoCap Toolbox is a Matlab® toolbox that contains functions for the analysis and visualization of motion capture data.
+## Analysis and visualization of motion capture data in MATLAB
 
-The MoCap Toolbox is a [Matlab®](http://www.mathworks.com/) toolbox that contains functions for the analysis and visualization of motion capture data. The toolbox is mainly aimed for the analysis of music-related movement, but might be useful in other areas of study as well. It supports the generic .c3d file format, the .tsv data format produced by the [Qualisys Motion Capture system](http://www.qualisys.com/), the .mat file format produced by the Qualisys Motion Capture system, the .bvh format, and the .wii format produced by the [WiiDataCapture](https://www.jyu.fi/hytk/fi/laitokset/mutku/en/research/materials/mocaptoolbox#wiidatacapture-2-1) software.
+The MoCap Toolbox is a [MATLAB®](http://www.mathworks.com/) toolbox that contains functions for the analysis and visualization of motion capture data. The toolbox is mainly aimed for the analysis of music-related movement, but might be useful in other areas of study as well. It supports the generic .c3d file format, the .tsv data format produced by the [Qualisys Motion Capture system](http://www.qualisys.com/), the .mat file format produced by the Qualisys Motion Capture system, the .bvh format, and the .wii format produced by the [WiiDataCapture](https://www.jyu.fi/hytk/fi/laitokset/mutku/en/research/materials/mocaptoolbox#wiidatacapture-2-1) software.
 
-To use the toolbox, you need the [Matlab]((http://www.mathworks.com/)) software. Before using it, the toolbox has to be added in the Matlab path variable. The toolbox should be compatible with most versions of Matlab and most platforms. The latest implementations and developments have been made on Matlab version 8.4 (R2014b) running on Macintosh OS X v10.10. The MoCap Toolbox comes with no warranty. It is free software, and you are welcome to redistribute it under certain conditions. See the file License.txt provided with the toolbox for details of GNU General Public License.
+To use the toolbox, you need the [MATLAB]((http://www.mathworks.com/)) software. Before using it, the toolbox has to be added in the Matlab path variable. The toolbox should be compatible with most versions of Matlab and most platforms. The latest implementations and developments have been made on Matlab version 8.4 (R2014b) running on Macintosh OS X v10.10. The MoCap Toolbox comes with no warranty. It is free software, and you are welcome to redistribute it under certain conditions. See the file License.txt provided with the toolbox for details of GNU General Public License.
 
  
 
