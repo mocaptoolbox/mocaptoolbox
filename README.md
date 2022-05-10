@@ -4,7 +4,7 @@
 
 The MoCap Toolbox is a [MATLAB®](http://www.mathworks.com/) toolbox that contains functions for the analysis and visualization of motion capture data. The toolbox is mainly aimed for the analysis of music-related movement, but might be useful in other areas of study as well. It supports the generic .c3d file format, the .tsv data format produced by the [Qualisys Motion Capture system](http://www.qualisys.com/), the .mat file format produced by the Qualisys Motion Capture system, the .bvh format, and the .wii format produced by the [WiiDataCapture](https://www.jyu.fi/hytk/fi/laitokset/mutku/en/research/materials/mocaptoolbox#wiidatacapture-2-1) software.
 
-To use the toolbox, you need the [MATLAB]((http://www.mathworks.com/)) software. Before using it, the toolbox has to be added in the Matlab path variable. The toolbox should be compatible with most versions of Matlab and most platforms. The latest implementations and developments have been made on Matlab version 8.4 (R2014b) running on Macintosh OS X v10.10. The MoCap Toolbox comes with no warranty. It is free software, and you are welcome to redistribute it under certain conditions. See the file License.txt provided with the toolbox for details of GNU General Public License.
+To use the toolbox, you need the [MATLAB]((http://www.mathworks.com/)) software. Before using it, the toolbox has to be added in the MATLAB path variable. The toolbox should be compatible with most versions of MATLAB and most platforms. The latest implementations and developments have been made on MATLAB version 8.4 (R2014b) running on Macintosh OS X v10.10. The MoCap Toolbox comes with no warranty. It is free software, and you are welcome to redistribute it under certain conditions. See the file License.txt provided with the toolbox for details of GNU General Public License.
 
  
 
@@ -59,12 +59,12 @@ Download the [article](https://www.jyu.fi/hytk/fi/laitokset/mutku/en/research/ma
  
 
 ### Installation
-Unpack the MoCap Toolbox file package you have downloaded. This will create a directory called mocaptoolbox. Secondly, a version of the Matlab program needs to be installed (see www.mathworks.com). Thirdly, the Toolbox needs to be defined in the Matlab path variable. Under the File menu, select Set Path Under the Path menu, select Add to Path. Write here the name of the directory where this toolbox has been installed. Then click OK. Finally, under the File menu, select Save Path, and then Exit.
+Unpack the MoCap Toolbox file package you have downloaded. This will create a directory called mocaptoolbox. Secondly, a version of the MATLAB program needs to be installed (see www.mathworks.com). Thirdly, the Toolbox needs to be defined in the MATLAB path variable. Under the File menu, select Set Path Under the Path menu, select Add to Path. Write here the name of the directory where this toolbox has been installed. Then click OK. Finally, under the File menu, select Save Path, and then Exit.
 
  
 
 ### Compatibility
-Macintosh (OS X): The MoCap Toolbox is compatible with most recent Matlab versions and has been tested with 8.4. (R2014b) running on Macintosh OS X v10.10 and higher. 
+Macintosh (OS X): The MoCap Toolbox is compatible with most recent MATLAB versions and has been tested with 8.4. (R2014b) running on Macintosh OS X v10.10 and higher. 
 Linux/Windows: Currently not tested but should be compatible.
 
 
