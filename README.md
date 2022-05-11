@@ -9,16 +9,17 @@ To use the toolbox, you need the [MATLAB]((http://www.mathworks.com/)) software.
  
 
 ### Authors
-[Petri Toiviainen](http://users.jyu.fi/~ptoiviai/) (Professor) and [Martin Hartmann](http://users.jyu.fi/~maarhart/) (Postdoctoral researcher) are employed at the Department of Music, Art and Culture Studies of the University of Jyväskylä, Finland. Both are members of the [Centre of Excellence in Music, Mind, Body and Brain
-](https://www.aka.fi/en/research-funding/programmes-and-other-funding-schemes/finnish-centres-of-excellence/new-centres-of-excellence/centre-of-excellence-in-music-mind-body-and-brain/), which investigates various issues related with embodied music cognition. [Birgitta Burger](https://www.linkedin.com/in/birgitta-burger/) (independent researcher) has been fundamental to the development and support of the Mocap Toolbox.
+[Petri Toiviainen](http://users.jyu.fi/~ptoiviai/) (Professor) and [Martin Hartmann](http://users.jyu.fi/~maarhart/) (Postdoctoral researcher) are employed at the Department of Music, Art and Culture Studies of the University of Jyväskylä, Finland. Both are members of the [Centre of Excellence in Music, Mind, Body and Brain](https://www.aka.fi/en/research-funding/programmes-and-other-funding-schemes/finnish-centres-of-excellence/new-centres-of-excellence/centre-of-excellence-in-music-mind-body-and-brain/), which investigates various issues related with embodied music cognition. [Birgitta Burger](https://www.linkedin.com/in/birgitta-burger/) (independent researcher) is an affiliate member of the Centre of Excellence in Music, Mind, Body and Brain. She has been fundamental to the development and support of the Mocap Toolbox.
 
 If you have any comments or problems to report, please contact Petri Toiviainen or Martin Hartmann (`firstname.lastname at jyu.fi`).
 ### Download
-To download the latest release of MoCap Toolbox, you can either use the following download link or get a copy of the repository using Git.
 
-#### [Click here to download the latest version of MoCap Toolbox](https://github.com/mocaptoolbox/mocaptoolbox/archive/refs/heads/main.zip)
+#### [Click here to download the latest release of MoCap Toolbox.](https://github.com/mocaptoolbox/mocaptoolbox/releases)
+
+Alternatively, you can check out our [main development branch](https://github.com/mocaptoolbox/mocaptoolbox). To clone it via Git:
 
 `git clone https://github.com/mocaptoolbox/mocaptoolbox.git`
+
 ### Extensions / Add ons
 
 #### [Eye tracker add on](https://github.com/mocaptoolbox/EyetrackerAddOn)
