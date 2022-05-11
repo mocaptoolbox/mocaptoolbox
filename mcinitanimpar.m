@@ -36,17 +36,17 @@ function p = mcinitanimpar
 %   fps: frames per second for animation (30)
 %   output: either file name for video file, of folder for pgn frames ('tmp')
 %   videoformat: specifies video file format, either 'avi' or 'mpeg4' ('avi')
-%   createFrames: create png frames instead of video file, 1=frames, 0=video file (0)
+%   createFrames: create png frames or animated gif instead of video file, 2 = animated gif, 1=frames, 0=video file (0) % MH20201203
 %   getparams: return animation parameters, without plotting or animating frames, 1=yes, 0=no (0)
 %   perspective: perform perspective projection, 0 = orthographic (default), 1 = perspective (0)
 %   pers: perspective projection parameters:
 %       pers.c: 3D position of the camera [0 -4000 0]
 %       pers.th: orientation of the camera [0 0 0]
 %       pers.e: viewer's position relative to the display surface [0 -2000 0]
-% 
-% Colors can be given as strings if only the MATLAB string color options are used. 
-% However, any color can be specified by using RGB triplets - for example, 
-% plotting the first two markers in gray: par.markercolors=[.5 .5 .5; .5 .5 .5];  
+%
+% Colors can be given as strings if only the MATLAB string color options are used.
+% However, any color can be specified by using RGB triplets - for example,
+% plotting the first two markers in gray: par.markercolors=[.5 .5 .5; .5 .5 .5];
 %
 % see also
 % mccreateconnmatrix, mcplotframe, mcanimate
@@ -63,7 +63,7 @@ p.az = 0;
 p.el = 0;
 
 p.msize = 12;
-p.colors = 'kwwww'; 
+p.colors = 'kwwww';
 p.markercolors = [];
 p.conncolors = [];
 p.tracecolors = [];
@@ -81,6 +81,7 @@ p.numbers = [];
 p.showfnum = 0;
 
 p.animate = 0;
+p.hold = 0;
 p.fps = 30;
 p.output = 'tmp';
 p.videoformat = 'avi';
@@ -91,5 +92,3 @@ p.perspective = 0;
 p.pers.c=[0 -4000 0];
 p.pers.th=[0 0 0];
 p.pers.e=[0 -2000 0];
-
-

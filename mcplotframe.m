@@ -1,6 +1,6 @@
-function par = mcplotframe(d, n, p, proj)
-% Plots frames of motion capture data.  
-% COMPATIBILITY NOTES (v. 1.5): Please use the function without the projection input argument, 
+function [par x y z] = mcplotframe(d, n, p, proj)
+% Plots frames of motion capture data.
+% COMPATIBILITY NOTES (v. 1.5): Please use the function without the projection input argument,
 % but specify it in the animation structure instead.
 %
 % syntax
@@ -82,13 +82,15 @@ else disp([10, 'The third input argument has to be an animation parameter struct
     [y,fs] = audioread('mcsound.wav');
     sound(y,fs);
     return;
-end 
+end
 
 if p.animate && p.getparams==0 %BBADD20150303
     currdir = cd; % store current directory
     if p.createframes==1
         mkdir(p.output) %BB20150507 in case frames (series of png files) are needed, and not video file
-        cd(p.output) 
+        cd(p.output)
+    elseif p.createframes==2 %MH20201201 (animated gif)
+        fn=[p.output '.gif'] ;
     else %VideoWriter is used with video file output %BB20150507
         fn=p.output; %BB_NEW_20140212 for VideoWriter
         if strcmp(p.videoformat,'avi')
@@ -123,7 +125,7 @@ if isfield(p,'markercolors') && ~isempty(p.markercolors) %field and colors are s
         for k=1:size(p.markercolors,2)
             mcol(k,:)=lookup_l(p.markercolors(k));%convert to num array
         end
-    else 
+    else
         mcol=p.markercolors; %field and colors are set in num format already
     end
     if d.nMarkers > length(p.markercolors)
@@ -141,7 +143,7 @@ if isfield(p,'conncolors') && ~isempty(p.conncolors) %field and colors are set
         for k=1:size(p.conncolors,2)
             ccol(k,:)=lookup_l(p.conncolors(k));%convert to num array
         end
-    else 
+    else
         ccol=p.conncolors; %field and colors are set in num format already
     end
     if size(p.conn,1) > length(p.conncolors)
@@ -191,7 +193,7 @@ if ~isempty(p.trm)%created problem when merging and translating...
     p.trm=p.trm(:);
 end
 
-%warning if trace length is empty, but marker trace vector is set 
+%warning if trace length is empty, but marker trace vector is set
 if (p.trl==0 && ~isempty(p.trm)) || (p.trl==0 && ~isempty(p.tracecolors))
     disp([10, 'Warning: Please set trace length (trl) in your animation parameters in order to plot traces.', 10])
 end
@@ -263,7 +265,7 @@ if p.trl~=0
         p.twidth=twidth;
     end
 end
-    
+
 %individual widths for connectors and traces
 %fill up cwidth
 if length(p.cwidth)<size(p.conn,1)
@@ -294,16 +296,16 @@ else
         p.twidth=repmat(p.twidth(1),1,length(p.trm));
     end
 end
- 
+
 
 
 az=p.az;
 el=p.el;
-    
+
 d1 = mcrotate(d, az, [0 0 1]);
 d2 = mcrotate(d1, el, [1 0 0]); %%%%%%%
-    
-if p.perspective==0 % orthographic projection    
+
+if p.perspective==0 % orthographic projection
     x=d2.data(n,1:3:end);
     y=d2.data(n,2:3:end);
     z=d2.data(n,3:3:end);
@@ -324,10 +326,10 @@ else % perspective projection
         dd(:,3*k+(-2:0))=(rot1*rot2*rot3*(d2.data(n,3*k+(-2:0))'-repmat(p.pers.c',1,length(n))))';
     end
     % make closest marker to be on the projection plan
-    dd(:,2:3:end)=dd(:,2:3:end)-min(min(dd(:,2:3:end)))+p.pers.e(2)-p.pers.c(2); 
+    dd(:,2:3:end)=dd(:,2:3:end)-min(min(dd(:,2:3:end)))+p.pers.e(2)-p.pers.c(2);
     x=-(dd(:,1:3:end)-repmat(p.pers.e(1),length(n),d.nMarkers)).*(p.pers.e(2)./dd(:,2:3:end));
     y=(p.pers.e(2)-p.pers.c(2))./dd(:,2:3:end); % used for marker size scaling
-    z=-(dd(:,3:3:end)-repmat(p.pers.e(3),length(n),d.nMarkers)).*(p.pers.e(2)./dd(:,2:3:end));    
+    z=-(dd(:,3:3:end)-repmat(p.pers.e(3),length(n),d.nMarkers)).*(p.pers.e(2)./dd(:,2:3:end));
 end
 
 
@@ -339,7 +341,7 @@ if isempty(p.limits)
     midx = (maxx+minx)/2;
     midy = (maxy+miny)/2;
     midz = (maxz+minz)/2;
-    
+
     scrratio = p.scrsize(1)/p.scrsize(2);
     range = max((maxx-minx)/scrratio, maxz-minz)/2;
     zrange = (maxy-miny)/2;
@@ -352,8 +354,8 @@ minzz = p.limits(3);
 maxzz = p.limits(4);
 
 
-% %BBADD20150303: exit function here without doing the animation or plotting, 
-% but setting the parameters, esp. the limits, to make videos with a reduced 
+% %BBADD20150303: exit function here without doing the animation or plotting,
+% but setting the parameters, esp. the limits, to make videos with a reduced
 % set of markers that look exactly like the videos with all markers
 if p.getparams==1
     par=p;
@@ -377,24 +379,26 @@ end
 
 for k=1:size(x,1) % main loop
     if p.animate
-        clf; 
+        clf;
         axes('position', [0 0 1 1], 'XLim', [minxx maxxx], 'YLim', [minzz maxzz]);
         hold on;
     else
-        figure(fignr); clf;
+        if p.hold == 0;
+            figure(fignr); clf;
+        end
         set(gcf, 'WindowStyle','normal');
-        set(gcf,'Position',[50 50 p.scrsize(1) p.scrsize(2)]) ; % DVD: w=720 h=420        
+        set(gcf,'Position',[50 50 p.scrsize(1) p.scrsize(2)]) ; % DVD: w=720 h=420
         axes('position', [0 0 1 1]); hold on
         set(gcf, 'color', bgcol);
         view(0,90);
         colormap([ones(64,1) zeros(64,1) zeros(64,1)]);
         fignr=fignr+1;
     end
-    
+
     %plot some text to appear in background
 %     text(maxxx-650, minzz+350, {YOUR TEXT'}, 'FontSize', 24, 'color', [.15 .15 .15]);
 
-         
+
     % plot marker-to-marker connections
     if ~isempty(p.conn)
         for m=1:size(p.conn,1)
@@ -404,7 +408,7 @@ for k=1:size(x,1) % main loop
             end
         end
     end
-    
+
     % plot midpoint-to-midpoint connections
     if ~isempty(p.conn2)
         for m=1:size(p.conn2,1)
@@ -418,22 +422,22 @@ for k=1:size(x,1) % main loop
             end
         end
     end
-    
+
     % plot traces if animation
     if p.animate && p.trl~=0
-%         trml=sort(p.trm);%BB: sorting marker traces 
+%         trml=sort(p.trm);%BB: sorting marker traces
         trlen = round(p.fps * p.trl);
         start=max(1,k-trlen);
         ind = start-1+find(~isnan(x(start:k)));
         for m=1:length(p.trm)
-            if isnan(p.trm(m)) %BBFIX 20120404 mcmerge adaption - NaN traces not plotted 
+            if isnan(p.trm(m)) %BBFIX 20120404 mcmerge adaption - NaN traces not plotted
             else
                 plot(x(ind,m),z(ind,m),'-','Color',tcol(m,:),'Linewidth',p.twidth(m));
             end
         end
     end
-    
-    
+
+
     % plot markers
     for m=1:size(x,2)
         %if x(k,m)~=0 & ~isnan(x(k,m)) % if marker visible
@@ -450,7 +454,7 @@ for k=1:size(x,1) % main loop
                     set(h,'FontSize',16);
                     set(h,'Color',ncol(m,:))
                 else
-                     %if ismember(m, p.numbers) %FIX BB20120326: redefinining numbers plotting (mcmerge) 
+                     %if ismember(m, p.numbers) %FIX BB20120326: redefinining numbers plotting (mcmerge)
                      if m<=length(p.numbers)
                          if isnan(p.numbers(m)) %NaN numbers not plotted
                          else
@@ -475,21 +479,29 @@ for k=1:size(x,1) % main loop
             'HorizontalAlignment','Right','FontSize',12,'FontWeight','bold');
         set(h,'Color',colors(5,:))
     end
-    
+
 %     %plot some copywrite text or anything else - BB20121102
 %      text(maxxx-650, minzz+350, {'Jyv?skyl? Music & Motion Capture'}, 'FontSize', 24, 'color', [.9 .9 .9]);
 %     text(maxxx-300, 0, {'Birgitta Burger', 'Jyv?skyl? Univ.', 'Finland'});
 %     text(minxx+40, minzz+0.97*(maxzz-minzz), 'High Sub-Band 2 Flux', 'FontSize', 16, 'FontWeight', 'bold');
 %     text(minxx+70, minzz+0.97*(maxzz-minzz)-75, {'high speed of head'}, 'FontSize', 12, 'FontWeight', 'bold');
-    
+
     drawnow
     hold off
     if p.animate
-        if p.createframes==1 
+        if p.createframes==1
             fn=['frame', sprintf('%0.4d',k),'.png']; %old version: create frames
             imwrite(frame2im(getframe),fn,'png');
 %             fn=['frame', sprintf('%0.4d',k),'.eps'];
 %             saveas(gcf, fn, 'eps');
+        elseif p.createframes==2 %MH20200312 (animated gif)
+            im=frame2im(getframe);
+            [imind,cm]=rgb2ind(im,256);
+            if k == 1
+                imwrite(imind,cm,fn,'gif','Loopcount',inf,'DelayTime',1/p.fps)
+            else
+                imwrite(imind,cm,fn,'gif','WriteMode','append','DelayTime',1/p.fps)
+            end
         else
             writeVideo(movObj,getframe(gcf)); %BB_NEW_20140212 for VideoWriter
         end
@@ -509,7 +521,7 @@ end
 %return struct fields in the same order and way as the init params: #BB20150303
 par = orderfields(par, {'type','scrsize','limits','az','el','msize','colors','markercolors',...
     'conncolors','tracecolors','numbercolors','cwidth','twidth','conn','conn2','trm','trl',...
-    'showmnum','numbers','showfnum','animate','fps','output','videoformat','createframes','getparams','perspective','pers'});
+    'showmnum','numbers','showfnum','animate','hold','fps','output','videoformat','createframes','getparams','perspective','pers'});
 
 
 
@@ -536,6 +548,3 @@ elseif strcmp(colorstr, 'c')
 end
 
 return;
-
-
-
