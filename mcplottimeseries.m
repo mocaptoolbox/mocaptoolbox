@@ -6,9 +6,10 @@ function mcplottimeseries(varargin)
 % mcplottimeseries(d, marker, 'dim', dim) % specifying dimensions to be plotted
 % mcplottimeseries(d, marker, 'timetype', timetype) % axis unit
 % mcplottimeseries(d, marker, 'plotopt', plotopt) % combined or separate plots
-% mcplottimeseries(d, marker, 'label', label) % y-axis label 
-% mcplottimeseries(d, marker, 'names', names) % marker names 
+% mcplottimeseries(d, marker, 'label', label) % y-axis label
+% mcplottimeseries(d, marker, 'names', names) % marker names
 % mcplottimeseries(s, segm, 'var', var) % for segm data structure
+% mcplottimeseries(s, segm, 'plotarr', var) % vertical or horizontal subplot arrangement
 %
 % input parameters
 % d/s: MoCap data structure, norm data structure, or segm data structure
@@ -23,6 +24,9 @@ function mcplottimeseries(varargin)
 % label: y-axis label (default: no y-axis label). X-axis label is always set, according to timetype
 %   (however, for plotting neither x-axis nor y-axis labels: 'label', 0)
 % names: if marker names (instead of numbers) are plotted in title and legend (0: numbers (default), 1: names)
+% plotarr: arrangement of subplots; 'v' (default) or 'h' (only relevant when plotopt is set to 'sep' and more than one dim/marker is plotted):
+%    'v': vertical: subplots above each other
+%    'h': horizontal: subplots next to each other
 %
 % output
 % Figure.
@@ -36,10 +40,10 @@ function mcplottimeseries(varargin)
 % mcplottimeseries(d, 5, 'dim', 1:3, 'plotopt', 'comb', 'label', 'mm') % y-axis label: mm
 % mcplottimeseries(d, 5, 'dim', 1:3, 'timetype', 'frame', 'label', 0) % no x- axis (and no y-axis) label
 % mcplottimeseries(d, 5, 'names', 1) % marker names (instead of numbers) plotted in title and legend
+% mcplottimeseries(d, 5, 'dim', 1:3, 'plotarr', 'h') % subplots horizontal
 % mcplottimeseries(s, [3 6 20], 'var', 'angle') % for segm data structure
 % mcplottimeseries(s, 5:10, 'var', 'eucl', 'timetype', 'frame') % frames as x axis unit
 % mcplottimeseries(s, [12 14], 'var', 'quat', 'dim', 2, 'plotopt', 'comb') % all in one plot, component 2
-% 
 % comment
 %
 % Part of the Motion Capture Toolbox, Copyright 2008,
@@ -51,14 +55,14 @@ function mcplottimeseries(varargin)
 % for backwards compatibility for users, who haven't adapted their syntax yet
 if nargin>2
     if (strcmp(varargin{3},'dim') + strcmp(varargin{3},'var') + strcmp(varargin{3},'timetype') + ...
-            strcmp(varargin{3},'plotopt') + strcmp(varargin{3},'label') + strcmp(varargin{3},'names')) == 0
+            strcmp(varargin{3},'plotopt') + strcmp(varargin{3},'label') + strcmp(varargin{3},'names') + strcmp(varargin{3},'plotarr')) == 0
         disp([10, 'Warning: You are using an old version of mcplottimeseries. Please consider adapting your syntax to the new version.'])
         disp(['For more information, check the Mocap Toolbox manual.', 10])
         mcplottimeseries_dep(varargin{1:end});
         return
     end
 end
-        
+
 d=varargin{1};
 marker=varargin{2};
 
@@ -68,6 +72,7 @@ timetype=[];
 plotopt=[];
 label=[];
 names=[];
+plotarr=[];
 
 for k=3:2:length(varargin)
     if strcmp(varargin{k}, 'dim')
@@ -82,6 +87,8 @@ for k=3:2:length(varargin)
         label=varargin{k+1};
     elseif strcmp(varargin{k}, 'names')
         names=varargin{k+1};
+    elseif strcmp(varargin{k}, 'plotarr')
+        plotarr=varargin{k+1};
     else
         str=sprintf('Input argument %s unknown.', varargin{k});
         disp([10, str, 10])
@@ -156,6 +163,17 @@ else
     disp([10, 'Incorrect spelling of plotopt input. Value set to "sep".', 10])
 end
 
+if isempty(plotarr)
+    plotarr='v';
+end
+if strcmp(plotarr,'v') || strcmp(plotarr,'h')
+else
+    plotarr='v';
+    disp([10, 'Incorrect spelling of plotarr input. Value set to "v".', 10])
+end
+%TODO catch plotopt=comb not compatible with plotarr - and also only works
+%if dim is larger than 1 or marker is larger than 1...
+
 if isempty(names)
     names=0;
 end
@@ -212,16 +230,20 @@ colors={'blue', 'green', 'red', 'cyan', 'magenta', 'yellow', 'black'};
 
 if isfield(d,'type')
     t = (1:d.nFrames)';%-1 taken away as it caused time series to start at 0... [BB 20110301]
-    if strcmp(timetype,'sec') 
-        t = t/d.freq; 
+    if strcmp(timetype,'sec')
+        t = (t-1)/d.freq; %t-1 to start at 0.0s [BB 20190509]
     end
     if strcmp(d.type, 'MoCap data')
-%         figure
+        figure
         al=1;%amount of lines - for 'comb' plotting
         for k=1:length(p1)
             for m=1:length(p2)
                 if strcmp(plotopt, 'sep')
-                    subplot(length(p1), length(p2), length(p2)*(k-1)+m)
+                    if strcmp(plotarr, 'h')
+%                         subplot(length(p1), length(p2), length(p2)*(k-1)+m)
+                        subplot(length(p1), length(p2), length(p1)*(k-1)+m)
+                    else subplot(length(p2), length(p1), length(p2)*(k-1)+m)
+                    end
                     pl=plot(t, d.data(:,3*p1(k)-3+p2(m)));
                     axis([min(t) max(t) -Inf Inf])
                     if names==0
@@ -239,7 +261,7 @@ if isfield(d,'type')
                     elseif names==1
                         title(['Marker [' num2str(p1) '], dim. [' num2str(p2) ']'])
                         st{al} = ['M. ' char(d.markerName{p1(k)}) ', dim. ' num2str(p2(m))];
-                    end 
+                    end
                     al=al+1;
                     hold on
                 end
@@ -255,16 +277,19 @@ if isfield(d,'type')
             end
         end
         if strcmp(plotopt, 'comb') %plot legend
-            leg=legend(st, 'Location', 'EastOutside'); 
-        end 
+            leg=legend(st, 'Location', 'EastOutside');
+        end
     elseif strcmp(d.type, 'norm data')
         figure
         al=1;%amount of lines - for 'comb' plotting
         plot(t, d.data(:,p1));
         for k=1:length(p1)
             for m=1%:length(p2)
-                if strcmp(plotopt, 'sep') 
-                    subplot(length(p1), 1, k)
+                if strcmp(plotopt, 'sep')
+                    if strcmp(plotarr, 'h')
+                        subplot(1, length(p1), k)
+                    else subplot(length(p1), 1, k)
+                    end
                     plot(t, d.data(:,p1(k)))
                     axis([min(t) max(t) -Inf Inf])
                     if names==0
@@ -276,7 +301,7 @@ if isfield(d,'type')
                     pl=plot(t, d.data(:,p1(k))); %FIXBB110102: 'comb' also for norm data
                     axis([min(t) max(t) -Inf Inf])
                     set(pl,'color',colors{mod(al-1,7)+1}) %al has 4 colors, should start over with blue after 7 lines
-                    
+
 %                     title(['Marker [' num2str(p1) '], norm data'])
                     if names==0
                         title(['Marker [' num2str(p1) '], norm data'])
@@ -301,9 +326,9 @@ if isfield(d,'type')
             end
         end
         if strcmp(plotopt, 'comb') %plot legend
-            legend(st, 'Location', 'EastOutside'); 
-        end 
-    
+            legend(st, 'Location', 'EastOutside');
+        end
+
     elseif strcmp(d.type, 'segm data')
         figure
         tmp=[];
@@ -314,14 +339,17 @@ if isfield(d,'type')
                 if strcmp(var, 'angle')
                     if strcmp(plotopt, 'sep')
                         % k
-                        subplot(length(p1),1,k)
+                        if strcmp(plotarr, 'h')
+                            subplot(1, length(p1), k)
+                        else subplot(length(p1), 1, k)
+                        end
                         plot(t, tmp)
                         axis([min(t) max(t) -Inf Inf])
                         if names==0
                             title(['Segm. ' num2str(p1(k)) ' - angle'])
                         elseif names==1
                             title(['Segm. ' char(d.segmentName{p1(k)}) ' - angle'])
-                        end                
+                        end
                     else
                         pl=plot(t, tmp); %FIXBB201202010: 'comb' also for segm data
                         axis([min(t) max(t) -Inf Inf])
@@ -332,7 +360,7 @@ if isfield(d,'type')
                         elseif names==1
                             title(['Segm. [' num2str(p1) '] - angle'])
                             st{al} = ['Segm. ' char(d.segmentName{p1(k)})];
-                        end 
+                        end
                         al=al+1;
                         hold on
                     end
@@ -348,7 +376,10 @@ if isfield(d,'type')
                 elseif strcmp(var, 'eucl')
                     for m=1:length(p2)
                         if strcmp(plotopt, 'sep')
-                            subplot(length(p1), length(p2), length(p2)*(k-1)+m)
+                            if strcmp(plotarr, 'h')
+                                subplot(length(p2), length(p1), length(p2)*(k-1)+m)
+                            else subplot(length(p1), length(p2), length(p2)*(k-1)+m)
+                            end
                             plot(t, tmp(:,p2(m)))
                             if names==0
                                 title(['Segm. ' num2str(p1(k)) ', dim. ' num2str(p2(m)) ' - eucl']);
@@ -383,7 +414,10 @@ if isfield(d,'type')
                 elseif strcmp(var, 'quat')
                     for m=1:length(p2)
                         if strcmp(plotopt, 'sep')
-                            subplot(length(p1), length(p2), length(p2)*(k-1)+m)
+                            if strcmp(plotarr, 'h')
+                                subplot(length(p2), length(p1), length(p2)*(k-1)+m)
+                            else subplot(length(p1), length(p2), length(p2)*(k-1)+m)
+                            end
                             plot(t, tmp(:,p2(m)))
                             if names==0
                                 title(['Segm. ' num2str(p1(k)) ', comp. ' num2str(p2(m)) ' - quat']);
@@ -422,9 +456,9 @@ if isfield(d,'type')
         end
     end
     if strcmp(plotopt, 'comb') %plot legend
-        legend(st, 'Location', 'EastOutside'); 
+        legend(st, 'Location', 'EastOutside');
     end
-    
+
 else % direct reference to data
     if ~exist('p1')
         p1=1;
