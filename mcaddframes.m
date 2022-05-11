@@ -1,12 +1,12 @@
 function d2 = mcaddframes(varargin)
 % Duplicates frames in a given mocap structure; either last frame in the
 % end, first frames in the beginning, or at a given position in the middle.
-% 
+%
 % syntax
 % d2 = mcaddframes(d, add);
 % d2 = mcaddframes(d, add, 'timetype', 'frame', 'location', 'beginning');
 % d2 = mcaddframes(d, add, 'location', 'middle', 'position', n);
-% 
+%
 % input parameters
 % d: MoCap or norm data structure
 % add: total amount of frames to be added
@@ -16,10 +16,10 @@ function d2 = mcaddframes(varargin)
 % position: position where frames are added ? only needed when using
 % 'middle' as location. If timetype is set to seconds, position value
 % is also treated as being in seconds.
-% 
+%
 % output
 % d2: MoCap or norm data structure
-% 
+%
 % examples
 % d2 = mcaddframes(d, 60);
 % d2 = mcaddframes(d, 60, 'location', 'middle', 100);
@@ -28,7 +28,7 @@ function d2 = mcaddframes(varargin)
 % timetype, location, and position are optional. Default values are used if
 % not specified.
 %
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+% Part of the Motion Capture Toolbox, Copyright 2008,
 % University of Jyvaskyla, Finland
 
 d2=[];
@@ -46,7 +46,7 @@ ttype=[];
 loc=[];
 pos=[];
 
-if ~isnumeric(frames) || length(frames)>1 
+if ~isnumeric(frames) || length(frames)>1
     disp([10, 'Frame argument has to be a single numeric.' 10])
     [y,fs] = audioread('mcsound.wav');
     sound(y,fs);
@@ -98,7 +98,7 @@ if isfield(d, 'type') && strcmp(d.type, 'MoCap data') || isfield(d, 'type') && s
     end
 
     if strcmp(loc,'end')
-        last=d.data(d.nFrames,:);    
+        last=d.data(d.nFrames,:);
         add=repmat(last, frames, 1);
         d.data = [d.data; add];
     elseif strcmp(loc,'beginning')
@@ -114,15 +114,12 @@ if isfield(d, 'type') && strcmp(d.type, 'MoCap data') || isfield(d, 'type') && s
     else disp([10, 'Input argument for location unknown.' 10])
         return
     end
-    
+
     d.nFrames=size(d.data,1);
     d2=d;
-    
+
 else
     disp([10, 'The first input argument has to be a variable with MoCap or norm data structure.' 10])
     [y,fs] = audioread('mcsound.wav');
     sound(y,fs);
 end
-
-
-

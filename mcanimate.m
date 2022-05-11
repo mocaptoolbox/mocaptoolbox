@@ -2,16 +2,16 @@ function p = mcanimate(d, p, proj)
 % Creates animation of mocap data and saves it to file (.avi or .mpeg-4) or as consecutive
 % frames (.png). Matlab's VideoWriter function is used to create the video
 % file.
-% COMPATIBILITY NOTES (v. 1.5): The 'folder'-field (animpar structure, v. 1.4) has been changed to 
-% 'output' and is used as file name for the animation (and stored to the current directory) 
-% or as folder name in case frames are to be plotted. 
-% Please use the function without the projection input argument, but specify 
+% COMPATIBILITY NOTES (v. 1.5): The 'folder'-field (animpar structure, v. 1.4) has been changed to
+% 'output' and is used as file name for the animation (and stored to the current directory)
+% or as folder name in case frames are to be plotted.
+% Please use the function without the projection input argument, but specify
 % it in the animation structure instead.
 %
 % syntax
 % p = mcanimate(d);
 % p = mcanimate(d, p);
-% 
+%
 % input parameters
 % d: MoCap data structure
 % p: animpar structure (optional)
@@ -20,13 +20,13 @@ function p = mcanimate(d, p, proj)
 %
 % output
 % p: animpar structure used for plotting the frames
-% 
+%
 % examples
 % mcanimate(d, par);
 %
 % comments
 % If the animpar structure is not given as input argument, the function
-% creates it by calling the function mcinitanimpar and setting the .limits field 
+% creates it by calling the function mcinitanimpar and setting the .limits field
 % of the animpar structure automatically so that all the markers fit into all frames.
 % If the par.pers field (perspective projection) is not given, it is created internally for backwards
 % compatibility. For explanation of the par.pers field, see help mcinitanimpar
@@ -34,7 +34,7 @@ function p = mcanimate(d, p, proj)
 % see also
 % mcplotframe, mcinitanimpar
 %
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+% Part of the Motion Capture Toolbox, Copyright 2008,
 % University of Jyvaskyla, Finland
 
 
@@ -52,6 +52,8 @@ d2 = mcresample(d, p.fps);
 
 p.animate = 1;
 
-p = mcplotframe(d2,1:d2.nFrames,p); % output parameter added 240608
-
-
+if isfield(p,'par3D')
+    p = mcplot3Dframe(d2,1:d2.nFrames,p);
+else
+    p = mcplotframe(d2,1:d2.nFrames,p); % output parameter added 240608
+end
