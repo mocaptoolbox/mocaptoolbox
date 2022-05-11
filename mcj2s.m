@@ -10,14 +10,14 @@ function d2 = mcj2s(d, par)
 %
 % output
 % d2: segm data structure
-% 
+%
 % comments
 % See explanation of the j2spar structure.
-% 
+%
 % see also
 % mcinitj2spar, mcs2j
 %
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+% Part of the Motion Capture Toolbox, Copyright 2008,
 % University of Jyvaskyla, Finland
 
 
@@ -78,4 +78,3 @@ else
     [y,fs] = audioread('mcsound.wav');
     sound(y,fs);
 end
-
