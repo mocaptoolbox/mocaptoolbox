@@ -1,4 +1,4 @@
-function [par x y z] = mcplotframe(d, n, p, proj)
+function par = mcplotframe(d, n, p, proj)
 % Plots frames of motion capture data.
 % COMPATIBILITY NOTES (v. 1.5): Please use the function without the projection input argument,
 % but specify it in the animation structure instead.
