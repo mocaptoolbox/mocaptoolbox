@@ -30,15 +30,13 @@ Periodic quantity of motion by Rodrigo Schramm & Federico Visi. You need MoCap T
 
 See also: Visi, Federico, Schramm, Rodrigo and Miranda, Eduardo. Gesture in Performance with Traditional Musical Instruments and Electronics: Use of Embodied Music Cognition and Multimodal Motion Capture to Design Gestural Mapping Strategies. Proceedings of the International Workshop on Movement and Computing. MOCO '14, p. 100-105, ACM, Paris, 2014.
 
-#### WiiDataCapture
+#### [WiiDataCapture](https://www.jyu.fi/hytk/fi/laitokset/mutku/en/research/materials/mocaptoolbox/WiiDataCaptureDownload2.1)
 
 WiiDataCapture is a software that displays and saves acceleration data of up to 8 Nintendo Wiimotes. Version 2.2 also features audio playback (from line in input or computer) and audio recording.
 
-Download [WiiDataCapture 2.2](https://www.jyu.fi/hytk/fi/laitokset/mutku/en/research/materials/mocaptoolbox/WiiDataCaptureDownload2.1)
-
 The WiiDataCapture 2.2 utility runs on Mac OS X until v10.12 (Sierra) with both Osculator 2 and 3. If the Wiimote refuses to pair with the computer, try restarting the computer.
 
-WiiDataCapture 2.2 requires OSCulator (http://www.osculator.net)!
+WiiDataCapture 2.2 requires [OSCulator](http://www.osculator.net)!
  
 Old versions of WiiDataCapture: please contact authors for older versions.
 
@@ -78,7 +76,7 @@ Download the [article](https://www.jyu.fi/hytk/fi/laitokset/mutku/en/research/ma
  
 
 ### Installation
-Unpack the MoCap Toolbox file package you have downloaded. This will create a directory called mocaptoolbox. Secondly, a version of the MATLAB program needs to be installed (see www.mathworks.com). Thirdly, the Toolbox needs to be defined in the MATLAB path variable. Under the File menu, select Set Path Under the Path menu, select Add to Path. Write here the name of the directory where this toolbox has been installed. Then click OK. Finally, under the File menu, select Save Path, and then Exit.
+Unpack the MoCap Toolbox file package you have downloaded. This will create a directory called mocaptoolbox. Secondly, a version of the [MATLAB](www.mathworks.com) program needs to be installed. Thirdly, the Toolbox needs to be defined in the MATLAB path variable. Under the File menu, select Set Path Under the Path menu, select Add to Path. Write here the name of the directory where this toolbox has been installed. Then click OK. Finally, under the File menu, select Save Path, and then Exit.
 
  
 
