@@ -24,17 +24,16 @@ To download the latest release of MoCap Toolbox, you can either use the followin
 #### [Eye tracker add on](https://github.com/mocaptoolbox/EyetrackerAddOn)
 This add on reads in Ergoneers Dikablis eye tracker data and syncs it to mocap recordings. More information on how to use the functions will follow soon.
 
-##### [Periodic Quantity of Motion]()
+##### [Periodic Quantity of Motion](https://github.com/mocaptoolbox/periodic-quantity-of-motion)
 
 Periodic quantity of motion by Rodrigo Schramm & Federico Visi. You need MoCap Toolbox to run the functions. See the Manual and the function help how to use it.
 
 See also: Visi, Federico, Schramm, Rodrigo and Miranda, Eduardo. Gesture in Performance with Traditional Musical Instruments and Electronics: Use of Embodied Music Cognition and Multimodal Motion Capture to Design Gestural Mapping Strategies. Proceedings of the International Workshop on Movement and Computing. MOCO '14, p. 100-105, ACM, Paris, 2014.
 
-#### WiiDataCapture
+#### [WiiDataCapture](https://www.jyu.fi/hytk/fi/laitokset/mutku/en/research/materials/mocaptoolbox/WiiDataCaptureDownload2.1)
 
 WiiDataCapture is a software that displays and saves acceleration data of up to 8 Nintendo Wiimotes. Version 2.2 also features audio playback (from line in input or computer) and audio recording.
 
-Download [WiiDataCapture 2.2](https://www.jyu.fi/hytk/fi/laitokset/mutku/en/research/materials/mocaptoolbox/WiiDataCaptureDownload2.1)
 
 The WiiDataCapture 2.2 utility runs on Mac OS X until v10.12 (Sierra) with both Osculator 2 and 3. If the Wiimote refuses to pair with the computer, try restarting the computer.
 
