@@ -1,4 +1,4 @@
-The Motion Capture Toolbox 1.5 Software Package, Copyright © 2008-2015, University of Jyväskylä, Finland
+The Motion Capture Toolbox 1.5 Software Package, Copyright 2008-2015, University of Jyv√§skyl√§, Finland
 
 Developed by Petri Toiviainen, Martin Hartmann, and Birgitta Burger
 petri.toiviainen@jyu.fi, martin.hartmann@jyu.fi, birgitta.burger@jyu.fi
@@ -18,7 +18,7 @@ program; if not, write to the Free Software Foundation, Inc., 59 Temple Place - 
 Boston, MA  02111-1307, USA.
 
 If you publish results that are achieved with the software, please cite the following paper:
-Burger, B. & Toiviainen, P. (2013). MoCap Toolbox – A Matlab toolbox for computational analysis of movement data. In R. Bresin (Ed.), Proceedings of the 10th Sound and Music Computing Conference, (SMC). Stockholm, Sweden: KTH Royal Institute of Technology.
+Burger, B. & Toiviainen, P. (2013). MoCap Toolbox - A Matlab toolbox for computational analysis of movement data. In R. Bresin (Ed.), Proceedings of the 10th Sound and Music Computing Conference, (SMC). Stockholm, Sweden: KTH Royal Institute of Technology.
 
 GNU GENERAL PUBLIC LICENSE
 
