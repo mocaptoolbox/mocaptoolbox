@@ -5,7 +5,7 @@
 % mcread -- reads MoCap data files
 % mcreademg -- reads emg files in tsv format
 % mcmissing -- reports missing frames and markers
-% mctrim -- exctracts a temporal segment from MoCap data 
+% mctrim -- extracts a temporal segment from MoCap data
 % mccut -- cuts two MoCap structures to the length of the shorter one
 % mcaddframes -- duplicates frames
 % mcsetlength -- sets mocap data to the length given
@@ -47,7 +47,7 @@
 % mccumdist -- calculates the cumulative distance traveled by each marker
 % mcmarkerdist -- calculates the distance of a marker pair
 % mcboundrect -- calculates the bounding rectangle
-% mccomplexity -- calculate the complexity of movement 
+% mccomplexity -- calculate the complexity of movement
 % mcfluidity -- calculate the fluidity/circularity of mocap data
 % mcrotationrange -- calculates rotation range between two markers
 % mcsegmangle -- calculates the angles between two markers
@@ -62,8 +62,8 @@
 %
 % TIME-SERIES ANALYSIS FUNCTIONS
 % mcmean -- calculates mean of MoCap data
-% mcstd -- calculates std of MoCap data 
-% mcvar -- calculates variance of MoCap data 
+% mcstd -- calculates std of MoCap data
+% mcvar -- calculates variance of MoCap data
 % mcskewness -- calculates skewness of MoCap data
 % mckurtosis -- calculates kurtosis of MoCap data
 % mcstatmoments -- calculates first four statistical moments
@@ -74,8 +74,8 @@
 % mcplotphaseplane -- creates phase plane plots
 % mcinitanimpar -- initializes animation parameters
 % mccreateconnmatrix: creates connection matrix for plotting and animations
-% mcplotframe -- plots frames from MoCap data
-% mcanimate -- makes an animation
+% mcplotframe -- plots jpeg frames from MoCap data
+% mcanimate -- plots and saves jpeg frames for animation
 % mcsimmat -- calculate similarity matrix
 % mcmocapgram -- plots mocapgram
 %
