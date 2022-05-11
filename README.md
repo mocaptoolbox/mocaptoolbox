@@ -13,7 +13,11 @@ To use the toolbox, you need the [MATLAB]((http://www.mathworks.com/)) software.
 ](https://www.aka.fi/en/research-funding/programmes-and-other-funding-schemes/finnish-centres-of-excellence/new-centres-of-excellence/centre-of-excellence-in-music-mind-body-and-brain/), which investigates various issues related with embodied music cognition. [Birgitta Burger](https://www.linkedin.com/in/birgitta-burger/) (independent researcher) has been fundamental to the development and support of the Mocap Toolbox.
 
 If you have any comments or problems to report, please contact Petri Toiviainen or Martin Hartmann (`firstname.lastname at jyu.fi`).
- 
+### Download
+#### Download Link
+[Latest version](https://github.com/mocaptoolbox/mocaptoolbox/archive/refs/heads/main.zip)
+#### git
+`git clone https://github.com/mocaptoolbox/mocaptoolbox.git`
 ### Extensions / Add ons
 
 #### [Eye tracker add on](https://github.com/mocaptoolbox/EyetrackerAddOn)
