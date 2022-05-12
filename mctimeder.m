@@ -1,6 +1,6 @@
 function d2 = mctimeder(d, n, f, s)
-% Estimates time derivatives of motion capture data. Two options are available, the fast version 
-% uses differences between two successive frames and a Butterworth smoothing filter, 
+% Estimates time derivatives of motion capture data. Two options are available, the fast version
+% uses differences between two successive frames and a Butterworth smoothing filter,
 % whereas the accurate version uses derivation with a Savitzky-Golay FIR smoothing filter.
 %
 % syntax
@@ -14,19 +14,19 @@ function d2 = mctimeder(d, n, f, s)
 %
 % input parameters
 % d: MoCap structure, norm structure, or segm structure
-% n: order of time derivative (optional, default = 1). 
-% f: 
+% n: order of time derivative (optional, default = 1).
+% f:
 %   filterparams: order and cutoff frequency for Butterworth smoothing filter (optional, default [2, 0.2])
 %   window: window length for Savitzky-Golay FIR smoothing filter (optional, default = 7 for first-order derivative)
-% s: fast or accurate version; fast version is default, use 'acc' for accurate version (if no window length is given, the default lengths are used, see comment)% 
-% 
+% s: fast or accurate version; fast version is default, use 'acc' for accurate version (if no window length is given, the default lengths are used, see comment)%
+%
 % output
 % d2: MoCap structure, norm structure, or segm structure
 %
 % examples
 % d2 = mctimeder(d) % first-order time derivative using the fast version
-% d2 = mctimeder(d, [2 .1]); % first-order time derivative using fast version (second order Butterworth 
-% filter with 0.1 Hz cutoff frequency)
+% d2 = mctimeder(d, [2 .1]); % first-order time derivative using fast version (second order Butterworth
+% filter with 0.1 cutoff – see comments)
 % d2 = mctimeder(d, 'acc'); % first-order time derivative using the accurate
 % version (Savitzky-Golay filter)
 % d2 = mctimeder(d, 2, 9, 'acc'); % second-order time derivative with 9-frame
@@ -34,10 +34,11 @@ function d2 = mctimeder(d, n, f, s)
 %
 % comments
 % The default parameters for the Butterworth smoothing filter create a second-order zero-phase digital
-% Butterworth filter with a cutoff frequency of 0.2 Hz.
-% The window length is dependent on the order of the time derivative and the 
+% Butterworth filter with a cutoff frequency of 0.2 times the Nyquist frequency
+% (half the mocap frame rate – if the frame rate is 120, then the cuttoff frequency is 12 Hz).
+% The window length is dependent on the order of the time derivative and the
 % given window length. It is calculated by 4*n+w-4. Thus, if the default
-% window length of 7 is used, the window length for the second-order derivative 
+% window length of 7 is used, the window length for the second-order derivative
 % will be 11, and the window length for the third-order derivative will be 15.
 % For information about the Savitzky-Golay filter, see help sgolayfilt.
 % The function updates the d.timederorder field as follows: d2.timederorder = d.timederorder + order.
@@ -45,7 +46,7 @@ function d2 = mctimeder(d, n, f, s)
 % see also
 % mcsmoothen, mctimeintegr
 %
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+% Part of the Motion Capture Toolbox, Copyright 2008,
 % University of Jyvaskyla, Finland
 
 
@@ -72,7 +73,7 @@ if nargin==2
         s = n;
         n = 1;
         f = 7;
-    else 
+    else
         disp([10, 'Inconsistent input arguments.', 10]);
         [y,fs] = audioread('mcsound.wav');
         sound(y,fs);
@@ -122,13 +123,34 @@ if strcmp(s,'acc') %accurate version
         [y,fs] = audioread('mcsound.wav');
         sound(y,fs);
     end
-    
+
 else %fast version - default option
     if isfield(d,'type') && (strcmp(d.type, 'MoCap data') || strcmp(d.type, 'norm data'))
         % differentiate_fast MoCap data
+
+        %check for empty markers and set to 0 - BBFIX 20220329
+        mf1=mcmissing(d);
+        for k=1:length(mf1)
+            if mf1(k)==d.nFrames
+                d.data(:,k*3-2)=0;
+                d.data(:,k*3-1)=0;
+                d.data(:,k*3)=0;
+            end
+        end
+
         d2 = d;
         d2.data = differentiate_fast(d.data, n, order, cutoff) * d.freq^n;
         d2.timederOrder = d.timederOrder + n;
+
+        %restore empty markers and set to NaN - BBFIX 20220329
+        for k=1:length(mf1)
+            if mf1(k)==d.nFrames
+                d2.data(:,k*3-2)=NaN;
+                d2.data(:,k*3-1)=NaN;
+                d2.data(:,k*3)=NaN;
+            end
+        end
+
     elseif isfield(d,'type') && strcmp(d.type, 'segm data')
         % differentiate_fast segm data
         d2 = d;
@@ -155,6 +177,7 @@ return
 function der = differentiate(d, n, f)
 
 
+
 pol = n+1; % polynomial order %BBFIX 20110207: pol now dependent on the order of derivative
 
 f = 4*n+f-4; %%BBFIX 20110207: increase window size relative to the order of derivative
@@ -177,6 +200,7 @@ return
 
 function der = differentiate_fast(d, n, order, cutoff) %%ADD 20110908: fast version
 
+
 [b,a]=butter(order, cutoff); % optimal filtering frequency is 0.2 Nyquist frequency
 
 d_mc=mcinitstruct('MoCap data', d, 100);
@@ -185,7 +209,7 @@ if sum(mf)>0 %missing frames need to be filled for the filtering!
    d_mc=mcfillgaps(d_mc,'fillall');%BB FIX 20111212, also beginning and end need filling
    d=d_mc.data;
 end
-    
+
 for k=1:n %differences and filtering
     d=diff(d);
     d=filtfilt(b,a,d);
