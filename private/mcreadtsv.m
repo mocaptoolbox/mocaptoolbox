@@ -10,9 +10,14 @@ d.type = 'MoCap data';
 d.filename = fn;
 
 s=fscanf(ifp,'%s',1);
-if strcmp('NO_OF_FRAMES', s) == 0 
-    disp('No header information found. Please use the export option Include TSV header in QTM.');
-    return
+if strcmp('NO_OF_FRAMES', s) == 0
+    if strcmp('Objects', s)
+        d = mcreadtsvRigid(fn);
+        return
+    else
+        disp('No header information found. Please use the export option Include TSV header in QTM.');
+        return
+    end
 end
 s=fscanf(ifp,'%s',1); d.nFrames = str2num(s);
 s=fscanf(ifp,'%s',1);
@@ -62,28 +67,28 @@ end
 %BB: QTM export option "export time data for every frame" - 20100201 fix
 %Data is on the vector tmp. Length is EITHER nFrames * 3*nMarkers OR nFrames *  3*nMarkers + nFrames*2
 if strcmp(other.dataIncluded, '3D') || strcmp(other.dataIncluded, '')
-    if length(tmp) > d.nFrames*3*d.nMarkers %test if exported with time and frame
-        
+    if length(tmp) > d.nFrames*3*d.nMarkers %test if exported with time and frame AND SOMETHING ELSE AS OF QTM12 OR SO...
+
         if length(tmp)~=d.nFrames*3*d.nMarkers+2*d.nFrames %BBFIX 20120112, for not exported gaps
             disp([10,'Warning: Data inconsistent with amount of markers. Please export complete data. Data set to NaN',10])
             d.data=0;
             return
         end
-        
+
         d.data=NaN*ones(d.nFrames, 3*d.nMarkers+2); %yes. So data array with two more fields for frame and time
-        tmp(find(tmp==0)) = NaN; % change potential zeros to NaN's
+        %tmp(find(tmp==0)) = NaN; % change potential zeros to NaN's %%BB20220329: don't think this is actually needed, since done in mcread anyway
         d.data = reshape(tmp', 3*d.nMarkers+2, d.nFrames)';
         d.data(:,[1 2]) = []; %delete first two columns (frame and time)
     else %no time and frame exported
-        
+
         if length(tmp)~=d.nFrames*3*d.nMarkers %BBFIX 20120112, for not exported gaps
             disp([10,'Warning: Data inconsistent with amount of markers. Please export complete data. Data set to NaN',10])
             d.data=0;
             return
         end
-        
+
         d.data = NaN*ones(d.nFrames, 3*d.nMarkers);
-        tmp(find(tmp==0)) = NaN;
+        %tmp(find(tmp==0)) = NaN; %%BB20220329: don't think this is actually needed, since done in mcread anyway
         d.data = reshape(tmp',3*d.nMarkers,d.nFrames)';
     end
 % elseif strcmp(other.dataIncluded, '6D') %%Fix BB20110114 to read in 6-dof data - dirty fix if you need the read in 6d data without doing much
@@ -93,8 +98,6 @@ if strcmp(other.dataIncluded, '3D') || strcmp(other.dataIncluded, '')
 %         d.data = reshape(tmp',16*d.nMarkers,d.nFrames)';
 %         d.data(:,7:end) = []; %delete first two columns (frame and time)
 end
-
-
 
 fclose(ifp);
 
