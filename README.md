@@ -61,7 +61,7 @@ The documentation provides a general description of the Toolbox (Chapter 1) and 
 
 ### Documentation and Reference
 The documentation provides a general description of the Toolbox (Chapter 1) and examples (Chapter 2). Chapter 3 and 4 contain the data and parameter structure, and function reference respectively.
- 
+
 >>>>>>> origin/main
 
 To cite the MoCap Toolbox, please use the following reference:
