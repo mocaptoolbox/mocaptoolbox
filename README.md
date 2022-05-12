@@ -48,21 +48,8 @@ Please register to our Google Group to stay informed about new releases, bug rep
 
 The email address to send messages to the group is `mocaptoolbox@googlegroups.com` (requires registration to send).
 
-<<<<<<< HEAD
-The email address to send messages to the list is `mocaptoolbox at freelists.org` (requires registration to send).
-
-
-
 ### Documentation and Reference
 The documentation provides a general description of the Toolbox (Chapter 1) and examples (Chapter 2). Chapter 3 and 4 contain the data and parameter structure, and function reference respectively.
-
-
-=======
-
-### Documentation and Reference
-The documentation provides a general description of the Toolbox (Chapter 1) and examples (Chapter 2). Chapter 3 and 4 contain the data and parameter structure, and function reference respectively.
-
->>>>>>> origin/main
 
 To cite the MoCap Toolbox, please use the following reference:
 
