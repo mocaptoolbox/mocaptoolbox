@@ -64,6 +64,14 @@ mcplotframe(d, 1:5:51, par);
 
 pause %%%%%%%%%%% hit a key to continue %%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% We can also plot the frames as a single figure by setting the field
+% `.hold` of the parameter structure `par` to have the value 1:
+
+par.hold=1
+mcplotframe(d, 1:5:51, par);
+
+pause %%%%%%%%%%% hit a key to continue %%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % Example 6 explains how these frames can be used to create an animation.
 
 pause %%%%%%%%%%% hit a key to continue %%%%%%%%%%%%%%%%%%%%%%%%%%
