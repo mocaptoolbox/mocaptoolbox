@@ -1,6 +1,6 @@
 function d2 = mc2local(d, m1, m2)
 % Transforms MoCap data to a local coordinate system with the new origin given
-% in m1. The data can further be rotated to be aligned to frontal view 
+% in m1. The data can further be rotated to be aligned to frontal view
 % (on frame basis).
 %
 % syntax
@@ -21,7 +21,7 @@ function d2 = mc2local(d, m1, m2)
 % d2 = mc2local(d, 1, [1 2]); %data rotated to frontal view based on markers 1 and 2
 %
 % comments
-% 
+%
 % see also
 % mc2frontal, mcrotate
 %
@@ -29,7 +29,7 @@ function d2 = mc2local(d, m1, m2)
 % University of Jyvaskyla, Finland
 
 
-if nargin<2 
+if nargin<2
     disp([10, 'mc2frontal needs at least two input parameters.' 10])
     d2=[];
     [y,fs] = audioread('mcsound.wav');
@@ -46,7 +46,7 @@ if ~isnumeric(m1) || length(m1)>1
     return
 end
 
-if nargin==3 
+if nargin==3
     if ~isnumeric(m2) || length(m2)<2 || length(m2)>2
         disp([10, 'Second marker number argument has to consist of two single numerics.' 10])
         d2=[];
@@ -65,6 +65,3 @@ if nargin==3 %in case rotation to frontal place is indicated
 end
 
 d2.data = d.data - repmat(d.data(:,3*m1-3+(1:3)), 1, d.nMarkers);
-
-
-
