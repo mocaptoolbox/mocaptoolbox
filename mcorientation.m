@@ -11,7 +11,7 @@ function [or r2] = mcorientation(source,lmarker1,rmarker1,target,lmarker2,rmarke
 % lmarker2, rmarker2: left and right marker numbers defining the target
 %
 % output
-% or: horizontal angle quantifying orientation of source segment with respect of location of target segment
+% or: horizontal angle (in degrees and in the interval [-180,180]) quantifying orientation of source segment with respect of location of target segment
 % r2: horizontal distance between mean locations of source and target segment
 %
 % examples
