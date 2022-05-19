@@ -1,5 +1,5 @@
 function par = mcplot3Dframe(d, n, p)
-% Plots frames of motion capture data in 3D.  
+% Plots frames of motion capture data in 3D.
 %
 % syntax
 % par = mcplot3Dframe(d, n);
@@ -19,17 +19,17 @@ function par = mcplot3Dframe(d, n, p)
 %
 % comments
 % If the animpar structure is not given, the function calls
-% mcinitanimpar with '3D' argument and sets the par3D.limits field of 
-% the animpar structure automatically so that all the markers fit into 
+% mcinitanimpar with '3D' argument and sets the par3D.limits field of
+% the animpar structure automatically so that all the markers fit into
 % all frames.
 %
 % see also
 % mcplotframe, mcanimate, mcinitanimpar
 %
-% Based on mcplotframe in the Motion Capture Toolbox, 
+% Based on mcplotframe in the Motion Capture Toolbox,
 % 3D version developed by Kristian Nymoen, University of Oslo
-% 
-% ? Part of the Motion Capture Toolbox, Copyright ?2008,
+%
+% Part of the Motion Capture Toolbox, Copyright 2008,
 % University of Jyvaskyla, Finland
 
 
@@ -74,13 +74,13 @@ else
     [y,fs] = audioread('mcsound.wav');
     sound(y,fs);
     return;
-end 
+end
 
 if p.animate && p.getparams==0 %BBADd0150303
     currdir = cd; % store current directory
     if p.createframes==1
         mkdir(p.output) %BB20150507 in case frames (series of png files) are needed, and not video file
-        cd(p.output) 
+        cd(p.output)
     else %VideoWriter is used with video file output %BB20150507
         fn=p.output; %BB_NEW_20140212 for VideoWriter
         if strcmp(p.videoformat,'avi')
@@ -91,7 +91,7 @@ if p.animate && p.getparams==0 %BBADd0150303
         movObj.FrameRate = p.fps; %set frame rate before opening the video object
         open(movObj); %open the object
     end
-    
+
 end
 
 par=p;
@@ -114,7 +114,7 @@ if isfield(p,'markercolors') && ~isempty(p.markercolors) %field and colors are s
         for k=1:size(p.markercolors,2)
             mcol(k,:)=lookup_l(p.markercolors(k));%convert to num array
         end
-    else 
+    else
         mcol=p.markercolors; %field and colors are set in num format already
     end
     if d.nMarkers > length(p.markercolors)
@@ -132,7 +132,7 @@ if isfield(p,'conncolors') && ~isempty(p.conncolors) %field and colors are set
         for k=1:size(p.conncolors,2)
             ccol(k,:)=lookup_l(p.conncolors(k));%convert to num array
         end
-    else 
+    else
         ccol=p.conncolors; %field and colors are set in num format already
     end
     if size(p.conn,1) > length(p.conncolors)
@@ -182,7 +182,7 @@ if ~isempty(p.trm)%created problem when merging and translating...
     p.trm=p.trm(:);
 end
 
-%warning if trace length is empty, but marker trace vector is set 
+%warning if trace length is empty, but marker trace vector is set
 if (p.trl==0 && ~isempty(p.trm)) || (p.trl==0 && ~isempty(p.tracecolors))
     disp([10, 'Warning: Please set trace length (trl) in your animation parameters in order to plot traces.', 10])
 end
@@ -285,7 +285,7 @@ else
         p.twidth=repmat(p.twidth(1),1,length(p.trm));
     end
 end
- 
+
 
 
 % az and el doesn't work that well in the 3d animation. using
@@ -296,8 +296,8 @@ end
 
 %d1 = mcrotate(d, az, [0 0 1]);
 %d = mcrotate(d1, el, [1 0 0]); %%%%%%%
-    
-if p.perspective==0 % orthographic projection    
+
+if p.perspective==0 % orthographic projection
     x=d.data(n,1:3:end);
     y=d.data(n,2:3:end);
     z=d.data(n,3:3:end);
@@ -305,7 +305,7 @@ else % perspective projection
     disp('perspective option disabled in 3D version, using orthographic')
     x=d.data(n,1:3:end);
     y=d.data(n,2:3:end);
-    z=d.data(n,3:3:end);   
+    z=d.data(n,3:3:end);
 end
 
 
@@ -315,23 +315,23 @@ end
     midx = (maxx+minx)/2;
     midy = (maxy+miny)/2;
     midz = (maxz+minz)/2;
-    
+
 %     maxx = maxx+abs(maxx*0.05);
 %     maxy = maxy+abs(maxy*0.05);
 %     maxz = maxz+abs(maxz*0.05);
 %     minx = minx-abs(minx*0.05);
 %     miny = miny-abs(miny*0.05);
 %     minz = minz-abs(minz*0.05);
-    
+
     maxxyz = max([maxx,maxy,maxz]);
-    
+
     %axes limits
     if isfield(p,'par3D') && isfield(p.par3D,'limits') && ~isempty(p.par3D.limits)
         axesLimits = p.par3D.limits;
     else
         axesLimits = [minx maxxyz;miny maxxyz;minz maxxyz];
     end
-    
+
     om = abs(round(max(axesLimits(:,2)-axesLimits(:,1)))); %order of magnitude.. used for bone widths, marker sizes and shadow widths
 
     if isfield(p,'par3D') && isfield(p.par3D,'drawfloor') && p.par3D.drawfloor == 1
@@ -339,31 +339,31 @@ end
     else
         drawFloor = 0;
     end
-    
+
     if isfield(p,'par3D') && isfield(p.par3D,'drawwallx') && p.par3D.drawwallx == 1
         drawXWall = 1;
     else
         drawXWall = 0;
     end
-    
+
     if isfield(p,'par3D') && isfield(p.par3D,'drawwally') && p.par3D.drawwally == 1
         drawYWall = 1;
     else
         drawYWall = 0;
     end
-    
+
     if isfield(p,'par3D') && isfield(p.par3D,'showaxis') && p.par3D.showaxis == 1
         showaxis = 1;
     else
         showaxis = 0;
     end
-    
+
     if isfield(p,'par3D') && isfield(p.par3D,'shadowalpha') && ~isempty(p.par3D.shadowalpha)
         shadowAlpha = p.par3D.shadowalpha;
     else
         shadowAlpha = 0.25;
     end
-    
+
     if shadowAlpha > 0 && (drawXWall || drawYWall || showaxis)
         wallshadow = 1;
     else
@@ -376,33 +376,33 @@ end
     else
         shadowWidth = p.cwidth;
     end
-    
 
-    
+
+
     %camera position
     if isfield(p,'par3D') && isfield(p.par3D,'cameraposition') && ~isempty(p.par3D.cameraposition)
         camPosition = p.par3D.cameraposition;
     elseif isfield(p,'az') && isfield(p,'el') && ~isempty(p.az) && ~isempty(p.el)
         [camPosition(1), camPosition(2), camPosition(3)]  = sph2cart(deg2rad(p.az),deg2rad(p.el),maxxyz*5);
     else
-        camPosition = [maxx,maxy,maxz]; 
+        camPosition = [maxx,maxy,maxz];
     end
-    
+
     %light position
     if isfield(p,'par3D') && isfield(p.par3D,'lightposition') && ~isempty(p.par3D.lightposition)
         lightPos = p.par3D.lightposition;
     else
         lightPos = [maxx,maxy,maxz].*[2 2 4];
     end
-    
+
     %camera target
     if isfield(p,'par3D') && isfield(p.par3D,'cameratarget') && ~isempty(p.par3D.cameratarget)
         camTarget = p.par3D.cameratarget;
     else
         camTarget = [midx midy midz];
     end
-    
-    
+
+
     %camera target
     if isfield(p,'par3D') && isfield(p.par3D,'zoom') && ~isempty(p.par3D.zoom)
         camDistance = p.par3D.zoom;
@@ -410,10 +410,10 @@ end
         camDistance = 15;
     end
 
-    
 
-% %BBADd0150303: exit function here without doing the animation or plotting, 
-% but setting the parameters, esp. the limits, to make videos with a reduced 
+
+% %BBADd0150303: exit function here without doing the animation or plotting,
+% but setting the parameters, esp. the limits, to make videos with a reduced
 % set of markers that look exactly like the videos with all markers
 if p.getparams==1
     par=p;
@@ -426,7 +426,7 @@ end
 fignr=1;
 
 if p.animate %20150720 / HJ: in animate case, set figure and axes outside main loop
-    figure(fignr); 
+    figure(fignr);
     clf;
     set(gcf, 'WindowStyle','normal');
     set(gcf,'Position',[50 50 p.scrsize(1) p.scrsize(2)]) ; % DVD: w=720 h=420
@@ -458,17 +458,17 @@ end
 
 for k=1:size(x,1) % main loop
     if  p.animate
-        clf; 
+        clf;
         %axes('position', [0 0 1 1], 'XLim', axesLimits(1,1:2), 'YLim', axesLimits(2,1:2),'ZLim', axesLimits(3,1:2), 'CameraPosition',camPosition,'CameraTarget',camTarget,'Projection','perspective','CameraUpVector',[0 0 1],'Color',p.colors(1));
         axes('position', [0 0 1 1], 'CameraPosition',camPosition,'CameraTarget',camTarget,'Projection','perspective','CameraUpVector',[0 0 1],'Color',p.colors(1));
         %view([0 90])
         daspect([1 1 1])
         hold on;
     else
-        figure(fignr); 
+        figure(fignr);
         clf;
         set(gcf, 'WindowStyle','normal');
-        set(gcf,'Position',[50 50 p.scrsize(1) p.scrsize(2)]) ; % DVD: w=720 h=420        
+        set(gcf,'Position',[50 50 p.scrsize(1) p.scrsize(2)]) ; % DVD: w=720 h=420
         %axes('position', [0 0 1 1], 'XLim', axesLimits(1,1:2), 'YLim', axesLimits(2,1:2),'ZLim', axesLimits(3,1:2), 'CameraPosition',camPosition,'CameraTarget',camTarget,'Projection','perspective','CameraUpVector',[0 0 1],'Color',p.colors(1));
         axes('position', [0 0 1 1], 'CameraPosition',camPosition,'CameraTarget',camTarget,'Projection','perspective','CameraUpVector',[0 0 1],'Color',p.colors(1));
         daspect([1 1 1])
@@ -478,7 +478,7 @@ for k=1:size(x,1) % main loop
         %colormap([ones(64,1) zeros(64,1) zeros(64,1)]);
         fignr=fignr+1;
     end
-    
+
     %plot some text to appear in background
     %text(maxx, miny, midz, {'YOUR TEXT'}, 'FontSize', 24, 'color', [.85 .15 .15]);
 
@@ -486,19 +486,19 @@ for k=1:size(x,1) % main loop
         floortransform = hgtransform('Matrix',makehgtform('xrotate',0,'scale',floorscale,'translate',axesLimits(:,1)/floorscale));
         image(floortransform,floorimg)
     end
-    
+
     if drawXWall
         xbackwalltransform = hgtransform('Matrix',makehgtform('scale',wallxscale,'translate',axesLimits(:,1)/wallxscale,'xrotate',pi/2));
         image(xbackwalltransform,wallimgx)
     end
- 
- 
-    if drawYWall 
+
+
+    if drawYWall
         ybackwalltransform = hgtransform('Matrix',makehgtform('scale',wallyscale,'translate',axesLimits(:,1)/wallyscale,'xrotate',pi/2,'yrotate',pi/2));
         image(ybackwalltransform,flip(wallimgy ,2))
     end
- 
-         
+
+
     % plot marker-to-marker connections
     if ~isempty(p.conn)
             for m=1:size(p.conn,1)
@@ -516,12 +516,12 @@ for k=1:size(x,1) % main loop
                         %X axis shadow
                         SPax = shadowPoint([0 1 0],[0 axesLimits(2,1) 0],lightPos,[x(k,p.conn(m,1)) y(k,p.conn(m,1)) z(k,p.conn(m,1))]);
                         SPbx = shadowPoint([0 1 0],[0 axesLimits(2,1) 0],lightPos,[x(k,p.conn(m,2)) y(k,p.conn(m,2)) z(k,p.conn(m,2))]);
-                        if lightPos(2) > y(k,p.conn(m,1)) && lightPos(2) > y(k,p.conn(m,2)) && ((SPax(1) > axesLimits(1,1) && SPax(3) > axesLimits(3,1)) || (SPbx(1) > axesLimits(1,1) && SPbx(3) > axesLimits(3,1))) 
+                        if lightPos(2) > y(k,p.conn(m,1)) && lightPos(2) > y(k,p.conn(m,2)) && ((SPax(1) > axesLimits(1,1) && SPax(3) > axesLimits(3,1)) || (SPbx(1) > axesLimits(1,1) && SPbx(3) > axesLimits(3,1)))
                             qqq = line2rect(SPax([1,3]),SPbx([1,3]),shadowWidth(m)*0.005*om);
                             patchdepth = ones(4,1)*SPax(2)*(p.cwidth(m)*0.001*log(om));
                             sx = patch([qqq(:,1);qqq(:,1)],SPax(2)-[patchdepth; -patchdepth],[qqq(:,2);qqq(:,2)]   ,'k','EdgeColor','none','FaceLighting','none');alpha(sx,shadowAlpha);
                         end
-                        
+
                         %Y axis shadow
                         SPay = shadowPoint([1 0 0],[axesLimits(1,1) 0 0],lightPos,[x(k,p.conn(m,1)) y(k,p.conn(m,1)) z(k,p.conn(m,1))]);
                         SPby = shadowPoint([1 0 0],[axesLimits(1,1) 0 0],lightPos,[x(k,p.conn(m,2)) y(k,p.conn(m,2)) z(k,p.conn(m,2))]);
@@ -536,7 +536,7 @@ for k=1:size(x,1) % main loop
                     if shadowAlpha > 0
                         SPaz = shadowPoint([0 0 1],[0 0 axesLimits(3,1)],lightPos,[x(k,p.conn(m,1)) y(k,p.conn(m,1)) z(k,p.conn(m,1))]);
                         SPbz = shadowPoint([0 0 1],[0 0 axesLimits(3,1)],lightPos,[x(k,p.conn(m,2)) y(k,p.conn(m,2)) z(k,p.conn(m,2))]);
-                        if ~drawXWall || ~drawYWall || (SPaz(1) > axesLimits(1,1) && SPaz(2) > axesLimits(2,1)) || (SPbz(1) > axesLimits(1,1) && SPbz(2) > axesLimits(2,1)) 
+                        if ~drawXWall || ~drawYWall || (SPaz(1) > axesLimits(1,1) && SPaz(2) > axesLimits(2,1)) || (SPbz(1) > axesLimits(1,1) && SPbz(2) > axesLimits(2,1))
                             qqq = line2rect(SPaz([1,2]),SPbz([1,2]),shadowWidth(m)*0.005*om);
                             patchdepth = ones(4,1)*SPaz(3)*(p.cwidth(m)*0.001*log(om));
                             sz = patch([qqq(:,1);qqq(:,1)],[qqq(:,2);qqq(:,2)],SPaz(3)-[patchdepth; -patchdepth]   ,'k','EdgeColor','none','FaceLighting','none');alpha(sz,shadowAlpha);
@@ -549,7 +549,7 @@ for k=1:size(x,1) % main loop
     grid on
     % plot midpoint-to-midpoint connections
     if ~isempty(p.conn2)
-       
+
          for m=1:size(p.conn2,1)
              if isfinite(x(k,p.conn2(m,1))*x(k,p.conn2(m,2))*x(k,p.conn2(m,3))*x(k,p.conn2(m,4)))
                 tmpx1 = (x(k,p.conn2(m,1))+x(k,p.conn2(m,2)))/2;
@@ -558,10 +558,10 @@ for k=1:size(x,1) % main loop
                 tmpy2 = (y(k,p.conn2(m,3))+y(k,p.conn2(m,4)))/2;
                 tmpz1 = (z(k,p.conn2(m,1))+z(k,p.conn2(m,2)))/2;
                 tmpz2 = (z(k,p.conn2(m,3))+z(k,p.conn2(m,4)))/2;
-                 
+
                 r1 = [tmpx1 tmpy1 tmpz1];
                 r2 = [tmpx2 tmpy2 tmpz2];
-                
+
                 if isfinite([r1,r2])
                     [ccx,ccy,ccz] = line2cylinder(r1,r2,p.cwidth(m)*0.003*om,50);
                     tmpbone = surf(ccx,ccy,ccz);
@@ -578,7 +578,7 @@ for k=1:size(x,1) % main loop
                             patchdepth = ones(4,1)*SPax(2)*(p.cwidth(m)*0.001*log(om));
                             sx = patch([qqq(:,1);qqq(:,1)],SPax(2)-[patchdepth; -patchdepth],[qqq(:,2);qqq(:,2)]   ,'k','EdgeColor','none','FaceLighting','none');alpha(sx,shadowAlpha);
                         end
-                        
+
                         %Y axis shadow
                         SPay = shadowPoint([1 0 0],[minx 0 0],lightPos,[tmpx1 tmpy1 tmpz1]);
                         SPby = shadowPoint([1 0 0],[minx 0 0],lightPos,[tmpx2 tmpy2 tmpz2]);
@@ -588,41 +588,41 @@ for k=1:size(x,1) % main loop
                             sy = patch(SPay(1)-[patchdepth; -patchdepth],[qqq(:,1);qqq(:,1)],[qqq(:,2);qqq(:,2)]   ,'k','EdgeColor','none','FaceLighting','none');alpha(sy,shadowAlpha);
                         end
                     end
-                    
+
                     if shadowAlpha > 0
                             %Z axis shadow
                             SPaz = shadowPoint([0 0 1],[0 0 minz],lightPos,[tmpx1 tmpy1 tmpz1]);
                             SPbz = shadowPoint([0 0 1],[0 0 minz],lightPos,[tmpx2 tmpy2 tmpz2]);
-                        if ~drawXWall || ~drawYWall || (SPaz(1) > axesLimits(1,1) && SPaz(2) > axesLimits(2,1)) || (SPbz(1) > axesLimits(1,1) && SPbz(2) > axesLimits(2,1)) 
+                        if ~drawXWall || ~drawYWall || (SPaz(1) > axesLimits(1,1) && SPaz(2) > axesLimits(2,1)) || (SPbz(1) > axesLimits(1,1) && SPbz(2) > axesLimits(2,1))
                             qqq = line2rect(SPaz([1,2]),SPbz([1,2]),shadowWidth(m)*0.005*om);
                             patchdepth = ones(4,1)*SPaz(3)*(p.cwidth(m)*0.001*log(om));
                             sz = patch([qqq(:,1);qqq(:,1)],[qqq(:,2);qqq(:,2)],SPaz(3)-[patchdepth; -patchdepth]   ,'k','EdgeColor','none','FaceLighting','none');alpha(sz,shadowAlpha);
                         end
                     end
                 end
-                
+
              end
          end
 
     end
-    
+
     % plot traces if animation
     if p.animate && p.trl~=0
-%         trml=sort(p.trm);%BB: sorting marker traces 
+%         trml=sort(p.trm);%BB: sorting marker traces
         trlen = round(p.fps * p.trl);
         start=max(1,k-trlen);
         ind = start-1+find(~isnan(x(start:k)));
         for m=1:length(p.trm)
-            if isnan(p.trm(m)) %BBFIX 20120404 mcmerge adaption - NaN traces not plotted 
+            if isnan(p.trm(m)) %BBFIX 20120404 mcmerge adaption - NaN traces not plotted
             else
                 plot3(x(ind,m),y(ind,m),z(ind,m),'-','Color',tcol(m,:),'Linewidth',p.twidth(m));
             end
         end
     end
-    
-    
+
+
     % plot markers
-       
+
     [px,py,pz] = sphere(50); % generate coordinates for a 50 x 50 sphere
 
     px=px*p.msize*0.0015*om;
@@ -631,40 +631,40 @@ for k=1:size(x,1) % main loop
 
     for m=1:size(x,2)
 
-        markerBall = surface(px+x(k,m), py+y(k,m),flip(pz)+z(k,m));   
-        markerBall.FaceColor = p.colors(2); 
+        markerBall = surface(px+x(k,m), py+y(k,m),flip(pz)+z(k,m));
+        markerBall.FaceColor = p.colors(2);
         markerBall.EdgeColor = 'none';              % remove surface edge color
 
     end
-    
+
     if showaxis
         axis on
     else
         axis off
     end
-    
+
     if p.showfnum
         h=text(minx+0.95*(maxx-minx), miny+0.05*(maxy-miny), minz+0.05*(maxz-minz), num2str(k),...
             'HorizontalAlignment','Right','FontSize',12,'FontWeight','bold');
         set(h,'Color',colors(5,:))
     end
-    
+
 %     %plot some copywrite text or anything else - BB20121102
 %     text(maxxx-650, minzz+350, {'Jyv?skyl? Music & Motion Capture'}, 'FontSize', 24, 'color', [.9 .9 .9]);
 %     text(maxxx-300, 0, {'Birgitta Burger', 'Jyv?skyl? Univ.', 'Finland'});
 %     text(minxx+40, minzz+0.97*(maxzz-minzz), 'High Sub-Band 2 Flux', 'FontSize', 16, 'FontWeight', 'bold');
 %     text(minxx+70, minzz+0.97*(maxzz-minzz)-75, {'high speed of head'}, 'FontSize', 12, 'FontWeight', 'bold');
-    
+
     light('Position',lightPos)
     set(gca,'CameraViewAngle',camDistance)
-    
-        
+
+
     drawnow
     hold off
     drawnow
     hold off
     if p.animate
-        if p.createframes==1 
+        if p.createframes==1
             fn=['frame', sprintf('%0.4d',k),'.png']; %old version: create frames
             imwrite(frame2im(getframe),fn,'png');
 %             fn=['frame', sprintf('%0.4d',k),'.eps'];
@@ -672,11 +672,11 @@ for k=1:size(x,1) % main loop
         else
             writeVideo(movObj,getframe(gcf)); %BB_NEW_20140212 for VideoWriter
         end
-        
+
         if k == 1
             fprintf('Writing video frame number                     ')
         end
-        fprintf('\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b')        
+        fprintf('\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b')
         fprintf('%8d of %8d',k,size(x,1))
 
     end
@@ -765,4 +765,3 @@ function [ccx, ccy, ccz] = line2cylinder(p1,p2,r,n)
     ccz = [points1(3,:); points2(3,:)];
 
 end
-
