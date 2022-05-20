@@ -3,10 +3,11 @@ function dist = mcmarkerdist(d, m1, m2)
 %
 % syntax
 % dist = mcmarkerdist(d, m1, m2);
-%
+% dist = mcmarkerdist(d, m1, [m2 m3]);
+% dist = mcmarkerdist(d, m1, [m2 m3 m4]);
 % input parameters
 % d: MoCap data structure
-% m1, m2: marker numbers. If m2 is an array of two markers, the distance between marker m1 and a line spanned by two other markers is computed. If m2 is an array of three markers, the function computes the distance between marker m1 and a plane spanned by the three other markers.
+% m1, m2: marker numbers. The second input argument can also be an array of two markers or three markers. If it is an array of two markers, the distance between marker m1 and a line spanned by two other markers is computed. If it is an array of three markers, the function computes the distance between marker m1 and a plane spanned by the three other markers.
 %
 % output
 % dist: column vector
