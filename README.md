@@ -23,6 +23,18 @@ Alternatively, you can check out our [main development branch](https://github.co
 
 ### Extensions / Add ons
 
+#### [mcarray](https://github.com/krisny/mcarray)
+
+Array extensions for the Mocap Toolbox (Kristian Nymoen).
+
+#### [MCT Extras](https://github.com/krisny/mct-extras)
+
+Extensions and alternative functions for the Mocap Toolbox (Kristian Nymoen).
+
+#### [MusicMocapMatlab](https://github.com/olivierlar/MusicMocapMatlab)
+
+Various Matlab tools for analysing audio and mocap data (Kristian Nymoen and Olivier Lartillot)
+
 #### [Eye tracker add on](https://github.com/mocaptoolbox/EyetrackerAddOn)
 This add on reads in Ergoneers Dikablis eye tracker data and syncs it to mocap recordings. More information on how to use the functions will follow soon.
 
