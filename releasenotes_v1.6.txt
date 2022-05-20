@@ -1,0 +1,126 @@
+Release Notes 
+
+The Motion Capture Toolbox, Copyright ©2008-2015, University of Jyvaskyla, Finland
+
+Version 1.1
+
+New functions
+mcbandpass: band pass filter MoCap data
+mceigenmovement: generates eigenmovements from PCA
+mchilbert: performs a Hilbert transform
+mcicaproj: performs an ICA on MoCap data
+mcpcaproj: performs a PCA on MoCap data
+mcs2j: performs a segment-to-joint mapping
+mcs2posture: creates a posture representation form segm data
+mcsethares_mb: performs an m-best Sethares transform
+mcsethares_s2l: performs a small-to-large Sethares transform
+mcsimmat: calculates similarity matrix
+mcvect2grid: converts MoCap structure vector to MoCap structure with three orthogonal views
+PCA example added in the Examples section
+
+Bug fixes
+mcicaproj: fix a bug to allow to handle cases when not all ica's converge
+mcmissing: allow to use norm data as input
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Version 1.2
+
+New features
+mccreateconnmatrix: creates a connection matrix using QTM label list files (for plotting)
+mchilberthuang: performs a Hilbert-Huang transform
+mcreademg: read in emg data (Mega EMG system, recorded into QTM)
+mcsethares: combines mcsethares_mb and mcsethares_s2l in one function
+mcvar: calculates the variance of (MoCap) data
+mcdemo8: demo added on how to use colors in plotting and animations
+mcdemo9: demo added on how to use PCA on movement data
+
+Bug fixes
+mcbandpass: add gaussian weighting as a method
+mcfillgaps: fill gaps in the beginning and end with the first/last recorded values
+mcgetmarker: allow to use norm data as input
+mcplotframe, mcinitanimpar: individual colors for markers, traces, connectors, and numbers for plotting and animations
+mcread: handling of the various .tsv export options of QTM and faster .c3d import (including marker names as well)
+mcresample: allow to use norm data as input
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Version 1.2.1
+
+Bug fixes
+mcplotframe: plotting frame numbers, no stats toolbox for animationsmcmerge: concatenates marker and trace color strings (if both animations shall have the same colors)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Version 1.2.2
+Bug fixesmcfillgaps: filling of begin and end with first or last recorded marker ('fillall') fixed. New option ('nobefill') that fills gaps during recording, but gaps in start and end are set to NaN instead of 0mcm2j: number of markers set correctly in the joint representationmcplottimeseries: frame scale when plotting norm data mcplottimeseries: plot more than one time series in the same plot using different colorsmcplotframe: frame numbers issue fixedmc2frontal: change marker direction to left to right
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Version 1.3
+
+New functions
+mcboundrect: calculates the bounding rectangle
+mccut: cuts two MoCap structures to the length of the shorter onemcfilteremg: filters emg data
+mcinitstruct: initializes mocap or norm structure
+mcreadmat: reads in .mat files as exported from QTM
+mcsegmangle: calculates the angles between two markers 
+mcsetmarker: replaces a subset of markers in an existing mocap or norm structure
+mcspectrum: Calculates the amplitude spectrum of mocap time series
+
+
+Bug fixes
+mcanimate (1), mcplotframe (1), mcinitanimpar (1): perspective projection implemented
+mccumdist: also for data that has already norm structure
+mcdemo9: demo on how to use perspective projection in animations
+mcfillgaps: bug fixed regarding empty markers/trajectories (being ignored now), bug fixed on input parameter 
+mcmerge: now also for norm data
+mcperiod: option for either first or highest peak value of autocorrelation 
+mcplotframe: png output format when creating animation
+mcplottimeseries: plotting of more than one time series in the same plot also possible for norm data (that 'combined' option is very probably not working for segment data) 
+mcread: opportunity to read in .mat files as exported from QTM
+mcreadc3d: number of frames issue solved (though see note for mcread)
+mcreadwii: can handle 6-dof data (order: X Y Z Roll Pitch Yaw) if we publish WiiDataCapture for the motionPlus extension
+mcrotate: bug fixed regarding missing markers
+mcsmoothen: Butterworth filter smoothing implemented
+mctimeder (1): polynomial order and window length dependent on the order of the derivative
+mctimeder (2): implementation of faster version based on differences of successive frames
+mcwindow: extended for mcvar
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Version 1.4
+
+New functionsmcc3d2tsv: converts c3d into tsv filemcconcatenate: concatenates markers from different MoCap or norm data structuremcmocapgram: plots mocapgrammcwritetsv: saves a mocap structure as tsv file 
+
+Bug fixesmcdemo1: added new functionality of mcplottimeseriesmcdemo3: code adaption due to new functionality of mcplottimeseriesmcdemo5/9/10: improved explanations and wordingmcdemo11: code adaption due to new functionality of mcplottimeseriesmcdemodata: marker names: spelling and quotation marks fixedmcmerge: color, number, traces, and connection arrays filled up and merged correctlymcperiod: bug fixed related to finding the local maximamcplotframe: color strings internally replaced by RGB triples. User can either specify colors as strings or as RGB triples. Filling up of color, number, traces, and connection arrays (for mcmerge). Warning if frame number exceeds number of frames in datamcplottimeseries: parameter call changed, extension for plotting marker names and labels, using marker/segment names instead of numbers, combined plot option also for segm datamcread: check if input file exists. Support of .mat files (from QTM)mcsetmarker: marker numbers in replacing data set must equal the amount of markers in the vector containing the marker numbers to the replaced. Fix regarding marker namesmctimeder: bug fixed on gap filling for differentiation 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Version 1.5
+
+New functions
+mcaddframes: duplicates frames
+mccomplexity: calculates the complexity of movement based on entropy of the first principal component
+mcfluidity: calculates the fluidity/circularity of mocap data 
+mcrepovizz: exports MoCap structure as repoVizz files
+mcreverse: reverses dimensions of motion-capture data
+mcrotationrange: calculates the rotation range between two markers
+mcsetlength: sets mocap data to the length given
+mcsort: sorts mocap data according to marker names
+
+Bug fixes
+mcanimate, mcplotframe, mcinitanimpar: direct video file making; changing use of projection parameters; returning from function with setting video parameters, but without creating video
+mcdemodata: updated animpar variables to fit new animation parameter structure
+mcdemo6-mcdemo9: fit new animation parameter structure
+mcgetmarkername: now for norm data as well
+mchilbert: keep data structure same as input file, added flag for indicating phase wrap
+mcinitstruct: fixed inconsistency in naming in the manual
+mcmerge: fixing animation parameter structure merging
+mcmocapgram: norm data included
+mcplotframe: move axes definition outside the main plotting loop for efficiancy
+mcread: added bvh support, added potential troubleshoot for c3d data
+mcreadc3d: check for matching frame no and data size (Optitrack issue)
+mcs2j: runtime efficiency 
+mctimeintegr: for norm data as well
+readc3d: changed machinetype parameter - change back as indicated in script if you run into issues reading in c3d files
