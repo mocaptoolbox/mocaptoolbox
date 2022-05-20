@@ -17,7 +17,7 @@ function dist = mcmarkerdist(d, m1, m2)
 % dist = mcmarkerdist(d, 1, [2 5]);
 % dist = mcmarkerdist(d, 1, [2 5 8]);
 %
-% ? Part of the Motion Capture Toolbox, Copyright ?2008,
+% Part of the Motion Capture Toolbox, Copyright 2008,
 % University of Jyvaskyla, Finland
 
 dist = zeros(d.nFrames,1);
