@@ -1,5 +1,5 @@
 function [r par] = mccoupling(mc1, mc2, par)
-% uses Principal Component Analysis (PCA) and Canonical Component Analysis (CCA) to compute a number of coupling indices between two sets of mocap data
+% Computes a number of coupling indices between two sets of mocap data using Principal Component Analysis (PCA) and Canonical Component Analysis (CCA).
 %
 % syntax
 % r = mccoupling(mc1, mc2);
