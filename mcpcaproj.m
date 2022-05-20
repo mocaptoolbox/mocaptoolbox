@@ -17,26 +17,26 @@ function [dp, p] = mcpcaproj(d, pcind, proj)
 % output
 % dp: vector of MoCap, norm or segm data structures
 % p: PCA parameter structure containing the following fields:
-%    l: proportion of variance contained in each PC 
-%    q: PC vectors (columns) 
-%    c: PC projections (rows) 
+%    l: proportion of variance contained in each PC
+%    q: PC vectors (columns)
+%    c: PC projections (rows)
 %    meanx: mean vector of variables
 %
 % examples
 % [dp, p] = mcpcaproj(d);
 % [dp, p] = mcpcaproj(d, 1:3);
 % [dp, p] = mcpcaproj(d, 1:3, sin(2*pi*0:60/60);
-% 
+%
 % see also
 % mcicaproj, mcsethares
 %
 % references
-% Burger, B., Saarikallio, S., Luck, G., Thompson, M. R., & Toiviainen, P. (2012). 
-% Emotions Move Us: Basic Emotions in Music Influence People's Movement to Music. 
-% In Proceedings of the 12th International Conference on Music Perception and 
-% Cognition (ICMPC) / 8th Triennial Conference of the European Society for the 
-% Cognitive Sciences of Music (ESCOM). Thessaloniki, Greece. 
-% 
+% Burger, B., Saarikallio, S., Luck, G., Thompson, M. R., & Toiviainen, P. (2012).
+% Emotions Move Us: Basic Emotions in Music Influence People's Movement to Music.
+% In Proceedings of the 12th International Conference on Music Perception and
+% Cognition (ICMPC) / 8th Triennial Conference of the European Society for the
+% Cognitive Sciences of Music (ESCOM). Thessaloniki, Greece.
+%
 % Part of the Motion Capture Toolbox, Copyright 2008,
 % University of Jyvaskyla, Finland
 
@@ -86,16 +86,16 @@ elseif isfield(d,'type') && strcmp(d.type, 'segm data')
         end
         dp(k) = d;
         tmp = repmat(p.meanx,size(proj,2),1)+(proj'*pc');
-        dp(k).roottrans = tmp(:,1:3); 
-        dp(k).rootrot.az = tmp(:,4); 
-%        dp(k).roottrans = zeros(size(tmp(:,1:3))); 
-%        dp(k).rootrot.az = zeros(size(tmp(:,1:3))); 
+        dp(k).roottrans = tmp(:,1:3);
+        dp(k).rootrot.az = tmp(:,4);
+%        dp(k).roottrans = zeros(size(tmp(:,1:3)));
+%        dp(k).rootrot.az = zeros(size(tmp(:,1:3)));
         for m=2:d.nMarkers
             dp(k).segm(m).eucl = tmp(:,3*m+(-1:1));
         end
         dp(k).nFrames = size(tmp,1);
     end
-    
+
     else
         disp([10, 'The first input argument has to be a variable with MoCap, norm or segment data structure.', 10]);
         [y,fs] = audioread('mcsound.wav');
