@@ -17,6 +17,7 @@
 % mcconcatenate -- concatenates markers from different MoCap or norm data structure
 % mcgetmarkername -- gets names of markers from MoCap data
 % mcfillgaps -- fills missing data
+% mcfixrigidbody -- fill gaps in rigid body MoCap data
 % mcinitstruct -- initializes "empty" Mocap or norm data structure
 % mcreorderdims -- reorders the Euclidean dimensions in the MoCap data
 % mcreverse -- reverse dimensions of mocap data
@@ -30,6 +31,7 @@
 % mctranslate -- translates MoCap data
 % mcrotate -- rotates MoCap data
 % mc2frontal -- rotates MoCap data to have a frontal view with respect to a pair of markers
+% mc2local -- transform MoCap data to a local coordinate system
 % mcvect2grid -- convert a MoCap structure vector to a MoCap structure with three orthogonal views
 %
 % COORDINATE SYSTEM CONVERSION FUNCTIONS
@@ -74,8 +76,9 @@
 % mcplotphaseplane -- creates phase plane plots
 % mcinitanimpar -- initializes animation parameters
 % mccreateconnmatrix: creates connection matrix for plotting and animations
-% mcplotframe -- plots jpeg frames from MoCap data
-% mcanimate -- plots and saves jpeg frames for animation
+% mcplotframe -- plots frames from MoCap data in 2D
+% mcplot3Dframe -- plot frames from MoCap data in 3D
+% mcanimate -- make an animation
 % mcsimmat -- calculate similarity matrix
 % mcmocapgram -- plots mocapgram
 %
@@ -85,8 +88,14 @@
 % mcsethares -- performs either an m-best or a small-to-large Sethares transform
 % mceigenmovement -- returns eigenmovements obtained from Principal Components Analysis
 %
+% COUPLING FUNCTIONS
+% mccoupling -- compute a number of coupling indices between MoCap data
+% mcplsproj -- perform a PLS from two sets of MoCap data
+% mcgxwt -- perform a GXWT from two or more sets of MoCap data
+%
 % OTHER FUNCTIONS
 % mcbandpass -- band pass filters MoCap data
 % mchilbert -- performs a Hilbert transform
 % mchilberthuang -- performs a Hilbert-Huang transform
 % mcfilteremg -- filter emg data
+% mcorientation -- gets orientation of a segment with respect to location of another segment

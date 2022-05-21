@@ -1,4 +1,4 @@
-Release Notes 
+Release Notes
 
 The Motion Capture Toolbox, Copyright ©2008-2015, University of Jyvaskyla, Finland
 
@@ -64,7 +64,7 @@ mcboundrect: calculates the bounding rectangle
 mccut: cuts two MoCap structures to the length of the shorter onemcfilteremg: filters emg data
 mcinitstruct: initializes mocap or norm structure
 mcreadmat: reads in .mat files as exported from QTM
-mcsegmangle: calculates the angles between two markers 
+mcsegmangle: calculates the angles between two markers
 mcsetmarker: replaces a subset of markers in an existing mocap or norm structure
 mcspectrum: Calculates the amplitude spectrum of mocap time series
 
@@ -73,11 +73,11 @@ Bug fixes
 mcanimate (1), mcplotframe (1), mcinitanimpar (1): perspective projection implemented
 mccumdist: also for data that has already norm structure
 mcdemo9: demo on how to use perspective projection in animations
-mcfillgaps: bug fixed regarding empty markers/trajectories (being ignored now), bug fixed on input parameter 
+mcfillgaps: bug fixed regarding empty markers/trajectories (being ignored now), bug fixed on input parameter
 mcmerge: now also for norm data
-mcperiod: option for either first or highest peak value of autocorrelation 
+mcperiod: option for either first or highest peak value of autocorrelation
 mcplotframe: png output format when creating animation
-mcplottimeseries: plotting of more than one time series in the same plot also possible for norm data (that 'combined' option is very probably not working for segment data) 
+mcplottimeseries: plotting of more than one time series in the same plot also possible for norm data (that 'combined' option is very probably not working for segment data)
 mcread: opportunity to read in .mat files as exported from QTM
 mcreadc3d: number of frames issue solved (though see note for mcread)
 mcreadwii: can handle 6-dof data (order: X Y Z Roll Pitch Yaw) if we publish WiiDataCapture for the motionPlus extension
@@ -91,9 +91,9 @@ mcwindow: extended for mcvar
 
 Version 1.4
 
-New functionsmcc3d2tsv: converts c3d into tsv filemcconcatenate: concatenates markers from different MoCap or norm data structuremcmocapgram: plots mocapgrammcwritetsv: saves a mocap structure as tsv file 
+New functionsmcc3d2tsv: converts c3d into tsv filemcconcatenate: concatenates markers from different MoCap or norm data structuremcmocapgram: plots mocapgrammcwritetsv: saves a mocap structure as tsv file
 
-Bug fixesmcdemo1: added new functionality of mcplottimeseriesmcdemo3: code adaption due to new functionality of mcplottimeseriesmcdemo5/9/10: improved explanations and wordingmcdemo11: code adaption due to new functionality of mcplottimeseriesmcdemodata: marker names: spelling and quotation marks fixedmcmerge: color, number, traces, and connection arrays filled up and merged correctlymcperiod: bug fixed related to finding the local maximamcplotframe: color strings internally replaced by RGB triples. User can either specify colors as strings or as RGB triples. Filling up of color, number, traces, and connection arrays (for mcmerge). Warning if frame number exceeds number of frames in datamcplottimeseries: parameter call changed, extension for plotting marker names and labels, using marker/segment names instead of numbers, combined plot option also for segm datamcread: check if input file exists. Support of .mat files (from QTM)mcsetmarker: marker numbers in replacing data set must equal the amount of markers in the vector containing the marker numbers to the replaced. Fix regarding marker namesmctimeder: bug fixed on gap filling for differentiation 
+Bug fixesmcdemo1: added new functionality of mcplottimeseriesmcdemo3: code adaption due to new functionality of mcplottimeseriesmcdemo5/9/10: improved explanations and wordingmcdemo11: code adaption due to new functionality of mcplottimeseriesmcdemodata: marker names: spelling and quotation marks fixedmcmerge: color, number, traces, and connection arrays filled up and merged correctlymcperiod: bug fixed related to finding the local maximamcplotframe: color strings internally replaced by RGB triples. User can either specify colors as strings or as RGB triples. Filling up of color, number, traces, and connection arrays (for mcmerge). Warning if frame number exceeds number of frames in datamcplottimeseries: parameter call changed, extension for plotting marker names and labels, using marker/segment names instead of numbers, combined plot option also for segm datamcread: check if input file exists. Support of .mat files (from QTM)mcsetmarker: marker numbers in replacing data set must equal the amount of markers in the vector containing the marker numbers to the replaced. Fix regarding marker namesmctimeder: bug fixed on gap filling for differentiation
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -102,7 +102,7 @@ Version 1.5
 New functions
 mcaddframes: duplicates frames
 mccomplexity: calculates the complexity of movement based on entropy of the first principal component
-mcfluidity: calculates the fluidity/circularity of mocap data 
+mcfluidity: calculates the fluidity/circularity of mocap data
 mcrepovizz: exports MoCap structure as repoVizz files
 mcreverse: reverses dimensions of motion-capture data
 mcrotationrange: calculates the rotation range between two markers
@@ -121,6 +121,34 @@ mcmocapgram: norm data included
 mcplotframe: move axes definition outside the main plotting loop for efficiancy
 mcread: added bvh support, added potential troubleshoot for c3d data
 mcreadc3d: check for matching frame no and data size (Optitrack issue)
-mcs2j: runtime efficiency 
+mcs2j: runtime efficiency
 mctimeintegr: for norm data as well
 readc3d: changed machinetype parameter - change back as indicated in script if you run into issues reading in c3d files
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.6
+
+New functions
+
+mc2local: local coordinate transformation
+mccoupling: coupling indices between two sets of mocap data using Principal Component Analysis (PCA) and Canonical Component Analysis (CCA)
+mcfixrigidbody: Fills gaps in motion capture data using multiple linear regression
+mcgxwt: Generalized cross-wavelet transform between two or more MoCap or Norm data structures
+mcorientation: Calculates horizontal orientation of a segment with respect to the location of another segment
+mcplot3Dframe: Plots frames of motion capture data in 3D
+mcplsproj: Projection to Latent Structures (PLS) on two data structures and projects the data onto selected components
+
+Improvements
+
+mc2frontal: returns rotation angles (theta) per frame as well
+mcinitanimpar: '3D' option can be used to initialize parameters for a 3D animation. 'hold' parameter to retain the current or the upcoming plot (similar functionality to 'hold on' in Matlab). 'createFrames' parameter can be set for creation of animated gifs.
+mcmarkerdist: The second input argument can also be an array of two markers or three markers. If it is an array of two markers, the distance between marker m1 and a line spanned by two other markers is computed. If it is an array of three markers, the function computes the distance between marker m1 and a plane spanned by the three other markers.
+
+Bug fixes
+
+mcanimate: Kristian Nymoen's 3D plotting, and probably other things
+mccomplexity: added a scaling / noise reduction factor
+mcfillgaps: doesn't crash if only one frame needs to be filled
+mchilbert: no de-centering of data after calculation of transform
+mcreadtsv: minor fixes not affecting the results
+mctimeder: fix ignoring empty markers in the fast version
