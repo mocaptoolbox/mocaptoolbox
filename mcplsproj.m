@@ -28,7 +28,7 @@ function [dp1,dp2,p1,p2,sv] = mcplsproj(d1,d2, par)
 % [dp1,dp2,p1,p2,sv] = mcplsproj(d1,d2,ncomp=2);
 %
 % see also
-% mcpcaproj, mcicaproj, mccoupling
+% mcpcaproj, mcicaproj, mccoupling, mcgxwt
 %
 % references
 % Hartmann, M., Mavrolampados, A., Allingham, E., Carlson, E., Burger, B., & Toiviainen, P. (2019). Kinematics of perceived dyadic coordination in dance. Scientific Reports, 9(1), 1-14.
