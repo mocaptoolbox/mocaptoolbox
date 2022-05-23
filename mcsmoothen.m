@@ -1,16 +1,16 @@
 function d2 = mcsmoothen(d, f)
-% Smoothens motion capture data using a Butterworth (fast) or a Savitzky-Golay FIR (accurate) smoothing filter. 
+% Smoothens motion capture data using a Butterworth (fast) or a Savitzky-Golay FIR (accurate) smoothing filter.
 %
 % syntax
 % d2 = mcsmoothen(d);
 % d2 = mcsmoothen(d, filterparams);
-% d2 = mcsmoothen(d, method); 
+% d2 = mcsmoothen(d, method);
 % d2 = mcsmoothen(d, window);
 %
 % input parameters
 % d: MoCap data structure or segm data structure
-% f: 
-%   filterparams: order and cutoff frequency for Butterworth filter (optional, default [2, 0.2]) 
+% f:
+%   filterparams: order and cutoff frequency for Butterworth filter (optional, default [2, 0.2])
 %   method: Butterworth filtering is default - if Savitzky-Golay filtering is to be used, use 'acc' as method argument
 %   window: window length (optional, default = 7) for Savitzky-Golay FIR smoothing filter
 %   (if input is scalar or a string, Savitzky-Golay filter is chosen - if input is vector, it is considered as parameters for Butterworth filter)
@@ -26,13 +26,14 @@ function d2 = mcsmoothen(d, f)
 %
 % comments
 % The default parameters for the Butterworth filter create a second-order zero-phase digital
-% Butterworth filter with a cutoff frequency of 0.2 Hz.
+% Butterworth filter with a cutoff frequency of 0.2 Hz times the Nyquist frequency
+% (half the mocap frame rate – if the frame rate is 120, then the cuttoff frequency is 12 Hz).
 % For information about the Savitzky-Golay filter, see help sgolayfilt.
 %
 % see also
 % mctimeder
 %
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+% Part of the Motion Capture Toolbox, Copyright 2008,
 % University of Jyvaskyla, Finland
 
 d2=[];
@@ -47,9 +48,9 @@ if nargin==2
     if strcmp(f, 'acc')
         s = f;
         f = 7;
-    elseif isscalar(f) 
+    elseif isscalar(f)
         s = 'acc';
-    elseif isvector(f) && ~ischar(f) 
+    elseif isvector(f) && ~ischar(f)
         if f(1) ~= floor(f(1));
             disp([10, 'The order parameter must be an integer.', 10]);
             [y,fs] = audioread('mcsound.wav');
@@ -65,13 +66,13 @@ if nargin==2
         order=f(1);
         cutoff=f(2);
         s='';
-    else 
+    else
         disp([10, 'Inconsistent input arguments.', 10]);
         [y,fs] = audioread('mcsound.wav');
         sound(y,fs);
         return
     end
-end  
+end
 
 
 d2=d;
@@ -82,7 +83,7 @@ if strcmp(s, 'acc') %accurate, Savitzky-Golay version
 else %fast Butterworth version
     if isfield(d,'type') && (strcmp(d.type, 'MoCap data') || strcmp(d.type, 'norm data'))
         d2.data = butter_l(d.data, order, cutoff);
-        
+
     elseif isfield(d,'type') && strcmp(d.type, 'segm data')
         d2.roottrans = butter_l(d.roottrans, order, cutoff);
         d2.rootrot.az = butter_l(d.rootrot.az, order, cutoff);
@@ -99,8 +100,8 @@ else %fast Butterworth version
     end
 end
 return
-    
-    
+
+
 function dat2=butter_l(d, order, cutoff)
 
 d_filt=[];
@@ -130,5 +131,3 @@ if sum(mf)>0 %missing frames set back to NaN
 end
 
 dat2=d_filt;
-
-
