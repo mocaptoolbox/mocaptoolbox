@@ -34,7 +34,7 @@ function d2 = mctimeder(d, n, f, s)
 %
 % comments
 % The default parameters for the Butterworth smoothing filter create a second-order zero-phase digital
-% Butterworth filter with a cutoff frequency of 0.2 times the Nyquist frequency
+% Butterworth filter with a cutoff frequency of 0.2 Hz times the Nyquist frequency
 % (half the mocap frame rate – if the frame rate is 120, then the cuttoff frequency is 12 Hz).
 % The window length is dependent on the order of the time derivative and the
 % given window length. It is calculated by 4*n+w-4. Thus, if the default
