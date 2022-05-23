@@ -1,4 +1,4 @@
-function d2 = mc2frontal(d, m1, m2, method)
+function [d2 theta] = mc2frontal(d, m1, m2, method)
 % Rotates MoCap data to have a frontal view with respect to a pair of markers.
 %
 % syntax
@@ -13,10 +13,11 @@ function d2 = mc2frontal(d, m1, m2, method)
 %       frontal view with respect to the mean locations of markers m1 and m2
 %   'frame' rotates each frame separately to have a frontal view with
 %       respect to the instantaneous locations of markers m1 and m2; with this
-%       value, each individual frame is centered as well
+%       value, each individual frame is rotated as well
 %
 % output
 % d2: MoCap data structure or data matrix
+% theta: rotation angle(s)
 %
 % examples
 % d2 = mc2frontal(d, 3, 7);
@@ -32,11 +33,11 @@ function d2 = mc2frontal(d, m1, m2, method)
 % Part of the Motion Capture Toolbox, Copyright 2008,
 % University of Jyvaskyla, Finland
 
-if nargin<4 
-    method = 'mean'; 
+if nargin<4
+    method = 'mean';
 end
 
-if nargin<3 
+if nargin<3
     disp([10, 'mc2frontal needs at least three input parameters.' 10])
     d2=[];
     [y,fs] = audioread('mcsound.wav');
@@ -76,6 +77,7 @@ if strcmp(method, 'mean')
     y2 = mcmean(tmp(:,5));
     [th,r] = cart2pol(x1-x2,y1-y2);
     dat2 = mcrotate(dat, 180-180*th/pi, [0 0 1]);
+    theta=180-180*th/pi;
 elseif strcmp(method, 'frame')
     dat2 = zeros(size(dat));
     for k=1:size(dat,1)
@@ -87,6 +89,7 @@ elseif strcmp(method, 'frame')
         [th,r] = cart2pol(x1-x2,y1-y2);
         %dat2(k,:) = mccenter(mcrotate(dat(k,:), -180*th/pi, [0 0 1]));
         dat2(k,:) = mcrotate(dat(k,:), 180-180*th/pi, [0 0 1],[0.5*(x1+x2) 0.5*(y1+y2) 0]);
+        theta(k)=180-180*th/pi;
     end
 else disp([10, 'Method argument unknown.', 10]);
     d2=[];
