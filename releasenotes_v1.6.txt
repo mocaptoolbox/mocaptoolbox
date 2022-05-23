@@ -146,9 +146,9 @@ mcmarkerdist: The second input argument can also be an array of two markers or t
 
 Bug fixes
 
-mcanimate: Kristian Nymoen's 3D plotting, and probably other things
-mccomplexity: added a scaling / noise reduction factor
-mcfillgaps: doesn't crash if only one frame needs to be filled
+mcanimate: 3D plotting functionality
+mccomplexity: scaling / noise reduction factor added
+mcfillgaps: function does not crash if only one frame needs to be filled
 mchilbert: no de-centering of data after calculation of transform
 mcreadtsv: minor fixes not affecting the results
 mctimeder: fix ignoring empty markers in the fast version
