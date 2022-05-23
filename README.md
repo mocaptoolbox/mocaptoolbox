@@ -54,15 +54,15 @@ WiiDataCapture 2.2 requires [OSCulator](http://www.osculator.net)!
 
 Old versions of WiiDataCapture: please contact authors for older versions.
 
-### Google Group
-Please register to our Google Group to stay informed about new releases, bug reports, and bug fixes. It also serves as a general discussion board for users, so feel free to post anything motion capture- and toolbox-related that might be of interest to other users and developers.
+## Mailing List
+Please register to the mailing list to stay informed about new releases, bug reports, and bug fixes. It also serves as a general discussion board for users, so feel free to post anything motion capture- and toolbox-related that might be of interest to other users and developers. 
 
-[Join Google Group](https://groups.google.com/g/mocaptoolbox)
+[Subscribe to mailing list](https://www.freelists.org/list/mocaptoolbox)
 
-The email address to send messages to the group is `mocaptoolbox@googlegroups.com` (requires registration to send).
+You can also sign up to GitHub and participate in our [Discussions](https://github.com/mocaptoolbox/mocaptoolbox/discussions), report [issues](https://github.com/mocaptoolbox/mocaptoolbox/issues) and create [pull requests](https://github.com/mocaptoolbox/mocaptoolbox/pulls).
 
 ### Documentation and Reference
-The documentation provides a general description of the Toolbox (Chapter 1) and examples (Chapter 2). Chapter 3 and 4 contain the data and parameter structure, and function reference respectively.
+The [documentation](https://github.com/mocaptoolbox/mocaptoolbox/wiki) provides a general description of the Toolbox (Chapter 1) and examples (Chapter 2). Chapter 3 and 4 contain the data and parameter structure, and function reference respectively.
 
 To cite the MoCap Toolbox, please use the following reference:
 
