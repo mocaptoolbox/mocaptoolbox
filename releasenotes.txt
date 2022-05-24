@@ -152,3 +152,15 @@ mcfillgaps: function does not crash if only one frame needs to be filled
 mchilbert: no de-centering of data after calculation of transform
 mcreadtsv: minor fixes not affecting the results
 mctimeder: fix ignoring empty markers in the fast version
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Changes since version 1.6
+
+New functions
+
+Improvements
+mc2frontal: return rotation angle(s) as a second output
+
+Bug fixes
+mcsmoothen and mctimeder: In documentation, unit for butterworth filter cutoff is normalized frequency, not Hz (thanks Kristian Nymoen and Juan Mendoza)
+mc2frontal: Amendment to documentation: function applies rotation, not centering (thanks Juan Mendoza).
