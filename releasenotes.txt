@@ -48,12 +48,20 @@ mcresample: allow to use norm data as input
 Version 1.2.1
 
 Bug fixes
-mcplotframe: plotting frame numbers, no stats toolbox for animationsmcmerge: concatenates marker and trace color strings (if both animations shall have the same colors)
+mcplotframe: plotting frame numbers, no stats toolbox for animations
+mcmerge: concatenates marker and trace color strings (if both animations shall have the same colors)
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Version 1.2.2
-Bug fixesmcfillgaps: filling of begin and end with first or last recorded marker ('fillall') fixed. New option ('nobefill') that fills gaps during recording, but gaps in start and end are set to NaN instead of 0mcm2j: number of markers set correctly in the joint representationmcplottimeseries: frame scale when plotting norm data mcplottimeseries: plot more than one time series in the same plot using different colorsmcplotframe: frame numbers issue fixedmc2frontal: change marker direction to left to right
+
+Bug fixes
+mcfillgaps: filling of begin and end with first or last recorded marker ('fillall') fixed. New option ('nobefill') that fills gaps during recording, but gaps in start and end are set to NaN instead of 0
+mcm2j: number of markers set correctly in the joint representation
+mcplottimeseries: frame scale when plotting norm data 
+mcplottimeseries: plot more than one time series in the same plot using different colors
+mcplotframe: frame numbers issue fixed
+mc2frontal: change marker direction to left to right
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -61,7 +69,8 @@ Version 1.3
 
 New functions
 mcboundrect: calculates the bounding rectangle
-mccut: cuts two MoCap structures to the length of the shorter onemcfilteremg: filters emg data
+mccut: cuts two MoCap structures to the length of the shorter one
+mcfilteremg: filters emg data
 mcinitstruct: initializes mocap or norm structure
 mcreadmat: reads in .mat files as exported from QTM
 mcsegmangle: calculates the angles between two markers
@@ -91,9 +100,25 @@ mcwindow: extended for mcvar
 
 Version 1.4
 
-New functionsmcc3d2tsv: converts c3d into tsv filemcconcatenate: concatenates markers from different MoCap or norm data structuremcmocapgram: plots mocapgrammcwritetsv: saves a mocap structure as tsv file
+New functions
+mcc3d2tsv: converts c3d into tsv file
+mcconcatenate: concatenates markers from different MoCap or norm data structure
+mcmocapgram: plots mocapgram
+mcwritetsv: saves a mocap structure as tsv file
 
-Bug fixesmcdemo1: added new functionality of mcplottimeseriesmcdemo3: code adaption due to new functionality of mcplottimeseriesmcdemo5/9/10: improved explanations and wordingmcdemo11: code adaption due to new functionality of mcplottimeseriesmcdemodata: marker names: spelling and quotation marks fixedmcmerge: color, number, traces, and connection arrays filled up and merged correctlymcperiod: bug fixed related to finding the local maximamcplotframe: color strings internally replaced by RGB triples. User can either specify colors as strings or as RGB triples. Filling up of color, number, traces, and connection arrays (for mcmerge). Warning if frame number exceeds number of frames in datamcplottimeseries: parameter call changed, extension for plotting marker names and labels, using marker/segment names instead of numbers, combined plot option also for segm datamcread: check if input file exists. Support of .mat files (from QTM)mcsetmarker: marker numbers in replacing data set must equal the amount of markers in the vector containing the marker numbers to the replaced. Fix regarding marker namesmctimeder: bug fixed on gap filling for differentiation
+Bug fixes
+mcdemo1: added new functionality of mcplottimeseries
+mcdemo3: code adaption due to new functionality of mcplottimeseries
+mcdemo5/9/10: improved explanations and wording
+mcdemo11: code adaption due to new functionality of mcplottimeseries
+mcdemodata: marker names: spelling and quotation marks fixed
+mcmerge: color, number, traces, and connection arrays filled up and merged correctly
+mcperiod: bug fixed related to finding the local maxima
+mcplotframe: color strings internally replaced by RGB triples. User can either specify colors as strings or as RGB triples. Filling up of color, number, traces, and connection arrays (for mcmerge). Warning if frame number exceeds number of frames in data
+mcplottimeseries: parameter call changed, extension for plotting marker names and labels, using marker/segment names instead of numbers, combined plot option also for segm data
+mcread: check if input file exists. Support of .mat files (from QTM)
+mcsetmarker: marker numbers in replacing data set must equal the amount of markers in the vector containing the marker numbers to the replaced. Fix regarding marker names
+mctimeder: bug fixed on gap filling for differentiation
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -163,4 +188,5 @@ mc2frontal: return rotation angle(s) as a second output
 
 Bug fixes
 mcsmoothen and mctimeder: In documentation, unit for butterworth filter cutoff is normalized frequency, not Hz (thanks Kristian Nymoen and Juan Mendoza)
-mc2frontal: Amendment to documentation: function applies rotation, not centering (thanks Juan Mendoza).
+mc2frontal: Amendment to documentation: function applies rotation, not centering (thanks Juan Mendoza)
+mccoupling: fix malaprop (canonical component analysis -> canonical correlation analysis)
