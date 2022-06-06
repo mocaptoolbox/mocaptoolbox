@@ -5,7 +5,7 @@ function d2 = mc2local(d, m1, m2)
 %
 % syntax
 % d2 = mc2local(d, m1);
-% d2 = mc2local(d, [m1, m2]);
+% d2 = mc2local(d, m1, [m2, m3]);
 %
 % input parameters
 % d: MoCap data structure
