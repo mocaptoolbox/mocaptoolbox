@@ -10,14 +10,14 @@ function d2 = mcs2j(d, par)
 %
 % output
 % d2: MoCap data structure
-% 
+%
 % comments
 % See the description of the j2spar structure.
-% 
+%
 % see also
 % mcinitj2spar, mcj2s
 %
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+% Part of the Motion Capture Toolbox, Copyright 2008,
 % University of Jyvaskyla, Finland
 
 
@@ -41,8 +41,8 @@ if isfield(d,'type') && strcmp(d.type, 'segm data') && isfield(par,'type') && st
     d2=rmfield(d2,'segmentName');
     d2.markerName = [];
     d2.type = 'MoCap data';
-    d2.data = zeros(d2.nFrames, 3*d2.nMarkers); %BBFIX20150720, H. Jaeger note 
-    d2.data(:, 3*par.rootMarker+(-2:0)) = d.roottrans;
+    d2.data = zeros(d2.nFrames, 3*d2.nMarkers); %BBFIX20150720, H. Jaeger note
+    d2.data(:, 3*par.rootMarker+(-2:0)) = d.roottrans; % original root location data
     for k=1:d.nMarkers
         m=k;
         %tmp=d.roottrans;
@@ -61,4 +61,3 @@ else
 end
 
 return
-
