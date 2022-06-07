@@ -2,7 +2,7 @@ function d2 = mcgetmarker(d, mn)
 % Extracts a subset of markers.
 %
 % syntax
-% d2 = mcgetmarkers(d, mn);
+% d2 = mcgetmarker(d, mn);
 %
 % input parameters
 % d: MoCap or norm data structure
