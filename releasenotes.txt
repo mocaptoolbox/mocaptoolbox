@@ -191,3 +191,12 @@ Bug fixes
 mcsmoothen and mctimeder: In documentation, unit for butterworth filter cutoff is normalized frequency, not Hz (thanks Kristian Nymoen and Juan Mendoza)
 mc2frontal: Amendment to documentation: function applies rotation, not centering (thanks Juan Mendoza)
 mccoupling: fix malaprop (canonical component analysis -> canonical correlation analysis)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Changes since Version 1.6.1
+
+New functions
+mcrmmarker: Removes a subset of markers.
+
+Improvements
+
+Bug fixes

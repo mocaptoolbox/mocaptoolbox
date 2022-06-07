@@ -14,6 +14,7 @@
 % mcsort -- sorts mocap data according to marker names
 % mcgetmarker -- extracts a subset of markers from MoCap data
 % mcsetmarker -- replaces a subset of markers
+% mcrmmarker -- removes a subset of markers from MoCap data
 % mcconcatenate -- concatenates markers from different MoCap or norm data structure
 % mcgetmarkername -- gets names of markers from MoCap data
 % mcfillgaps -- fills missing data
