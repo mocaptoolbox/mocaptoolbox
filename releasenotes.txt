@@ -179,7 +179,7 @@ mcreadtsv: minor fixes not affecting the results
 mctimeder: fix ignoring empty markers in the fast version
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Changes since version 1.6
+Version 1.6.1
 
 New functions
 
