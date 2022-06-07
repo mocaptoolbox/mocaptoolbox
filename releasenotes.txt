@@ -58,7 +58,7 @@ Version 1.2.2
 Bug fixes
 mcfillgaps: filling of begin and end with first or last recorded marker ('fillall') fixed. New option ('nobefill') that fills gaps during recording, but gaps in start and end are set to NaN instead of 0
 mcm2j: number of markers set correctly in the joint representation
-mcplottimeseries: frame scale when plotting norm data 
+mcplottimeseries: frame scale when plotting norm data
 mcplottimeseries: plot more than one time series in the same plot using different colors
 mcplotframe: frame numbers issue fixed
 mc2frontal: change marker direction to left to right
@@ -185,6 +185,7 @@ New functions
 
 Improvements
 mc2frontal: return rotation angle(s) as a second output
+mcgetmarker: input parameter can be a string or cell array containg names of markers (case sensitive).
 
 Bug fixes
 mcsmoothen and mctimeder: In documentation, unit for butterworth filter cutoff is normalized frequency, not Hz (thanks Kristian Nymoen and Juan Mendoza)
