@@ -22,7 +22,30 @@ function p = mcanimate(d, p, proj)
 % p: animpar structure used for plotting the frames
 %
 % examples
-% mcanimate(d, par);
+%% 2D animation
+% load mcdemodata
+% mcanimate(dance1,mapar)
+%
+%% 3D animation
+% ap = mcinitanimpar('3D');
+% ap.conn=mapar.conn;
+% % add floor image
+% ap.par3D.wallimagex = 'saturn.png';
+% ap.par3D.wallimagey = 'fabric.png';
+% ap.par3D.floorimage= 'rice.png';
+% ap.par3D.drawfloor = 1;
+% ap.par3D.drawwallx = 1;
+% ap.par3D.drawwally = 1;
+% % add some color
+% ap.colors='wbgww';
+% % animate
+% mcanimate(dance2,ap)
+%
+%% 3D animation with joint rotations (for data imported from Qualysis + Theia 3D markerless pose estimation)
+% [d japar] = mcread('filename.tsv');
+% japar.par3D.jointrotations=1;
+% mcanimate(d,japar)
+%
 %
 % comments
 % If the animpar structure is not given as input argument, the function
@@ -30,6 +53,8 @@ function p = mcanimate(d, p, proj)
 % of the animpar structure automatically so that all the markers fit into all frames.
 % If the par.pers field (perspective projection) is not given, it is created internally for backwards
 % compatibility. For explanation of the par.pers field, see help mcinitanimpar
+%
+% If the joint animation parameter field par3D.jointrotations is set to 1, mcanimate draws axes in each joint to represent rotations with respect to the global coordinate system defined in calibration (for data imported from Qualysis + Theia 3D markerless pose estimation)
 %
 % see also
 % mcplotframe, mcinitanimpar
