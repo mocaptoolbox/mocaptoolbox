@@ -630,11 +630,24 @@ for k=1:size(x,1) % main loop
     pz=pz*p.msize*0.0015*om;
 
     for m=1:size(x,2)
-
+        Q = d.other.quat(k,(1:4)+4*(m-1));% expressed as XYZW
+        Q = Q([4 1 2 3]); % reorder
+        Q(1) = -Q(1); % sign change for rotation according to right-hand rule
         markerBall = surface(px+x(k,m), py+y(k,m),flip(pz)+z(k,m));
         markerBall.FaceColor = p.colors(2);
         markerBall.EdgeColor = 'none';              % remove surface edge color
 
+        if isfield(p,'par3D') && isfield(p.par3D,'jointrotations') && p.par3D.jointrotations==1
+            extra = p.msize*0.0025*om;
+            lwidth = 2;
+            hold on
+            Qx = quatrot([0-extra,0,0],Q);
+            Qy = quatrot([0,0-extra,0],Q);
+            Qz = quatrot([0,0,0+extra],Q);
+            quiver3(x(k,m),y(k,m),z(k,m),-Qx(1),Qx(2),Qx(3),'r','LineWidth',lwidth);
+            quiver3(x(k,m),y(k,m),z(k,m),Qy(1),-Qy(2),Qy(3),'g','LineWidth',lwidth);
+            quiver3(x(k,m),y(k,m),z(k,m),Qz(1),Qz(2),Qz(3),'b','LineWidth',lwidth);
+        end
     end
 
     if showaxis
