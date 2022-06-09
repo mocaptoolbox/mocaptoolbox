@@ -75,7 +75,6 @@ function p = mcinitanimpar(x)
 % see also
 % mccreateconnmatrix, mcplotframe, mcanimate, mcplot3Dframe
 %
-% Adaptation of the native Motion Capture Toolbox function to work with 3D frame plotting
 % Download the MoCap Toolbox from
 % https://www.jyu.fi/hytk/fi/laitokset/mutku/en/research/materials/mocaptoolbox
 %
