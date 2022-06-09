@@ -1,10 +1,17 @@
 function w = quatrot(v, q)
 % function w = quatrot(v, q)
 %
-% rotates vector V by quaternion Q
+% Rotates vector V by quaternion Q.
+%
+% The function uses quaternions that are defined using the scalar-first convention (q must have its scalar number as the first column).
+% If quaternions are not yet normalized, the function normalizes them.
+% The applied rotation uses the right-hand rule.
+% The function also accepts an N by 3 matrix V and an N by 4 matrix Q as input arguments.
 
-
-%v = v(:);
+if unique(sqrt(sum(q.^2,2))) ~= 1
+    quat_normalize = @(Q) Q./sqrt(sum(Q.^2,2));
+    q = quat_normalize(q);
+end
 
 w = zeros(size(v));
 
