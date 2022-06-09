@@ -119,4 +119,3 @@ if isfield(d,'type') && strcmp(d.type, 'MoCap data')
 else
     d2 = dat2;
 end
-
