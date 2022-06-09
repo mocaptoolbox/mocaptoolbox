@@ -191,12 +191,17 @@ Bug fixes
 mcsmoothen and mctimeder: In documentation, unit for butterworth filter cutoff is normalized frequency, not Hz (thanks Kristian Nymoen and Juan Mendoza)
 mc2frontal: Amendment to documentation: function applies rotation, not centering (thanks Juan Mendoza)
 mccoupling: fix malaprop (canonical component analysis -> canonical correlation analysis)
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Changes since Version 1.6.1
+Version 1.6.2
 
 New functions
 mcrmmarker: Removes a subset of markers.
 
 Improvements
+mcread: support for importing six degrees of freedom data based on Qualysis + Theia 3D markerless pose estimation
+mcinitanimpar: new 3D parameter 'jointrotations' for visualizing rotation of joints with respect to the global coordinate system defined in calibration for data imported from Qualysis + Theia 3D markerless pose estimation
+mcplot3Dframe and mcanimate: if the joint animation parameter field 'par3D.jointrotations' is set to 1, mcplot3Dframe draws axes in each joint to represent rotations (for data imported from Qualysis + Theia 3D markerless pose estimation)
 
 Bug fixes
+mcrotate: normalization of quaternions before applying rotation
