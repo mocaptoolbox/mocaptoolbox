@@ -1,4 +1,4 @@
-function d = mcread(fn)
+function [d japar] = mcread(fn)
 % Reads a motion capture data file and returns a MoCap structure.
 %
 % syntax
@@ -22,19 +22,20 @@ function d = mcread(fn)
 % comments
 % Currently the .c3d, .tsv (as exported by QTM), .bvh, .mat (as exported by QTM), and .wii
 % (WiiDataCapture software) formats are supported. The file names must have postfixes
-% '.c3d', '.tsv', ?.bvh', '.mat', or '.wii', respectively.
+% '.c3d', '.tsv', '.bvh', '.mat', or '.wii', respectively.
 % For reading .c3d files, the function provided at http://www.c3d.org/download_apps.html is used.
 % For exporting in .tsv format from Qualisys QTM, recommended export parameter are:
 %	3D data and Include TSV header ticked.
 %	Export time data for every frame and write column headers will be ignored by mcread if ticked
 % The .c3d format does not support more than 65535 frames per file
-% (see www.c3d.org/HTML/default.htm ? The C3D file format ? Limitations). Therefore,
+% (see www.c3d.org/HTML/default.htm - The C3D file format - Limitations). Therefore,
 % if you happen to have longer recordings, export them either in .tsv or .mat, or in more than one
-% c3d file. If further problems occur when reading in .c3d files, try to adapt the ?machinetype'
-% parameters as indicated in the readc3d.m (in the folder ?private?).
+% c3d file. If further problems occur when reading in .c3d files, try to adapt the 'machinetype'
+% parameters as indicated in the readc3d.m (in the folder 'private').
 % Reading in .bvh files requires additional toolboxes available here:
 % http://staffwww.dcs.shef.ac.uk/people/N.Lawrence/mocap/ (mocap and ndlutil).
-
+%
+% mcread can import Qualysis .tsv exports based on Theia 3D markerless pose estimation (https://www.theiamarkerless.ca/). In this case it generates an 'other.quat' field containing a time by component matrix where each marker/joint rotation is represented in quaternions using the 'scalar last' convention (X Y Z W).
 %
 % Part of the Motion Capture Toolbox, Copyright 2008,
 % University of Jyvaskyla, Finland
@@ -58,7 +59,7 @@ if fn ~= 0
         postfix = fn((end-3):end);
 
         if strcmp(postfix,'.tsv')
-            d = mcreadtsv(fn);
+            [d japar] = mcreadtsv(fn);
             d.data(d.data==0) = NaN;
         elseif strcmp(postfix, '.c3d')
             d = mcreadc3d(fn);
