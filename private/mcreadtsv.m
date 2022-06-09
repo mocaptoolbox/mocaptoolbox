@@ -1,4 +1,4 @@
-function d = mcreadtsv(fn);
+function [d japar] = mcreadtsv(fn);
 
 ifp = fopen(fn);
 if ifp<0
@@ -30,7 +30,11 @@ s=fscanf(ifp,'%s',1);
 s=fscanf(ifp,'%s',1); d.nAnalog = str2num(s);
 s=fscanf(ifp,'%s',1);
 s=fscanf(ifp,'%s',1); d.anaFreq = str2num(s);
-
+if strcmp(s,'SOLVER') % expects nothing in 'time_stamp'
+    fclose(ifp);
+    [d japar] = mcreadtsvTheia(fn);
+    return
+end
 d.timederOrder = 0;
 
 fgetl(ifp);
