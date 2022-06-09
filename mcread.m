@@ -36,7 +36,7 @@ function [d japar] = mcread(fn)
 % Reading in .bvh files requires additional toolboxes available here:
 % http://staffwww.dcs.shef.ac.uk/people/N.Lawrence/mocap/ (mocap and ndlutil).
 %
-% mcread can import Qualysis .tsv exports based on Theia 3D markerless pose estimation (https://www.theiamarkerless.ca/). In this case it generates an 'other.quat' field containing a time by component matrix where each marker/joint rotation is represented in quaternions using the 'scalar last' convention (X Y Z W). Besides the joint structure, mcread generates in this case a second output japar with corresponding joint animation parameters.
+% mcread can import Qualysis .tsv exports based on Theia 3D markerless pose estimation (https://www.theiamarkerless.ca/). In this case it generates an 'other.quat' field containing a time by component matrix where each joint rotation (with respect to the global coordinate system defined in calibration) is represented in quaternions using the 'scalar last' convention (X Y Z W). Besides the joint structure, mcread generates in this case a second output japar with corresponding joint animation parameters.
 %
 % Part of the Motion Capture Toolbox, Copyright 2008,
 % University of Jyvaskyla, Finland
