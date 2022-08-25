@@ -34,6 +34,8 @@ if strcmp(s,'SOLVER') % expects nothing in 'time_stamp'
     fclose(ifp);
     [d japar] = mcreadtsvTheia(fn);
     return
+else
+    japar = [];
 end
 d.timederOrder = 0;
 
