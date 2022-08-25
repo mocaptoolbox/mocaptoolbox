@@ -205,3 +205,12 @@ mcplot3Dframe and mcanimate: if the joint animation parameter field 'par3D.joint
 
 Bug fixes
 mcrotate: normalization of quaternions before applying rotation
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.6.3
+New functions
+
+Improvements
+
+Bug fixes
+mcread: tsv reading functionality
