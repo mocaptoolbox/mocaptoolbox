@@ -1,28 +1,28 @@
 function [d3, p3] = mcmerge(d1, d2, p1, p2)
 % Merges two MoCap structures and optionally the corresponding animation parameter files.
-% 
+%
 % syntax
 % d3 = mcmerge(d1, d2);
 % [d3, p3] = mcmerge(d1, d2, p1, p2);
-% 
+%
 % input parameters
 % d1, d2: MoCap or norm data structures
 % p1, p2: animpar structures for d1 and d2
-% 
+%
 % output
 % d3: MoCap or norm data structure
 % p3: animpar structure
 %
 % comments
-% d1 and d2 must have identical frame rates. If the numbers of frames are not equal, the MoCap 
-% structure with the higher number of frames will be cut before merging. 
+% d1 and d2 must have identical frame rates. If the numbers of frames are not equal, the MoCap
+% structure with the higher number of frames will be cut before merging.
 % All animation parameters will be taken from the first animpar file, apart
 % from any color, marker, trace definition, and connection matrices.
 %
 % see also
 % mcconcatenate
 %
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+% Part of the Motion Capture Toolbox, Copyright 2008,
 % University of Jyvaskyla, Finland
 
 d3=[]; %BEAUTY FIX BB20110113: if input arguments were not of Mocap or norm data, no system error message thrown anymore (because output argumant not assigned during call)
@@ -47,12 +47,18 @@ if isfield(d1,'type') && strcmp(d1.type, 'MoCap data') && isfield(d2,'type') && 
         disp([10, 'Different number of frames in the structures. The longer structure will be cut.', 10])
         N = min(d1.nFrames, d2.nFrames);
         d1.data = d1.data(1:N,:); d2.data = d2.data(1:N,:);
+        if isfield(d1.other,'quat') && isfield(d2.other,'quat')
+            d1.other.quat = d1.other.quat(1:N,:); d2.other.quat = d2.other.quat(1:N,:);
+        end
         d1.nFrames = N; d2.nFrames = N;
     end
     d3 = d1;
     d3.nMarkers = d1.nMarkers + d2.nMarkers;
     d3.markerName = [d1.markerName; d2.markerName];
     d3.data = [d1.data d2.data];
+    if isfield(d1.other,'quat') && isfield(d2.other,'quat')
+        d3.other.quat = [d1.other.quat d2.other.quat];
+    end
     %markercolors?
 elseif isfield(d1,'type') && strcmp(d1.type, 'norm data') && isfield(d2,'type') && strcmp(d2.type, 'norm data') %FIX BB20110113: norm data also mergeable now
     if d1.freq ~= d2.freq
@@ -89,7 +95,7 @@ end
 
 %merging parameter structures [BBFIX20150720]
 
-if nargin==2 %no animation parameter files given 
+if nargin==2 %no animation parameter files given
     p1=mcinitanimpar;
     p2=mcinitanimpar;
 elseif nargin==3 %one animation parameter file given
