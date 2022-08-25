@@ -41,8 +41,13 @@ function [d japar] = mcreadtsvTheia(fn);
     end
     d.nMarkers = numel(d.markerName);
     allData = nan(d.nFrames,length(mn));
+    i = 1;
     for k = 1:size(allData,1)
-        allData(k,:)=str2num(fgetl(ifp));
+        dataRow = str2num(fgetl(ifp));
+        if ~isempty(dataRow)
+            allData(i,:)=dataRow;
+            i = i+1;
+        end
     end
     fclose(ifp);
     d.data = allData(:,matches(mn,lettersPattern(1)));
