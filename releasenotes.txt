@@ -214,3 +214,14 @@ Improvements
 
 Bug fixes
 mcread: tsv reading functionality
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.6.4
+New functions
+
+Improvements
+mcmerge: Support for merging data imported from Qualysis + Theia 3D markerless pose estimation
+
+Bug fixes
+
+mcread: tsv reading functionality for data imported from Qualysis + Theia 3D markerless pose estimation
