@@ -2,24 +2,33 @@ function [xs p1 p2] = genxwt(varargin)
 % Generalized cross-wavelet transform between sets of multivariate time series
 %
 % syntax
-% xs = genxwt(w)
-% xs = genxwt(w,'all')
-% xs = genxwt(w,'pairwise')
+% xs = genxwt(W,<N>,<type>)
+% xs = genxwt(W1,W2,...,<type>)
 %
 % input parameters
 %
-% W:  wavelet tensors obtained by the function cwtensor.m; W is
-%       a cell array of wavelet tensors (W{1}=W1; W{2}=W2; W{3}=W3).
+% W =  wavelet tensors obtained by the function cwtensor. W can
+%       either be a set of wavelet tensors concatenated
+%       channel-wise % (W = cat(3,W1,W2,...)) or a cell array of
+%       wavelet tensors (W{1}=W1; W{2}=W2; W{3}=W3).
 %
+% W1,W2,... = wavelet tensors obtained by the function cwtensor
 %
-% TYPE (optional): {'all','pairwise'}
+% N = (optional)
+%       integer scalar (greater than 1) specifying number of sets
+%       (for sets with identical number of channels) or integer
+%       vector specifying number of channels in each set. Note: N
+%       is required when using concatenated tensors as input
+%       (cat(3,W1,W2,...)).
+%
+% TYPE = (optional) {'all','pairwise'}
 %       'all' (default) calculates the pseudovariace for all
 %       channel pairs in each wavelet tensor.
-%       'pairwise' calculates the pseudovariance for only the pairs of
+%       'pairwise' calculates the pseudo-variance for only the pairs of
 %       corresponding channels in W1 and W2 (note: can only be
 %       computed when all sets have identical number of channels)
 %
-% output
+% OUTPUT
 %
 % xs = generalized cross spectrum (frequency x time)
 %
@@ -33,7 +42,8 @@ function [xs p1 p2] = genxwt(varargin)
 %
 % - The imaginary part of xs is obtained from pairwise phase
 % differences.
-% - In- and anti-phase relationships yield identical imaginary parts.
+% - In this implementation, in- and anti-phase relationships yield
+% identical imaginary parts.
 % - When computing polyadic GXWT (i.e., involving more than two wavelet tensors),
 % the imaginary part is not a generalization of the cross-wavelet transform.
 %
