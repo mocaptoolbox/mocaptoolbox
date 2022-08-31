@@ -225,3 +225,12 @@ mcmerge: Support for merging data imported from Qualysis + Theia 3D markerless p
 Bug fixes
 
 mcread: tsv reading functionality for data imported from Qualysis + Theia 3D markerless pose estimation
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.6.5
+New functions
+mcembed: concatenate a MoCap or norm data structure with one or multiple time delayed copies of it
+
+Improvements
+
+Bug fixes
