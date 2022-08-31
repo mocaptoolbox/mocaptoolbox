@@ -1,11 +1,11 @@
-function d2 = mcembed(d, delays,options)
+function d2 = mcembed(d, delays, options)
 %function d2 = mcembed(d, delays)
 % Concatenates a MoCap or norm data structure with one or multiple time delayed copies of it.
 %
 % syntax
 %
-%  d2 = mcembed(d,delays);
-%  d2 = mcembed(d,delays,'timetype','frame');
+%  d2 = mcembed(d, delays);
+%  d2 = mcembed(d, delays, 'timetype', 'frame');
 %
 % input parameters
 % d: MoCap or norm data structure
