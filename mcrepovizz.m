@@ -1,6 +1,6 @@
 function mcrepovizz(d, path, p)
 % Exports MoCap structure as valid repoVizz .csv files, .xml repoVizz struct and optional .bones file.
-% 
+%
 % syntax
 % mcrepovizz(d, path, p);
 %
@@ -29,7 +29,7 @@ function mcrepovizz(d, path, p)
 % mcread, mcwritetsv
 %
 % Script developed by Federico Visi @ Interdisciplinary Centre for Computer Music Research (ICCMR), Plymouth University.
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 
@@ -56,7 +56,7 @@ if nargin>=2
 end
 
 % Checks if third argument is an animpar parameter structure (if not given, all files apart from the bones file will be written)
-if nargin==3 
+if nargin==3
     if isfield(p, 'type') && strcmp(p.type, 'animpar')
         a=p;
     else disp([10, 'The third argument must be an animpar parameter structure. No .bones file written.' 10])
@@ -85,10 +85,10 @@ if isstruct(a)
     [~, name, ~]=fileparts(d.filename);
     filename=strcat(name,'.bones');
     filename=strcat(path,filename);
-    
+
     % Creates repoVizz .bones file
     bonesFile = fopen(filename,'w');
-    
+
     % Bones from a.conn
     for ii = 1:size(a.conn,1)
         m1 = char(d.markerName(a.conn(ii,1)));
@@ -108,69 +108,69 @@ maxval=max(max(d.data));
 jj=0;
 
 for ii = 1:3:n
-    
+
     jj=jj+1;
-    
+
     % Creates file name.
     filename=char(d.markerName(jj));
     filename=strcat(filename,'_X');
     filename=strcat(filename,'.csv');
     filename=strcat(path,filename);
-    
+
     % Creates axis data vector and obtains info for csv header
     a = (d.data(:,ii))';
     framerate = d.freq;
-    
+
     % Creates repoVizz csv files for X axis
     fileID = fopen(filename,'w');
     fprintf(fileID,'repovizz,framerate=%.2f,minval=%f,maxval=%f\n',framerate,minval,maxval);
     fprintf(fileID,'%f,',a);
     fclose(fileID);
-    
+
 end
 
 % Y AXIS %
 jj=0;
 
 for ii = 2:3:n
-    
+
     jj=jj+1;
-    
+
     % Creates file name.
     filename=char(d.markerName(jj));
     filename=strcat(filename,'_Y');
     filename=strcat(filename,'.csv');
     filename=strcat(path,filename);
-    
+
     % Creates axis data vector and obtains info for csv header
     a = (d.data(:,ii))';
     framerate = d.freq;
-    
+
     % Creates repoVizz csv files for Y axis
     fileID = fopen(filename,'w');
     fprintf(fileID,'repovizz,framerate=%.2f,minval=%f,maxval=%f\n',framerate,minval,maxval);
     fprintf(fileID,'%f,',a);
     fclose(fileID);
-    
+
 end
 
 % Z AXIS %
 jj=0;
 
 for ii = 3:3:n
-    
+
     jj=jj+1;
-    
+
     % Creates file name.
     filename=char(d.markerName(jj));
     filename=strcat(filename,'_Z');
     filename=strcat(filename,'.csv');
     filename=strcat(path,filename);
-    
+
     % Creates axis data vector and obtains info for csv header
     a = (d.data(:,ii))';
     framerate = d.freq;
-    
+
     % Creates repoVizz csv files for Z axis
     fileID = fopen(filename,'w');
     fprintf(fileID,'repovizz,framerate=%.2f,minval=%f,maxval=%f\n',framerate,minval,maxval);

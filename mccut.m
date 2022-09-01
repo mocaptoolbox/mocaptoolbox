@@ -10,7 +10,7 @@ function [d11, d22] = mccut(d1, d2)
 % output
 % d11, d22: MoCap or norm structures, one shortened and one original (both with same number of frames)
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 d11=[];
@@ -25,14 +25,14 @@ end
 
 
 if isfield(d1,'type') && strcmp(d1.type, 'MoCap data')
-else disp([10, 'The first input argument has to be a variable with MoCap data structure.', 10]); 
+else disp([10, 'The first input argument has to be a variable with MoCap data structure.', 10]);
     [y,fs] = audioread('mcsound.wav');
     sound(y,fs);
     return
 end
 
 if isfield(d2,'type') && strcmp(d2.type, 'MoCap data')
-else disp([10, 'The second input argument has to be a variable with MoCap data structure.', 10]); 
+else disp([10, 'The second input argument has to be a variable with MoCap data structure.', 10]);
     [y,fs] = audioread('mcsound.wav');
     sound(y,fs);
     return

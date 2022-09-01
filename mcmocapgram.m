@@ -1,5 +1,5 @@
 function h = mcmocapgram(d, timetype)
-% Plots mocapgram (shows positions of a large number of markers as projection 
+% Plots mocapgram (shows positions of a large number of markers as projection
 % onto a colorspace).
 %
 % syntax
@@ -19,7 +19,7 @@ function h = mcmocapgram(d, timetype)
 % h = mcmocapgram(d);
 %
 % Script developed by Kristian Nymoen, University of Oslo, Norway
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 if strcmp(d.type, 'MoCap data') || strcmp(d.type, 'norm data')

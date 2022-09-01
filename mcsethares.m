@@ -25,11 +25,11 @@ function [ds, pers, pows] = mcsethares(d, per, nbasis)
 % small-to-large Sethares transform is chosen. See syntax above about in-
 % and output argument structure.
 % Uses the Periodicity Toolbox downloadable at http://eceserv0.ece.wisc.edu/~sethares/downloadper.html
-% 
+%
 % see also
 % mcpcaproj, mcicaproj
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 
@@ -88,7 +88,7 @@ end
 function ds=s2l(d, per)
 
 if isfield(d,'type') && (strcmp(d.type, 'MoCap data') || strcmp(d.type, 'norm data'))
-    
+
     ds = d; ds.data = zeros(per, size(d.data,2));
     for k=1:size(d.data,2)
         s=d.data(:,k);
@@ -97,9 +97,9 @@ if isfield(d,'type') && (strcmp(d.type, 'MoCap data') || strcmp(d.type, 'norm da
         [periodall,powersall,basall]=small2large(s,0,per);
         ds.data(:,k) = basall(end,1:per)'+ms;
     end
-    
+
 elseif isfield(d,'type') && strcmp(d.type, 'segm data')
-    ds = d; 
+    ds = d;
     ds.roottrans = zeros(per, 3);
     for kk=1:3
         s = d.roottrans(:,kk); ms = mean(s); s=s-ms;
@@ -114,8 +114,8 @@ elseif isfield(d,'type') && strcmp(d.type, 'segm data')
     s = d.rootrot.el; ms = mean(s); s=s-ms;
     [periodall,powersall,basall]=small2large(s,0,per);
     ds.rootrot.el = basall(end,1:per)'+ms;
-    
-    
+
+
     for k = 2:d.nMarkers
         ds.segm(k).eucl = zeros(per,3);
         for kk=1:3
@@ -147,7 +147,7 @@ if isfield(d,'type') && (strcmp(d.type, 'MoCap data') || strcmp(d.type, 'norm da
             ds(m).data(:,k) = bas(m,:)'+ms;
         end
     end
-    
+
 elseif isfield(d,'type') && strcmp(d.type, 'segm data')
     mp = round(maxper*d.freq);
     pers=[]; pows=[];

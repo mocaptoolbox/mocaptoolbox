@@ -1,6 +1,6 @@
 function d2=mcsort(d, srt)
 % Sorts mocap data according to marker names (alphanumerical or according
-% to given numeric or cell array indicating marker numbers or markers names 
+% to given numeric or cell array indicating marker numbers or markers names
 % as to how the output data is to be sorted).
 %
 % syntax
@@ -27,7 +27,7 @@ function d2=mcsort(d, srt)
 % in the input mocap data structure.
 %
 % Script developed by Federico Visi, Kristian Nymoen, and Birgitta Burger
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 d2=[];
@@ -51,23 +51,23 @@ if nargin==1 %sort alphanumerical
 end
 
 
-if nargin==2 
-    if length(srt) == d.nMarkers %match size        
+if nargin==2
+    if length(srt) == d.nMarkers %match size
         if ~iscell(srt) && ~isnumeric(srt)
             disp([10, 'The second input parameter has to be a numeric array or a cell array.' 10])
             [y,fs] = audioread('mcsound.wav');
             sound(y,fs);
             return
         end
-        
+
         if iscell(srt) %cell array with markers names
             if size(srt,1)==1 %check format
                 srt=srt';
             end
-            
+
             tmp1=sort(srt); %check spelling
             tmp2=sort(d.markerName);
-            if sum(strcmp(tmp1, tmp2)) == d.nMarkers             
+            if sum(strcmp(tmp1, tmp2)) == d.nMarkers
                 [~, idx] = ismember(srt,d.markerName); %convert cell array into numerical
                 srt=idx;
             else disp([10, 'The marker names in the sort array have to be spelled in the same way as in the input mocap data structure.' 10])
@@ -76,9 +76,9 @@ if nargin==2
                 return
             end
         end
-        
-        if isnumeric(srt) %numeric array with marker numbers (also converted cell array) 
-            if max(srt)==d.nMarkers %numbers are in correct range (highest value of srt should not be higher than no of markers)         
+
+        if isnumeric(srt) %numeric array with marker numbers (also converted cell array)
+            if max(srt)==d.nMarkers %numbers are in correct range (highest value of srt should not be higher than no of markers)
                 if isequal(unique(srt,'stable'),srt )%check for double numbers
                     for k=1:length(srt)
                         a.markerName(k,1)=d.markerName(srt(k));
@@ -99,9 +99,3 @@ if nargin==2
         sound(y,fs);
     end
 end
-
-
-
-
-
-

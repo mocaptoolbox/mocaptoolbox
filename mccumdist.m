@@ -9,13 +9,13 @@ function d2 = mccumdist(d)
 %
 % output
 % d2: norm data structure
-% 
+%
 % comments
-% If the input consists of one-dimensional data (i.e., norm data), the cumulative 
-% distance to the origin of the reference space/coordination system is calculated, 
+% If the input consists of one-dimensional data (i.e., norm data), the cumulative
+% distance to the origin of the reference space/coordination system is calculated,
 % which is not (necessarily) the cumulated distance traveled by the marker.
 %
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 d2=[];
@@ -43,4 +43,3 @@ else
     [y,fs] = audioread('mcsound.wav');
     sound(y,fs);
 end
-

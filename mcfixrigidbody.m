@@ -20,7 +20,7 @@ function d2 = mcfixrigidbody(d)
 %
 % mcfillgaps
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 d2=d;
 

@@ -4,23 +4,23 @@ function sm = mcsimmat(d, metric)
 % syntax
 % sm = mcsimmat(d);
 % sm = mcsimmat(d, metric);
-% 
+%
 % input parameters
 % d: MoCap or segm data structure
 % metric: distance metric used, see help pdist (default: cityblock)
 %
 % output
 % sm: self-similarity matrix
-% 
+%
 % examples
 % sm = mcsimmat(d);
 % sm = mcsimmat(d, 'corr');
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
-if nargin==1 
-    metric='cityblock'; 
+if nargin==1
+    metric='cityblock';
 end
 
 if nargin==2 && ~ischar(metric)
@@ -39,7 +39,7 @@ elseif isfield(d,'type') && strcmp(d.type, 'segm data')
         tmp = [tmp d.segm(k).eucl];
     end
     sm = simmat(tmp, metric);
-    
+
 else
     disp([10, 'The first input argument has to be a variable with MoCap data structure.', 10]);
     sm=[];

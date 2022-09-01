@@ -10,15 +10,15 @@ function d2 = mcm2j(d, par)
 %
 % output
 % d2: MoCap structure
-% 
+%
 % comments
 % The fields the fields par.nMarkers, par.markerNum and par.markerName have to be entered manually.
 % See the explanation of the m2jpar structure.
-% 
-% see also 
+%
+% see also
 % mcinitm2jpar
 %
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 
@@ -38,4 +38,3 @@ else
     [y,fs] = audioread('mcsound.wav');
     sound(y,fs);
 end
-

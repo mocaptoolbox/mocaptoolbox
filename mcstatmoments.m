@@ -9,14 +9,14 @@ function mom = mcstatmoments(d)
 %
 % output
 % mom: structure containing the fields .mean, .std, .skewness, and .kurtosis
-% 
+%
 % comments
 % Calls the functions mcmean, mcstd, mcskewness, and mckurtosis
 %
 % see also
 % mcmean, mcstd, mcskewness, mckurtosis
 %
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 

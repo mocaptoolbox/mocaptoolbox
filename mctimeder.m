@@ -46,7 +46,7 @@ function d2 = mctimeder(d, n, f, s)
 % see also
 % mcsmoothen, mctimeintegr
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 

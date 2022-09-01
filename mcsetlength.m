@@ -1,20 +1,20 @@
 function d2 = mcsetlength(varargin)
 % Sets mocap data to the length given.
-% 
+%
 % syntax
 % d2 = mcsetlength(d, n)
 % d2 = mcsetlength(d, n, 'timetype', 'sec')
 % d2 = mcsetlength(d, n, 'position', 'location')
-% 
+%
 % input parameters
 % d: MoCap or norm data structure
 % n: new length of mocap data
 % timetype: length given in frames ('frame') or seconds ('sec') (default: sec)
-% location: position where to add or trim frames ('beginning' or 'end' ? default: end)  
-% 
+% location: position where to add or trim frames ('beginning' or 'end' ? default: end)
+%
 % output
 % d2: MoCap or norm data structure
-% 
+%
 % examples
 % d2 = mcsetlength(d, 1200);
 % d2 = mcsetlength(d, n, 'timetype', 'sec');
@@ -23,13 +23,13 @@ function d2 = mcsetlength(varargin)
 % comments
 % If the given length is less than the number of frames in the mocap data,
 % the data will be trimmed to the given length from either beginning or end.
-% If the given length is more than the number of frames in the mocap data, 
+% If the given length is more than the number of frames in the mocap data,
 % data will be added by replicating with first or last frame.
 %
 % see also
 % mcaddframes, mctrim
 %
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 d2=[];
@@ -73,7 +73,7 @@ if isfield(d, 'type') && strcmp(d.type, 'MoCap data') || isfield(d, 'type') && s
             n = round(d.freq * n);
         end
         if strcmp(loc,'beginning')
-            if n<d.nFrames 
+            if n<d.nFrames
                 d2=mctrim(d, n, d.nFrames, 'frame'); %trim
             else
                 d2=mcaddframes(d, n-d.nFrames, 'timetype', 'frame', 'location', 'beginning'); %add
@@ -89,5 +89,3 @@ if isfield(d, 'type') && strcmp(d.type, 'MoCap data') || isfield(d, 'type') && s
     end
 else disp([10, 'The first input argument has to be a variable with MoCap or norm data structure.' 10])
 end
-
-

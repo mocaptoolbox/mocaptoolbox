@@ -16,11 +16,11 @@ function r = mcrotationrange(d, m1, m2)
 % r = mcrotation(d, 13, 17);
 %
 % references
-% Burger, B., Saarikallio, S., Luck, G., Thompson, M. R. & Toiviainen, P. (2013). 
-% Relationships between perceived emotions in music and music-induced movement. 
+% Burger, B., Saarikallio, S., Luck, G., Thompson, M. R. & Toiviainen, P. (2013).
+% Relationships between perceived emotions in music and music-induced movement.
 % Music Perception 30(5), 519-535.
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 r=[];
@@ -39,7 +39,7 @@ if ~isnumeric(m1) || ~isnumeric(m2) || length(m1)>1 || length(m2)>1
     return
 end
 
-if min(m1)<1 || max(m1)>d.nMarkers ||  min(m2)<1 || max(m2)>d.nMarkers 
+if min(m1)<1 || max(m1)>d.nMarkers ||  min(m2)<1 || max(m2)>d.nMarkers
     disp([10, 'Marker numbers are out of range.', 10])
     [y,fs] = audioread('mcsound.wav');
     sound(y,fs);
@@ -47,8 +47,8 @@ if min(m1)<1 || max(m1)>d.nMarkers ||  min(m2)<1 || max(m2)>d.nMarkers
 end
 
 if isfield(d,'type') && strcmp(d.type, 'MoCap data')
-    tmp = mcgetmarker(d,[m1 m2]); 
-    tmp2=tmp.data(:,4:5)-tmp.data(:,1:2); 
+    tmp = mcgetmarker(d,[m1 m2]);
+    tmp2=tmp.data(:,4:5)-tmp.data(:,1:2);
     [th,~]=cart2pol(tmp2(:,1),tmp2(:,2)); % convert to polar coordinates
     thu=unwrap(th);
     r=max(thu)-min(thu);
@@ -57,6 +57,3 @@ else
     [y,fs] = audioread('mcsound.wav');
     sound(y,fs);
 end
-
-
-

@@ -9,11 +9,11 @@ function s = mckurtosis(d)
 %
 % output
 % m: row vector containing the kurtosis values of each data column
-% 
+%
 % see also
 % mcmean, mcstd, mcvar, mcskewness
 %
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 if isfield(d, 'data')
@@ -37,9 +37,3 @@ function ku = kurt(y)
     ku = m4/(N*(std(tmp)^4))-3;
 
 return
-
-
-
-
-
-

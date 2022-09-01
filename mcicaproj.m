@@ -1,5 +1,5 @@
 function [di, p] = mcicaproj(d, pcs, ics)
-% Performs an Independent Components analysis on MoCap, norm or segm data,  
+% Performs an Independent Components analysis on MoCap, norm or segm data,
 % using the FastICA algorithm, and projects the data onto selected components.
 %
 % syntax
@@ -13,21 +13,21 @@ function [di, p] = mcicaproj(d, pcs, ics)
 % output
 % di: vector of MoCap, norm or segm data structures
 % p: ICA parameter structure containing the following fields:
-%    icasig: independent components 
-%    A: mixing matrix 
-%    W: separation matrix 
+%    icasig: independent components
+%    A: mixing matrix
+%    W: separation matrix
 %    meanx: mean vector of variables
 %
 % examples
 % [di, p] = mcicaproj(d, 6, 3);
-% 
+%
 % comments
 % Uses the fastICA algorithm, implemented in the FastICA Package, which is available at http://www.cis.hut.fi/projects/ica/fastica/
-% 
+%
 % see also
 % mcpcaproj, mcsethares
-% 
-% Part of the Motion Capture Toolbox, Copyright 2008,
+%
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 if nargin<3

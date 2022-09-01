@@ -10,11 +10,11 @@ function hh = mchilberthuang(d, N)
 %
 % output
 % hh: vector of MoCap, norm or segm data structures containing H-H transforms
-% 
+%
 % comments
 % See help hilberthuang
-% 
-% Part of the Motion Capture Toolbox, Copyright 2008,
+%
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 
@@ -40,7 +40,7 @@ if isfield(d,'type') && (strcmp(d.type, 'MoCap data') || strcmp(d.type, 'norm da
         [h0, h1] = hilberthuang(d.data);
         hh(k)=d;
         hh(k).data = h0 + repmat(dmean, d.nFrames, 1);
-        d = hh(k); 
+        d = hh(k);
         d.data=h1;
     end
 

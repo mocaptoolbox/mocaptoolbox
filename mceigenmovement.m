@@ -16,29 +16,29 @@ function e = mceigenmovement(d, eigind, len, per)
 %
 % output
 % e: vector of MoCap or segm data structures
-% 
+%
 % examples
 % e = mceigenmovement(d);
 % e = mceigenmovement(d, 1:3);
 % e = mceigenmovement(d, 1:4, 2);
 % e = mceigenmovement(d, 1:2, 1.2, 0.6);
-% 
+%
 % comments
-% The sinusoidal projections are scaled to match the RMS amplitudes of the PC projections 
+% The sinusoidal projections are scaled to match the RMS amplitudes of the PC projections
 % of respective degrees of freedom.
-% 
+%
 % see also
 % mcpcaproj
-% 
-% ? Part of the Motion Capture Toolbox, Copyright 2008,
+%
+% ? Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 
 if nargin<4
-    per=0.5; 
+    per=0.5;
 end
-if nargin<3 
-    len=0.5; 
+if nargin<3
+    len=0.5;
 end
 
 if nargin>1
@@ -49,7 +49,7 @@ if nargin>1
         sound(y,fs);
         return
     end
-end 
+end
 
 if isfield(d,'type') && (strcmp(d.type, 'MoCap data') || strcmp(d.type, 'norm data') || strcmp(d.type, 'segm data'))
     p = mcpca(d);
@@ -67,7 +67,7 @@ if isfield(d,'type') && (strcmp(d.type, 'MoCap data') || strcmp(d.type, 'norm da
     for k=1:length(eigind)
         e(k) = mcpcaproj(d,eigind(k),scale(k)*proj);
     end
-else 
+else
     disp([10, 'The first input argument has to be a variable with MoCap data structure.', 10]);
     e=[];
     [y,fs] = audioread('mcsound.wav');

@@ -14,7 +14,7 @@ function br = mcboundrect(d, mnum, w, hop)
 % hop: overlap of analysis windows (optional; default: 2 sec)
 %
 % output
-% br: data matrix (windows x nMarkers) 
+% br: data matrix (windows x nMarkers)
 %
 % examples
 % br = mcboundrect(d);
@@ -27,7 +27,7 @@ function br = mcboundrect(d, mnum, w, hop)
 % parameters. If the window and overlap length are to be changed, the
 % markers have to be always specified (e.g., all markers by [1:d.nMarkers]).
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 br=[];
@@ -72,14 +72,14 @@ if isfield(d,'type') && (strcmp(d.type, 'MoCap data'))
             ind1=1+120*b;
             ind2=min(size(d.data,1), ind1+120*w);
             tmp=d.data(ind1:ind2,k*3-2:k*3-1);%markers
-            mintmp=min(tmp); 
+            mintmp=min(tmp);
             maxtmp=max(tmp);
             rtmp = [rtmp (maxtmp(1)-mintmp(1))*(maxtmp(2)-mintmp(2))/1000000];
         end
         rtmp=rtmp';
         rect = [rect rtmp];
     end
-else 
+else
     disp([10, 'The first input argument has to be a variable with MoCap data structure.', 10]);
     [y,fs] = audioread('mcsound.wav');
     sound(y,fs);

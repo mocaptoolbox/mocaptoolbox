@@ -13,7 +13,7 @@ function [s, f] = mcspectrum(d)
 % amplitude spectra in the .data field
 % f: frequencies in Hz for the frequency channels in the spectra
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 s=[];
@@ -56,4 +56,3 @@ else
 end
 
 return
-

@@ -25,7 +25,7 @@ function d2 = mc2local(d, m1, m2)
 % see also
 % mc2frontal, mcrotate
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 

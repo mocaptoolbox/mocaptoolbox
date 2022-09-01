@@ -78,7 +78,7 @@ function p = mcinitanimpar(x)
 % Download the MoCap Toolbox from
 % https://www.jyu.fi/hytk/fi/laitokset/mutku/en/research/materials/mocaptoolbox
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 p.type = 'animpar';

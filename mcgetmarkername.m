@@ -10,7 +10,7 @@ function mn = mcgetmarkername(d)
 % output
 % mn: cell structure containing marker names
 %
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 mn=[];
@@ -22,4 +22,3 @@ if isfield(d,'type') && (strcmp(d.type, 'MoCap data') || strcmp(d.type, 'norm da
 else
     disp([10, 'The first input argument should be a variable with MoCap or norm data structure.', 10]);
 end
-

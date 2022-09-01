@@ -17,11 +17,11 @@ function d2 = mcbandpass(d, f1, f2, method)
 % examples
 % d2 = mcbandpass(d, 0.5, 2);
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
-if nargin<4 
-    method='rect'; 
+if nargin<4
+    method='rect';
 end
 
 d2=[];
@@ -41,8 +41,8 @@ if ~isnumeric(f1) || ~isnumeric(f2) || length(f1)>1 || length(f2)>1
 end
 
 if length(d)>1
-    for k=1:length(d) 
-        d2(k) = mcbandpass(d(k), f1, f2, method); 
+    for k=1:length(d)
+        d2(k) = mcbandpass(d(k), f1, f2, method);
     end
 else
     if isfield(d,'type') && (strcmp(d.type, 'MoCap data') || strcmp(d.type, 'norm data'))
@@ -94,7 +94,7 @@ for k=1:size(y,2)
     ff = (0:(length(z)-1)) / length(z);
     f = fs * (ff-round(ff));
     if strcmp(method,'gauss')
-        meanf=0.5*(maxf+minf); 
+        meanf=0.5*(maxf+minf);
         sd=0.5*(maxf-minf);
         sc = gauss(abs(f), meanf, sd)'; % scaling factor
         z = z.*sc;
@@ -109,6 +109,3 @@ return
 function y = gauss(x, mu, var)
 y=(1/(var*sqrt(2*pi)))*exp(-((x-mu).*(x-mu))/(2*var*var));
 return
-
-
-

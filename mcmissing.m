@@ -1,5 +1,5 @@
 function [mf, mm, mgrid] = mcmissing(d)
-% Reports missing data per marker and frame. 
+% Reports missing data per marker and frame.
 %
 % syntax
 % [mf, mm, mgrid] = mcmissing(d);
@@ -12,7 +12,7 @@ function [mf, mm, mgrid] = mcmissing(d)
 % mm: number of missing markers per frame
 % mgrid: matrix showing missing data per marker and frame (rows correspond to frames and columns to markers
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 if isfield(d,'type') && strcmp(d.type, 'MoCap data')
@@ -31,4 +31,3 @@ else
     mm=[];
     mgrid=[];
 end
-

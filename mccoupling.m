@@ -50,7 +50,7 @@ function [r par] = mccoupling(mc1, mc2, par)
 %
 % mcplsproj, mcgxwt
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 arguments

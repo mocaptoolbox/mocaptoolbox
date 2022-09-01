@@ -16,7 +16,7 @@ function d2 = mcresample(d, newfreq, method)
 % d2 = mcresample(d, 240);
 % d2 = mcresample(d, 360, 'spline');
 %
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 d2 = [];
@@ -38,8 +38,8 @@ end
 
 
 if isfield(d,'type') && (strcmp(d.type, 'MoCap data') || strcmp(d.type, 'norm data'))
-    if nargin==2 
-        method = 'linear'; 
+    if nargin==2
+        method = 'linear';
     end
     d2 = d;
     t1 = (0:(size(d.data,1)-1))/d.freq;

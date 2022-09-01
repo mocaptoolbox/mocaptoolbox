@@ -33,7 +33,7 @@ function d2 = mcsmoothen(d, f)
 % see also
 % mctimeder
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 d2=[];

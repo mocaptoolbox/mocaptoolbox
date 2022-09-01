@@ -14,7 +14,7 @@ function d2 = mcreverse(d, x)
 % examples
 % d2 = mcreverse(d, [0 0 1]);
 %
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 
@@ -58,9 +58,8 @@ elseif isnumeric(d) && mod(size(d,2),3)==0 && ~isempty(d)
     d2(:,1:3:end) = d(:,1:3:end) * X(1);
     d2(:,2:3:end) = d(:,2:3:end) * X(2);
     d2(:,3:3:end) = d(:,3:3:end) * X(3);
-    
+
 else disp([10, 'The first input argument has to be a variable with MoCap data structure or a numeric matrix (3*x columns).' 10])
     [y,fs] = audioread('mcsound.wav');
     sound(y,fs);
 end
-

@@ -1,6 +1,6 @@
 function p = mcinitj2spar
 % Initialises the parameter structure for joint-to-segment mapping.
-% 
+%
 % syntax
 % p = mcinitj2spar;
 %
@@ -18,11 +18,11 @@ function p = mcinitj2spar
 %   parent: []
 %   segmentName: {}
 % The fields p.parent and p.segmentName have to be entered manually.
-% 
+%
 % see also
 % mcj2s
 %
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 p.type = 'j2spar';

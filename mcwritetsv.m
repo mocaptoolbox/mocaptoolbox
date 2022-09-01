@@ -23,8 +23,8 @@
 %
 % see also
 % mcread
-% 
-% Part of the Motion Capture Toolbox, Copyright ?2008,
+%
+% Part of the Motion Capture Toolbox, Copyright ?2022,
 % University of Jyvaskyla, Finland
 
 if ~isfield(d,'type') || ~strcmp(d.type, 'MoCap data')
@@ -33,7 +33,7 @@ if ~isfield(d,'type') || ~strcmp(d.type, 'MoCap data')
     sound(y,fs);
     return
 end
-if nargin>=2 
+if nargin>=2
     if ~ischar(path)
         disp([10, 'The second input argument has to be a string.' 10])
         [y,fs] = audioread('mcsound.wav');
@@ -47,13 +47,13 @@ if nargin==3 && ~ischar(fn)
     sound(y,fs);
     return
 end
-    
+
 %create file name
 [~, name, ~]=fileparts(d.filename);
 
 if nargin==3 %add BB20141118 to have the option of splitting recordings into seperate files
     name=fn;
-end 
+end
 
 name=strcat(name,'.tsv');
 
@@ -75,7 +75,7 @@ if ~isempty(ems)
     sound(y,fs);
     return
 end
-    
+
 fprintf(fid, '%s\t', 'NO_OF_FRAMES');
 fprintf(fid, '%u\n', d.nFrames);
 fprintf(fid, '%s\t', 'NO_OF_CAMERAS');
@@ -124,4 +124,3 @@ else
     [y,fs] = audioread('mcsound.wav');
     sound(y,fs);
 end
-   

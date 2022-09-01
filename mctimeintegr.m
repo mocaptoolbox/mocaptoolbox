@@ -18,17 +18,17 @@ function d2 = mctimeintegr(d, n)
 % comments
 % The function updates the timederorder field as follows:
 % d2.timederorder = d.timederorder - order.
-% 
+%
 % see also
 % mctimeder
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 d2=[];
 
-if nargin<2 
-    n=1; 
+if nargin<2
+    n=1;
 end
 
 if nargin==2 && ~isnumeric(n)
@@ -39,7 +39,7 @@ if nargin==2 && ~isnumeric(n)
 end
 
 
-if isfield(d,'type') && (strcmp(d.type, 'MoCap data') || strcmp(d.type, 'norm data')) %BBADD20150811 norm data 
+if isfield(d,'type') && (strcmp(d.type, 'MoCap data') || strcmp(d.type, 'norm data')) %BBADD20150811 norm data
     % integrate MoCap data
     d2 = d;
     for m=1:n
@@ -72,4 +72,3 @@ else
 end
 
 return
-

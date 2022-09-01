@@ -16,9 +16,9 @@ function [g, gp] = mcvect2grid(c, p, dx, dy)
 % gp: animpar structure
 %
 % examples
-% [g, gpar] = mcvect2grid(c, par, 1000, 2000); 
+% [g, gpar] = mcvect2grid(c, par, 1000, 2000);
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 g=[];
@@ -68,5 +68,3 @@ else
     [y,fs] = audioread('mcsound.wav');
     sound(y,fs);
 end
-
-

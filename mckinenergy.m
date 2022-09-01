@@ -19,13 +19,13 @@ function [trans, rot] = mckinenergy(dv, segd, segmpar)
 % [te, re] = mckinenergy(d, segd, spar);
 %
 % comments
-% The energy for a given segment is in the column corresponding to the number 
+% The energy for a given segment is in the column corresponding to the number
 % of the distal joint of the respective segment.
 %
 % see also
 % mcj2s, mcgetsegmpar, mcpotenergy
 %
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 if nargin<3
@@ -37,22 +37,22 @@ if nargin<3
     return;
 end
 
-trans = zeros(dv.nFrames,dv.nMarkers); 
+trans = zeros(dv.nFrames,dv.nMarkers);
 rot = trans;
 
 if isfield(dv,'type') && strcmp(dv.type, 'MoCap data') && ...
         isfield(segd,'type') && strcmp(segd.type, 'segm data') &&...
         isfield(segmpar,'type') && strcmp(segmpar.type, 'segmpar')
     % do something
-    if dv.timederOrder == 0 
-        dv = mctimeder(dv); 
+    if dv.timederOrder == 0
+        dv = mctimeder(dv);
     end
 
     for k=1:dv.nMarkers
         if segd.parent(k)>0
             i1 = 3*k + (-2:0);
             i2 = 3*segd.parent(k) + (-2:0);
-            distv=dv.data(:,i1); 
+            distv=dv.data(:,i1);
             proxv=dv.data(:,i2);
             % linear velocity of COG
             cogv = mcnorm(proxv + (distv-proxv)*segmpar.comprox(k))/1000;
@@ -64,7 +64,7 @@ if isfield(dv,'type') && strcmp(dv.type, 'MoCap data') && ...
             rot(:,k) = 0.5 * 60 * segmpar.m(k) * (segd.segm(k).r*segmpar.rogcg(k)/1000).^2 * vang.*vang;
         end
     end
-    
+
 else
     disp([10, 'The first input argument should be a variable with MoCap data structure.']);
     disp('The second input argument should be a variable with segm data structure.');

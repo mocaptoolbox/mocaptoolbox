@@ -17,7 +17,7 @@ function d2 = mcs2j(d, par)
 % see also
 % mcinitj2spar, mcj2s
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 

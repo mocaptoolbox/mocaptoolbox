@@ -1,22 +1,22 @@
 function d = mcreademg(fn)
 % Reads emg files in .tsv format recorded with the Mega EMG system using QTM.
-% 
+%
 % syntax
 % d = mcreademg(fn);
-% 
+%
 % input parameters
 % fn: File name; tsv format (norm data structure)
-% 
+%
 % output
 % d: norm data structure
-% 
+%
 % examples
 % d = mcreademg('filename.tsv');
-% 
+%
 % see also
 % mcfilteremg
-% 
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+%
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 
@@ -46,8 +46,8 @@ s=fscanf(ifp,'%s',1);
 s=fscanf(ifp,'%s',1); d.other.firstSample = str2num(s);
 fgetl(ifp);
 s=fscanf(ifp,'%s',1);
-s=fscanf(ifp,'%s',1); 
-s=fscanf(ifp,'%s',1); 
+s=fscanf(ifp,'%s',1);
+s=fscanf(ifp,'%s',1);
 s=fscanf(ifp,'%s',1); d.other.dataIncluded = s;
 
 s=fscanf(ifp,'%s',1); % 20080811 fixed bug that prevented reading non-annotated tsv files

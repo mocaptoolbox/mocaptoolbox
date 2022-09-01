@@ -20,7 +20,7 @@ function d2 = mcembed(d, delays, options)
 % d2 = mcembed(d,10,'timetype','frame')
 % d2 = mcembed(d,10:10:120,'timetype','frame');
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 arguments
     d

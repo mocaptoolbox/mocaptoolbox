@@ -28,7 +28,7 @@ function d2 = mcaddframes(varargin)
 % timetype, location, and position are optional. Default values are used if
 % not specified.
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 d2=[];

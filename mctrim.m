@@ -1,35 +1,35 @@
 function d2 = mctrim(d, t1, t2, ttype)
 % Extracts a temporal section from a MoCap, norm, or segm data structure.
-% 
+%
 % syntax
 % d2 = mctrim(d, t1, t2);
 % d2 = mctrim(d, t1, t2, timetype);
-% 
+%
 % input parameters
 % d: MoCap, norm, or segm data structure
 % t1: start of extracted section
 % t2: end of extracted section
 % timetype: either 'sec' (default) or 'frame'
-% 
+%
 % output
 % d2: MoCap, norm, or segm structure containing frames from t1 to t2 (if timetype == 'frame') or frames between t1 and t2 seconds (if timetype == 'sec') of MoCap structure d.
-% 
+%
 % examples
-% d2 = mctrim(d, 305, 1506, 'frame'); 
+% d2 = mctrim(d, 305, 1506, 'frame');
 % d2 = mctrim(d, 3, 5, 'sec');
 %
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
-if nargin<4 
-    ttype='sec'; 
+if nargin<4
+    ttype='sec';
 end
 
 d2=[];
 
 if nargin==4 && ~strcmp(ttype, 'sec') && ~strcmp(ttype, 'frame')
     disp([10, 'Fourth input argument unknown. Time type set to seconds.', 10])
-    ttype='sec'; 
+    ttype='sec';
 end
 
 if isfield(d,'type') && (strcmp(d.type, 'MoCap data') || strcmp(d.type, 'norm data'))
@@ -78,4 +78,3 @@ else
     [y,fs] = audioread('mcsound.wav');
     sound(y,fs);
 end
-

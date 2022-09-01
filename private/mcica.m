@@ -1,14 +1,14 @@
 function p = mcica(d, pcs, ics);
 % Performs an Independent Components analysis on MoCap, norm or segm data
-% 
+%
 % syntax
 % p = mcpca(d, pcs, ics);
-% 
+%
 % input parameters
 % d: MoCap, norm or segm data structure
 % pcs: number of PCs entered into ICA
 % ics: number of ICs estimated
-% 
+%
 % output
 % p: structure containing the following fields:
 %   icasig: independent components
@@ -19,7 +19,7 @@ function p = mcica(d, pcs, ics);
 % note:
 % uses the fastICA algorithm, implemented in the fastICA Toolbox
 %
-% © Part of the Motion Capture Toolbox, Copyright ©2008, 
+% © Part of the Motion Capture Toolbox, Copyright ©2022,
 % University of Jyvaskyla, Finland
 
 if isfield(d,'type') & (strcmp(d.type, 'MoCap data') | strcmp(d.type, 'norm data'))

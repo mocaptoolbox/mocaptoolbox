@@ -14,13 +14,13 @@ function varargout = mcwindow(functionhandle, d, wlen, hop, timetype)
 % timetype: time type {'sec', 'frame'} (optional, default = 'sec')
 %
 % output
-% When used with the functions mcmean, mcstd, mcvar, mcskewness, and mckurtosis, the output 
-% is a two-dimensional matrix where the first index corresponds to window 
+% When used with the functions mcmean, mcstd, mcvar, mcskewness, and mckurtosis, the output
+% is a two-dimensional matrix where the first index corresponds to window
 % number and the second index to marker/dimension.
-% When used with mcperiod, the function returns four output parameters 
-% [per, ac, eac, lag], where per is a two-dimensional matrix with the first 
-% index corresponding to window number and the second to marker/dimension. 
-% Output parameters ac and eac are three-dimensional matrices, with the first 
+% When used with mcperiod, the function returns four output parameters
+% [per, ac, eac, lag], where per is a two-dimensional matrix with the first
+% index corresponding to window number and the second to marker/dimension.
+% Output parameters ac and eac are three-dimensional matrices, with the first
 % index corresponding to window number, the second to lag, and the third to marker/dimension.
 % The output parameter lag is a vector containing the lag values for the
 % autocorrelations.
@@ -31,14 +31,14 @@ function varargout = mcwindow(functionhandle, d, wlen, hop, timetype)
 %
 % see also
 % mcmean, mcstd, mcvar, mcskewness, mckurtosis, mcperiod
-% 
-% Part of the Motion Capture Toolbox, Copyright 2008,
+%
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 for k=1:nargout
     varargout(k)={[]};
 end
-    
+
 % initialize
 fn = func2str(functionhandle); % get function name
 if strcmp(fn,'mcmean') || strcmp(fn,'mcstd') || strcmp(fn,'mcvar') || strcmp(fn,'mcskewness') || strcmp(fn,'mckurtosis') %%BB20111017: extension with mcvar
@@ -83,11 +83,11 @@ end
 
 
 if isfield(d,'type') && (strcmp(d.type, 'MoCap data') || strcmp(d.type, 'norm data'))
-    if nargin<5 
-        timetype='sec'; 
+    if nargin<5
+        timetype='sec';
     end
     if nargin<=3
-        wlen=2; 
+        wlen=2;
         hop=0.5;
     end
     if strcmp(timetype, 'sec')
@@ -100,7 +100,7 @@ if isfield(d,'type') && (strcmp(d.type, 'MoCap data') || strcmp(d.type, 'norm da
     for k=1:wstep:size(d.data,1)-wlen+1
         if strcmp(fn,'mcmean') || strcmp(fn,'mcvar') || strcmp(fn,'mcstd') || strcmp(fn,'mcskewness') || strcmp(fn,'mckurtosis')
             out1 = [out1; functionhandle(mctrim(d, k, k+wlen-1, 'frame'))];
-        elseif strcmp(fn, 'mcperiod')            
+        elseif strcmp(fn, 'mcperiod')
             [per, ac, eac, lag] = functionhandle(mctrim(d, k, k+wlen-1, 'frame'));
             pers = [pers; per];
             acs = [acs; ac];

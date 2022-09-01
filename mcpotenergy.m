@@ -18,13 +18,13 @@ function pe = mcpotenergy(d, segd, segmpar)
 % pe = mckinenergy(d, segd, spar);
 %
 % comments
-% The energy for a given segment is in the column corresponding to the number of the distal joint 
+% The energy for a given segment is in the column corresponding to the number of the distal joint
 % of the respective segment.
 %
 % see also
 % mcj2s, mcgetsegmpar, mckinenergy
 %
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 pe = zeros(d.nFrames,d.nMarkers);
@@ -33,9 +33,9 @@ if isfield(d,'type') && strcmp(d.type, 'MoCap data') && ...
         isfield(segmpar,'type') && strcmp(segmpar.type, 'segmpar')
 
     % do something
-    if d.timederOrder > 0 
-        disp('Use location data'); 
-        return; 
+    if d.timederOrder > 0
+        disp('Use location data');
+        return;
     end
     for k=1:d.nMarkers
         if segd.parent(k)>0
@@ -47,7 +47,7 @@ if isfield(d,'type') && strcmp(d.type, 'MoCap data') && ...
             pe(:,k) = 60 * 9.81 * segmpar.m(k)*cog(:,3)/1000;
         end
     end
-    
+
 else
     disp('The first input argument should be a variable with MoCap data structure.');
     disp('The second input argument should be a variable with segm data structure.');

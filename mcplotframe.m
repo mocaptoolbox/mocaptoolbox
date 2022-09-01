@@ -29,7 +29,7 @@ function par = mcplotframe(d, n, p, proj)
 % see also
 % mcanimate, mcinitanimpar
 %
-% ? Part of the Motion Capture Toolbox, Copyright ?2008,
+% ? Part of the Motion Capture Toolbox, Copyright ?2022,
 % University of Jyvaskyla, Finland
 
 par=[];

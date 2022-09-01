@@ -1,5 +1,5 @@
 function f = mcfluidity(d, mnum)
-% Calculates the fluidity/circularity of mocap data, defined as the ratio 
+% Calculates the fluidity/circularity of mocap data, defined as the ratio
 % between velocity and acceleration of the normed and averaged mocap data.
 %
 % syntax
@@ -17,11 +17,11 @@ function f = mcfluidity(d, mnum)
 % f = mcfluidity(d, 4:6);
 %
 % references
-% Burger, B., Saarikallio, S., Luck, G., Thompson, M. R. & Toiviainen, P. (2013). 
-% Relationships between perceived emotions in music and music-induced movement. 
+% Burger, B., Saarikallio, S., Luck, G., Thompson, M. R. & Toiviainen, P. (2013).
+% Relationships between perceived emotions in music and music-induced movement.
 % Music Perception 30(5), 519-535.
 %
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 f=[];
@@ -51,4 +51,3 @@ a=mctimeder(v);
 vm=mcmean(mcnorm(v));
 am=mcmean(mcnorm(a));
 f=vm/am;
-

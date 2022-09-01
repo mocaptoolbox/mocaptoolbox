@@ -13,7 +13,7 @@ function m = mcmean(d)
 % see also
 % mcstd, mcvar, mcskewness, mckurtosis
 %
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 if isfield(d, 'data')

@@ -16,11 +16,11 @@ function d2 = mcnorm(d, comps)
 % n = mcnorm(d);
 % n = mcnorm(d, 1:2); % calculates norm of horizontal projection
 %
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
-if nargin==1 
-    comps=1:3; 
+if nargin==1
+    comps=1:3;
 end
 
 d2=[];

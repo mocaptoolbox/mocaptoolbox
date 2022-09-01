@@ -6,7 +6,7 @@ function d2 = mcconcatenate(varargin)
 %
 % input parameters
 % d1, d2, d3, ...: MoCap or norm data structure
-% mnum1, mnum2, mnum3, ...: vector containing the numbers of markers to be extracted 
+% mnum1, mnum2, mnum3, ...: vector containing the numbers of markers to be extracted
 % from the preceding MoCap structure
 %
 % output
@@ -18,9 +18,9 @@ function d2 = mcconcatenate(varargin)
 %
 % comments
 % Each mocap structure must have a corresponding marker number or number array.
-% All mocap structures must have identical frame rates. 
-% If the numbers of frames are not equal, the output MoCap structure 
-% will be as long as the shortest input MoCap structure. 
+% All mocap structures must have identical frame rates.
+% If the numbers of frames are not equal, the output MoCap structure
+% will be as long as the shortest input MoCap structure.
 %
 % see also
 % mcgetmarker, mcmerge
@@ -28,7 +28,7 @@ function d2 = mcconcatenate(varargin)
 % todo
 % segment structure (requires mcgetmarker and mcmerge to accept segment data)
 %
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 
@@ -61,7 +61,7 @@ end
 %get marker numbers
 markers={};
 i=0;%counter
-for k=2:2:nargin 
+for k=2:2:nargin
     i=i+1;
     if isnumeric(varargin{k})% check it's a number or a number vector
         m=varargin{k};
@@ -84,7 +84,7 @@ end
 
 % check that marker numbers are within the range
 for k=1:nargin/2
-    if max(markers{k}) > mocap{k}.nMarkers 
+    if max(markers{k}) > mocap{k}.nMarkers
         disp([10, 'Marker number higher than amount of markers in given mocap data.', 10]);
         [y,fs] = audioread('mcsound.wav');
         sound(y,fs);
@@ -98,4 +98,3 @@ for k=2:nargin/2
     tmp=mcgetmarker(mocap{k}, markers{k});
     d2=mcmerge(d2, tmp);
 end
-

@@ -16,16 +16,16 @@ function out = mcfilteremg(emgdata, filterfreqs)
 % examples
 % out = mcfilteremg(emgdata);
 % out = mcfilteremg(emgdata, [18 21]);
-% 
+%
 % comments
-% Filters the data using a 4th order Butterworth high-pass filter (default cutoff frequency: 20 Hz), 
-% then full-wave rectifies it, 
+% Filters the data using a 4th order Butterworth high-pass filter (default cutoff frequency: 20 Hz),
+% then full-wave rectifies it,
 % then filters it using a 4th order Butterworth low-pass filter (default cutoff frequency: 24 Hz).
-% 
+%
 % see also
 % mcreademg
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 out=[];
@@ -68,4 +68,3 @@ Wn_lp=lpf/(fs/2);
 out1=filtfilt(b_hp,a_hp,emgdata.data);
 out2=abs(out1);
 out.data=filtfilt(b_lp,a_lp,out2);
-

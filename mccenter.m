@@ -13,7 +13,7 @@ function d2 = mccenter(d)
 % comments
 % Missing data (NaN's) is ignored when calculating the centroid.
 %
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 d2=[];
@@ -32,4 +32,3 @@ else disp([10, 'The first input argument has to be a variable with MoCap data st
     [y,fs] = audioread('mcsound.wav');
     sound(y,fs);
 end
-

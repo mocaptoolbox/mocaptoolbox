@@ -2,7 +2,7 @@ function d2 = mcfillgaps(d, maxfill, method)
 % Fills gaps in motion capture data.
 %
 % syntax
-% d2 = mcfillgaps(d); 
+% d2 = mcfillgaps(d);
 % d2 = mcfillgaps(d, maxfill);
 % d2 = mcfillgaps(d, method);
 % d2 = mcfillgaps(d, maxfill, method);
@@ -14,8 +14,8 @@ function d2 = mcfillgaps(d, maxfill, method)
 %   default (parameter empty): missing frames in the beginning and/or in the end are set to 0;
 %   'fillall': fills missing frames in the beginning and end of the data with the first actual (recorded)
 %       value or the last actual (recorded) value respectively;
-%   'nobefill': fills all the gap in the data, but not missing frames in the beginning or 
-%       end of the data, but sets them to NaN instead. 
+%   'nobefill': fills all the gap in the data, but not missing frames in the beginning or
+%       end of the data, but sets them to NaN instead.
 %
 % output
 % d2: MoCap, norm, or segm data structure
@@ -29,7 +29,7 @@ function d2 = mcfillgaps(d, maxfill, method)
 % comments
 % Uses linear interpolation. More sophisticated algorithms will be implemented in the future.
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 d2=[];
@@ -54,7 +54,7 @@ if nargin==2
         [y,fs] = audioread('mcsound.wav');
         sound(y,fs);
         return
-    else method=''; 
+    else method='';
     end
 end
 
@@ -126,7 +126,7 @@ for k=1:size(dd,2)
     else
         dd2(:,k)=dd(:,k);
     end
-    
+
     if ~isempty(method) %if EITHER 'fillall' OR 'nobefill' is set
         if dd2(1,k)==0 || ~isfinite(dd2(1,k))%check if there is need to fill in the beginning
             if sum(isnan(dd(:,k)))==size(dd,1)%FIXBB110103: if marker is empty

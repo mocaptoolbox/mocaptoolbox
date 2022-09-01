@@ -37,7 +37,7 @@ function [dp, p] = mcpcaproj(d, pcind, proj)
 % Cognition (ICMPC) / 8th Triennial Conference of the European Society for the
 % Cognitive Sciences of Music (ESCOM). Thessaloniki, Greece.
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 if nargin==2

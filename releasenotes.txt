@@ -1,6 +1,6 @@
 Release Notes
 
-The Motion Capture Toolbox, Copyright ©2008-2015, University of Jyvaskyla, Finland
+The Motion Capture Toolbox, Copyright ©2008-2022, University of Jyvaskyla, Finland
 
 Version 1.1
 

@@ -1,5 +1,5 @@
 % Motion Capture Toolbox -- Copyright University of Jyvaskyla, Finland
-% Version 1.5 / 31-July-2015
+% Version 1.6
 %
 % I/O & EDIT FUNCTIONS
 % mcread -- reads MoCap data files
@@ -16,6 +16,7 @@
 % mcsetmarker -- replaces a subset of markers
 % mcrmmarker -- removes a subset of markers from MoCap data
 % mcconcatenate -- concatenates markers from different MoCap or norm data structure
+% mcembed -- concatenates MoCap data with time delayed copies of it
 % mcgetmarkername -- gets names of markers from MoCap data
 % mcfillgaps -- fills missing data
 % mcfixrigidbody -- fill gaps in rigid body MoCap data

@@ -23,7 +23,7 @@ function mcplotphaseplane(d1, d2, p1, p2)
 % mcplotphaseplane(s1, s2, 5:10, 'eucl') % for segm data structure
 % mcplotphaseplane(s1, s2, [12 14], 'quat') % for segm data structure
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 if (~isfield(d1,'type') || ~isfield(d2, 'type')) && (~isnumeric(d1) || ~isnumeric(d2))
@@ -38,19 +38,19 @@ if nargin<3
     sound(y,fs);
     return;
 end
-if ~isnumeric(p1) 
+if ~isnumeric(p1)
     disp([10, 'The third input argument has to be numeric.', 10]);
     [y,fs] = audioread('mcsound.wav');
     sound(y,fs);
     return
 end
-if nargin==4 
+if nargin==4
     if isfield(d1,'type') && strcmp(d1.type, 'MoCap data') && ~isnumeric(p2)
         disp([10, 'The fourth input argument has to be numeric.', 10]);
         [y,fs] = audioread('mcsound.wav');
         sound(y,fs);
         return
-    elseif isfield(d1,'type') && strcmp(d1.type, 'segm data') 
+    elseif isfield(d1,'type') && strcmp(d1.type, 'segm data')
         if ~strcmp(p2, 'angle') && ~strcmp(p2, 'eucl') && ~strcmp(p2, 'quat')
             disp([10, 'The fourth input argument is unknown.', 10]);
             [y,fs] = audioread('mcsound.wav');
@@ -121,4 +121,3 @@ else % direct reference to data
     end
     plot(d1(:,p1),d2(:,p1));
 end
-

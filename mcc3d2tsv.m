@@ -17,11 +17,11 @@ function mcc3d2tsv(fn, path)
 % mcc3d2tsv('file.c3d', '/path/folder') %(Mac)
 %
 % comments
-% 
+%
 % see also
 % mcread
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 if nargin==0
@@ -44,10 +44,10 @@ if fn ~= 0
     [~, name, ~]=fileparts(fn);
     name = strcat(name,'.tsv'); %create tsv file name
     postfix = fn((end-3):end); %get file extension
-    
+
     if strcmp(postfix, '.c3d')
         d = mcreadc3d(fn);
-        
+
         if nargin==2 %change to given directory
             currdir = cd; %store current directory
             cd(path);
@@ -55,7 +55,7 @@ if fn ~= 0
         if ~strcmp(path(end),'/') %append slash if needed
             path=strcat(path,'/');
         end
-        
+
         fid = fopen(name, 'w'); %file writing
         fprintf(fid, '%s\t', 'NO_OF_FRAMES');
         fprintf(fid, '%u\n', d.nFrames);
@@ -75,17 +75,17 @@ if fn ~= 0
         fprintf(fid, '%s\n', '--');
         fprintf(fid, '%s\t', 'DATA_INCLUDED');
         fprintf(fid, '%s\n', '3D');
-        fprintf(fid, '%s\t', 'MARKER_NAMES');       
+        fprintf(fid, '%s\t', 'MARKER_NAMES');
         fprintf(fid, '%s\t', d.markerName{:});
         fprintf(fid, '%f\n', []);
-        
+
         for k=1:size(d.data,1);
             fprintf(fid, '%f\t', d.data(k,:));
             fprintf(fid, '%f\n', []);
         end
-        
+
         fclose(fid);
-        
+
         currpwd=strcat(pwd,'/');
         name = strcat(currpwd,name);
         if exist(name,'file') == 2

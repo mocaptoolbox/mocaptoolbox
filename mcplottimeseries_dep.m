@@ -10,7 +10,7 @@ function mcplottimeseries_dep(d, marker, dim, timetype, plotopt)
 % mcplottimeseries(d, marker, dim, plotopt)
 % mcplottimeseries(d, marker, dim, timetype, plotopt)
 % mcplottimeseries(s, segm, var) % for segm data structure
-% mcplottimeseries(s, segm, var, timetype) 
+% mcplottimeseries(s, segm, var, timetype)
 %
 % input parameters
 % d/s: MoCap data structure, norm data structure, or segm data structure
@@ -35,16 +35,16 @@ function mcplottimeseries_dep(d, marker, dim, timetype, plotopt)
 % mcplottimeseries(s, [3 6 20], 'angle') % for segm data structure
 % mcplottimeseries(s, 5:10, 'eucl', 'frame') % frames as x axis unit
 % mcplottimeseries(s, [12 14], 'quat')
-% 
+%
 % comment
 % For segment data, the plot option 'comb' is not implemented yet.
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 % rearrangement of input argument management: BB 20111015
 if strcmp(d.type, 'MoCap data') || strcmp(d.type, 'norm data')
-    if nargin==4 
+    if nargin==4
         if strcmp(timetype, 'comb') == 1
             plotopt=timetype;
             timetype='sec';
@@ -74,7 +74,7 @@ if strcmp(d.type, 'MoCap data') || strcmp(d.type, 'norm data')
         timetype='sec';
         plotopt='sep';
     end
-    
+
 elseif strcmp(d.type, 'segm data')
     if nargin==3
         timetype='sec';
@@ -103,8 +103,8 @@ colors={'blue', 'green', 'red', 'cyan', 'magenta', 'yellow', 'black'};
 
 if isfield(d,'type')
     t = (1:d.nFrames)';%-1 taken away as it caused time series to start at 0... [BB 20110301]
-    if strcmp(timetype,'sec') 
-        t = t/d.freq; 
+    if strcmp(timetype,'sec')
+        t = t/d.freq;
     end
     if strcmp(d.type, 'MoCap data')
         figure
@@ -128,15 +128,15 @@ if isfield(d,'type')
             end
         end
         if strcmp(plotopt, 'comb') %plot legend
-            legend(st, 'Location', 'EastOutside'); 
-        end 
+            legend(st, 'Location', 'EastOutside');
+        end
     elseif strcmp(d.type, 'norm data')
         figure
         al=1;%amount of lines - for 'comb' plotting
         plot(t, d.data(:,p1));
         for k=1:length(p1)
             for m=1%:length(p2)
-                if strcmp(plotopt, 'sep') 
+                if strcmp(plotopt, 'sep')
                     subplot(length(p1), 1, k)
                     plot(t, d.data(:,p1(k)))
                     axis([min(t) max(t) -Inf Inf])
@@ -153,7 +153,7 @@ if isfield(d,'type')
             end
         end
         if strcmp(plotopt, 'comb') legend(st, 'Location', 'EastOutside'); end %plot legend
-    
+
     elseif strcmp(d.type, 'segm data')
         tmp=[];
         for k=1:length(p1)

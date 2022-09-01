@@ -24,7 +24,7 @@ function [p1 p2 sv] = mcpls(d1, d2, ncomp);
 % references
 % Hartmann, M., Mavrolampados, A., Allingham, E., Carlson, E., Burger, B., & Toiviainen, P. (2019). Kinematics of perceived dyadic coordination in dance. Scientific Reports, 9(1), 1-14.
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 if isfield(d1,'type') & isfield(d2,'type') & (strcmp(d1.type, 'MoCap data') | strcmp(d1.type, 'norm data')) & (strcmp(d2.type, 'MoCap data') | strcmp(d2.type, 'norm data'))
     if nargin > 2

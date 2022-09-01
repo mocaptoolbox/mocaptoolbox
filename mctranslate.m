@@ -14,7 +14,7 @@ function d2 = mctranslate(d, X)
 % examples
 % d2 = mctranslate(d, [0 1000 0]);
 %
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 d2=[];
@@ -26,7 +26,7 @@ if nargin<2
     return;
 end
 
-if ~isnumeric(X) || length(X)~=3 
+if ~isnumeric(X) || length(X)~=3
     disp([10, 'The second argument has to be numeric and have a length of 3.' 10])
     [y,fs] = audioread('mcsound.wav');
     sound(y,fs);
@@ -49,4 +49,3 @@ else
     [y,fs] = audioread('mcsound.wav');
     sound(y,fs);
 end
-

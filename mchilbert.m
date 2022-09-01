@@ -20,7 +20,7 @@ function [amp, phase, h] = mchilbert(d, wrap)
 % comments
 % See help hilbert
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 if nargin == 1  %adapted BB20140317

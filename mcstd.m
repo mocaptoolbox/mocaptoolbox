@@ -9,11 +9,11 @@ function s = mcstd(d)
 %
 % output
 % m: row vector containing the standard deviations of each data column
-% 
+%
 % see also
 % mcmean, mcvar, mcskewness, mckurtosis
 %
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 if isfield(d, 'data')

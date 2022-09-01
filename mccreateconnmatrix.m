@@ -12,7 +12,7 @@ function p = mccreateconnmatrix(fn, p)
 %
 % output
 % par: animpar structure with connection matrix
-% 
+%
 % examples
 % par = mccreateconnmatrix('labellist.txt', par);
 %
@@ -21,11 +21,11 @@ function p = mccreateconnmatrix(fn, p)
 % This function works for marker representations (before any marker reduction
 % or joint transformation has been applied). The markers in the MoCap structure
 % must resemble the structure of the marker connections in the label list file.
-% 
+%
 % see also
 % mcinitanimpar
 %
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 
@@ -34,7 +34,7 @@ if nargin==1
     p = mcinitanimpar;
 end
 
-if ~ischar(fn) 
+if ~ischar(fn)
     disp([10, 'The first input argument is not a file.', 10]);
     [y,fs] = audioread('mcsound.wav');
     sound(y,fs);
@@ -81,5 +81,3 @@ while ischar(tl)
 end
 
 fclose(ifp);
-
-

@@ -17,11 +17,11 @@ function p = mcinitm2jpar
 %   markerNum: {}
 %   markerName: {}
 % The fields p.nMarkers, p.markerNum and p.markerName have to be entered manually.
-% 
+%
 % see also
 % mcm2j
-% 
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+%
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 p.type = 'm2jpar';

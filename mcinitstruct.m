@@ -18,18 +18,18 @@ function d1 = mcinitstruct(type, data, freq, markerName, fn)
 % freq: frequency / capture rate of recording (default: NaN)
 % markerName: cell array with marker names (default: {})
 % fn: filename (default: '')
-% 
+%
 % output
 % d1: mocap or norm data structure with default parameters or parameter
 % adjustment according to the parameter input.
-% 
+%
 % examples
 % d1 = mcinitstruct;
 % d1 = mcinitstruct('norm data', data);
 % d1 = mcinitstruct(data, 120, markernames, 'mydata1.tsv');
-% 
+%
 % comments
-% default parameters (for 'MoCap data'): 
+% default parameters (for 'MoCap data'):
 %   type: 'MoCap data'
 %   filename: ''
 %   nFrames: 0
@@ -47,7 +47,7 @@ function d1 = mcinitstruct(type, data, freq, markerName, fn)
 %   	other.timeStamp: 'TIME_STAMP	--'
 %       other.dataIncluded: '3D'
 %
-% Part of the Motion Capture Toolbox, Copyright 2008, 
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 d1=[];
@@ -158,4 +158,3 @@ end
 if strcmp(d1.type,'norm data') && d1.nMarkers~=size(d1.data,2)
     disp([10, 'Warning: Inconsistent type (norm data) and size of data (data and nMarkers fields)', 10]);
 end
-

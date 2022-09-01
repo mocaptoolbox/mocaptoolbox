@@ -22,7 +22,7 @@ function [d3, p3] = mcmerge(d1, d2, p1, p2)
 % see also
 % mcconcatenate
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 d3=[]; %BEAUTY FIX BB20110113: if input arguments were not of Mocap or norm data, no system error message thrown anymore (because output argumant not assigned during call)

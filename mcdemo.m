@@ -2,7 +2,7 @@ function mcdemo
 % This function illustrates some of the most important functions
 % of the Motion Capture Toolbox.
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 p1 = cd; p2 = which('mcdemo'); cd(p2(1:end-9))
@@ -53,7 +53,7 @@ while (demonro ~= 0)
 					break
 					return
 				elseif demonro >= 1 & demonro <= 10
-					clc; 
+					clc;
 					cmd1=['echo mcdemo',num2str(demonro),' on'];
 					eval(cmd1);
 					eval(['mcdemo',num2str(demonro),';']);

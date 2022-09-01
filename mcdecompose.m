@@ -5,9 +5,9 @@ function [dt, dn] = mcdecompose(d, order)
 % [dt, dn] = mctangcomp(d, order);
 %
 % input parameters
-% d: MoCap data structure containing either location or velocity data 
+% d: MoCap data structure containing either location or velocity data
 %   (timederorder = 0 or 1)
-% order: time derivative order of the variable, must be at least 2 
+% order: time derivative order of the variable, must be at least 2
 %   (2 = acceleration, 3 = jerk, etc.)
 %
 % output
@@ -16,13 +16,13 @@ function [dt, dn] = mcdecompose(d, order)
 %
 % examples
 % [dt, dn] = mcdecompose(d, 2); % acceleration
-% [dt, dn] = mcdecompose(d, 3); % jerk 
+% [dt, dn] = mcdecompose(d, 3); % jerk
 % [dt, dn] = mcdecompose(d, 4); % jounce / snap
 % [dt, dn] = mcdecompose(d, 5); % crackle
 % [dt, dn] = mcdecompose(d, 6); % pop
 % [dt, dn] = mcdecompose(d, 7); % you-name-it
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 dt=[];
@@ -42,11 +42,11 @@ if ~isnumeric(order)
      return
 end
 
-if (order<2 || floor(order)~=order) 
-    disp([10, 'The second argument has to be an integer greater than 1', 10]); 
+if (order<2 || floor(order)~=order)
+    disp([10, 'The second argument has to be an integer greater than 1', 10]);
     [y,fs] = audioread('mcsound.wav');
     sound(y,fs);
-    return; 
+    return;
 end
 
 if isfield(d,'type') && strcmp(d.type, 'MoCap data')
@@ -57,10 +57,10 @@ if isfield(d,'type') && strcmp(d.type, 'MoCap data')
        v = d;
        q = mctimeder(d, order-1);
    else
-       disp([10, 'The timederOrder field of the first argument has to be 0 or 1', 10]); 
+       disp([10, 'The timederOrder field of the first argument has to be 0 or 1', 10]);
        [y,fs] = audioread('mcsound.wav');
        sound(y,fs);
-       return; 
+       return;
    end
    vnorm = mcnorm(v);
    dt = vnorm;
@@ -77,4 +77,3 @@ else
     [y,fs] = audioread('mcsound.wav');
     sound(y,fs);
 end
-

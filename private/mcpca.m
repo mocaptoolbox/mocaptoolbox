@@ -1,12 +1,12 @@
 function p = mcpca(d);
 % Performs a Principal Components analysis on MoCap, norm or segm data
-% 
+%
 % syntax
 % pc = mcpca(d);
-% 
+%
 % input parameters
 % d: MoCap, norm or segm data structure
-% 
+%
 % output
 % pc: structure containing the following fields:
 %   l: proportion of variance contained in each PC
@@ -14,7 +14,7 @@ function p = mcpca(d);
 %   c: PC projections (rows)
 %   meanx: mean vector of variables
 %
-% © Part of the Motion Capture Toolbox, Copyright ©2008, 
+% © Part of the Motion Capture Toolbox, Copyright ©2022,
 % University of Jyvaskyla, Finland
 
 if isfield(d,'type') & (strcmp(d.type, 'MoCap data') | strcmp(d.type, 'norm data'))

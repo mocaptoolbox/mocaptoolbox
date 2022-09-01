@@ -38,7 +38,7 @@ function [or r2] = mcorientation(source,lmarker1,rmarker1,target,lmarker2,rmarke
 %
 % see also
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 s1=mcgetmarker(source,lmarker1);

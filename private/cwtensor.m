@@ -30,7 +30,7 @@ function [w,f] = cwtensor(d,FS,MINF,MAXF,varargin)
 %
 % Toiviainen, P., & Hartmann, M. (2022). Analyzing multidimensional movement interaction with generalized cross-wavelet transform. Human Movement Science, 81, 102894.
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 for k=1:size(d,2)

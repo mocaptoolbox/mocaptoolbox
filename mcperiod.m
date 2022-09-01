@@ -24,15 +24,15 @@ function [per, ac, eac, lag] = mcperiod(d, maxper, method)
 % per = mcperiod(d, 'highest');
 %
 % comments
-% In ac and eac, each column corresponds to a dimension of a marker 
+% In ac and eac, each column corresponds to a dimension of a marker
 % (or in case of norm data to a marker), and each row corresponds to a time lag.
 %
 % references
-% Eerola, T., Luck, G., & Toiviainen, P. (2006). An investigation of pre-schoolers' 
-% corporeal synchronization with music. Paper presented at the 9th International 
+% Eerola, T., Luck, G., & Toiviainen, P. (2006). An investigation of pre-schoolers'
+% corporeal synchronization with music. Paper presented at the 9th International
 % Conference on Music Perception and Cognition, Bologna, Italy.
-% 
-% Part of the Motion Capture Toolbox, Copyright 2008,
+%
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
 
@@ -51,7 +51,7 @@ if isfield(d,'type') && (strcmp(d.type, 'MoCap data') || strcmp(d.type, 'norm da
             method = 'first';
         end
     end
-    
+
     d.data = detrend(d.data);
     maxlag = round(maxper*d.freq);
     lagfr = (0:maxlag)';
@@ -98,4 +98,3 @@ else
     [y,fs] = audioread('mcsound.wav');
     sound(y,fs);
 end
-

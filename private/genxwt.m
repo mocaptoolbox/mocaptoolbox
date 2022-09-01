@@ -54,7 +54,7 @@ function [xs p1 p2] = genxwt(varargin)
 %
 % Toiviainen, P., & Hartmann, M. (2022). Analyzing multidimensional movement interaction with generalized cross-wavelet transform. Human Movement Science, 81, 102894.
 %
-% Part of the Motion Capture Toolbox, Copyright 2008,
+% Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 if numel(varargin) > 1
     if ischar(varargin{end})
