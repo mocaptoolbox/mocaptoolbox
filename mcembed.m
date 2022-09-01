@@ -10,7 +10,7 @@ function d2 = mcembed(d, delays, options)
 % input parameters
 % d: MoCap or norm data structure
 % delays: vector indicating extent of the delays to be applied. The length of this vector is equal to the resulting number of delayed copies of the data.
-% timetype: delay given in frames ('frame') or seconds ('sec') (default: 'sec')
+% timetype: time delay unit, specified either as frames ('frame') or seconds ('sec') (default: 'sec')
 %
 % output
 % d2: MoCap or norm data structure containing time delay embedded data. Data preceding the specified delays in the time delayed copies consist of repeated copies of the first frame of the original data.
