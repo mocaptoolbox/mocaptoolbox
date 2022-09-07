@@ -638,7 +638,7 @@ for k=1:size(x,1) % main loop
             Q(1) = -Q(1); % sign change for rotation according to right-hand rule
         end
         markerBall = surface(px+x(k,m), py+y(k,m),flip(pz)+z(k,m));
-        markerBall.FaceColor = p.colors(2);
+        markerBall.FaceColor = mcol(m,:);% p.colors(2);
         markerBall.EdgeColor = 'none';              % remove surface edge color
 
         if isfield(p,'par3D') && isfield(p.par3D,'jointrotations') && p.par3D.jointrotations==1
