@@ -632,9 +632,11 @@ for k=1:size(x,1) % main loop
     pz=pz*p.msize*0.0015*om;
 
     for m=1:size(x,2)
-        Q = d.other.quat(k,(1:4)+4*(m-1));% expressed as XYZW
-        Q = Q([4 1 2 3]); % reorder
-        Q(1) = -Q(1); % sign change for rotation according to right-hand rule
+        if isfield(p,'par3D') && isfield(p.par3D,'jointrotations') && p.par3D.jointrotations==1
+            Q = d.other.quat(k,(1:4)+4*(m-1));% expressed as XYZW
+            Q = Q([4 1 2 3]); % reorder
+            Q(1) = -Q(1); % sign change for rotation according to right-hand rule
+        end
         markerBall = surface(px+x(k,m), py+y(k,m),flip(pz)+z(k,m));
         markerBall.FaceColor = p.colors(2);
         markerBall.EdgeColor = 'none';              % remove surface edge color
