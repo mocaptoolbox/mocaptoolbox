@@ -511,7 +511,7 @@ for k=1:size(x,1) % main loop
                     [ccx,ccy,ccz] = line2cylinder(r1,r2,p.cwidth(m)*0.003*om,50);
                     tmpbone = surf(ccx,ccy,ccz);
                     tmpbone.EdgeColor = 'none';
-                    tmpbone.FaceColor = p.colors(3);
+                    tmpbone.FaceColor = ccol(m,:); % p.colors(3);
 
                     %shadow coordinates for each connection on each axis
                     if wallshadow
@@ -568,7 +568,7 @@ for k=1:size(x,1) % main loop
                     [ccx,ccy,ccz] = line2cylinder(r1,r2,p.cwidth(m)*0.003*om,50);
                     tmpbone = surf(ccx,ccy,ccz);
                     tmpbone.EdgeColor = 'none';
-                    tmpbone.FaceColor = p.colors(3);
+                    tmpbone.FaceColor = ccol(m,:); %p.colors(3);
 
                     %shadow coordinates for each connection on each axis
                     if wallshadow
