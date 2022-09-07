@@ -234,3 +234,12 @@ mcembed: concatenate a MoCap or norm data structure with one or multiple time de
 Improvements
 
 Bug fixes
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.6.6
+New functions
+
+Improvements
+
+Bug fixes
+mcplotframe: fix 3D plotting when quaternion data is missing
