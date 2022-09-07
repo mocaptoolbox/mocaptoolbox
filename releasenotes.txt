@@ -243,3 +243,12 @@ Improvements
 
 Bug fixes
 mcplotframe: fix 3D plotting when quaternion data is missing
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.6.7
+New functions
+
+Improvements
+
+Bug fixes
+mcplotframe: fix marker-to-marker and midpoint-to-midpoint connection colors (3D plotting)
