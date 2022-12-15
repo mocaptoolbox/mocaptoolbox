@@ -368,7 +368,11 @@ end
 fignr=1;
 
 if p.animate %20150720 / HJ: in animate case, set figure and axes outside main loop
-    figure(fignr); clf;
+    f = figure(fignr); clf;
+    if p.visible==0;
+        f.Visible='off';
+        disp('Creating animation, please wait...');
+    end
     set(gcf, 'WindowStyle','normal');
     set(gcf,'Position',[50 50 p.scrsize(1) p.scrsize(2)]) ; % DVD: w=720 h=420
     set(gcf, 'color', bgcol);
@@ -521,7 +525,7 @@ end
 %return struct fields in the same order and way as the init params: #BB20150303
 par = orderfields(par, {'type','scrsize','limits','az','el','msize','colors','markercolors',...
     'conncolors','tracecolors','numbercolors','cwidth','twidth','conn','conn2','trm','trl',...
-    'showmnum','numbers','showfnum','animate','hold','fps','output','videoformat','createframes','getparams','perspective','pers'});
+    'showmnum','numbers','showfnum','animate','visible','hold','fps','output','videoformat','createframes','getparams','perspective','pers'});
 
 
 
