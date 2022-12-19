@@ -26,7 +26,7 @@ function par = mcplot3Dframe(d, n, p)
 % If the joint animation parameter field par3D.jointrotations is set to 1, mcplot3Dframe draws axes in each joint to represent rotations with respect to the global coordinate system defined in calibration (for data imported from Qualysis + Theia 3D markerless pose estimation)
 %
 % see also
-% mcplotframe, mcanimate, mcinitanimpar
+% mcplotframe, mcanimate, mcanimatedata, mcinitanimpar
 %
 % Based on mcplotframe in the Motion Capture Toolbox,
 % 3D version developed by Kristian Nymoen, University of Oslo

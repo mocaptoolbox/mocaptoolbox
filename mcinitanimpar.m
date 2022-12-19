@@ -34,7 +34,7 @@ function p = mcinitanimpar(x)
 %   numbers: array indicating the markers for which number is to be shown ([])
 %   showfnum: show frame numbers, 1=yes, 0=no (0)
 %   animate: create animation, 1=yes, 0=no (0)
-%   visible: display each frame while creating animation, 1=yes, 0=no (1)
+%   visible: state of visibility of the figure, 1=yes, 0=no (1)
 %   hold: retain the current or the upcoming plot (similar functionality to 'hold on' in Matlab), 1=yes, 0=no (0)
 %   fps: frames per second for animation (30)
 %   output: either file name for video file, of folder for pgn frames ('tmp')
@@ -74,7 +74,7 @@ function p = mcinitanimpar(x)
 % plotting the first two markers in gray: par.markercolors=[.5 .5 .5; .5 .5 .5];
 %
 % see also
-% mccreateconnmatrix, mcplotframe, mcanimate, mcplot3Dframe
+% mccreateconnmatrix, mcplotframe, mcanimate, mcanimatedata, mcplot3Dframe
 %
 % Download the MoCap Toolbox from
 % https://www.jyu.fi/hytk/fi/laitokset/mutku/en/research/materials/mocaptoolbox
@@ -109,7 +109,7 @@ p.numbers = [];
 p.showfnum = 0;
 
 p.animate = 0;
-p.visible = 0;
+p.visible = 1;
 p.hold = 0;
 p.fps = 30;
 p.output = 'tmp';
