@@ -243,3 +243,13 @@ Improvements
 
 Bug fixes
 mcplotframe: fix 3D plotting when quaternion data is missing; fix marker-to-marker and midpoint-to-midpoint connection colors (3D plotting)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.6.7
+New functions
+mcanimatedata: Creates an animation of both mocap data and plots or images of time series data. The function supports up to four sets of uni- or multivariate time series; each of these can be placed above, below, to the left, or to the right of the mocap data animation.
+
+Improvements
+mcanimate: new animation parameter 'p.visible' to control whether each frame should be displayed while the animation is being created. Note that this also controls state of visibility of a figure produced via mcplotframe, which can be controlled e.g. with the following command: set(gcf,'Visible','on')
+
+Bug fixes
