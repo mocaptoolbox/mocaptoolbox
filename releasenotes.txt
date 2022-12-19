@@ -253,3 +253,13 @@ Improvements
 mcanimate: new animation parameter 'p.visible' to control whether each frame should be displayed while the animation is being created. Note that this also controls state of visibility of a figure produced via mcplotframe, which can be controlled e.g. with the following command: set(gcf,'Visible','on')
 
 Bug fixes
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.6.8
+New functions
+
+Improvements
+
+mcread: Following MocapToolbox conventions, markerName parameter has been now set as a column vector for data imported from Qualysis + Theia 3D markerless pose estimation.
+
+Bug fixes
