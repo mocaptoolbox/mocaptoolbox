@@ -69,6 +69,7 @@ function [d japar] = mcreadtsvTheia(fn);
     m2jpar.markerName([10,16,20]) = []; % remove midtorso and fingers
     m2jpar.markerNum = [{[1]} {[2]} {[3]} {[4]} {[5]} {[6]} {[7]} {[8]} {[9]} {[10]} {[17]} {[11]} {[12]} {[13]} {[14]} {[15]} {[16]}];
     d = mcm2j(d,m2jpar);
+    d.markerName = d.markerName(:);
     load('mcdemodata.mat','japar');
     japar.conn = japar.conn(1:10,:);
     japar.conn = [japar.conn; 10 12; 12 13; 13 14; 10 15; 15 16; 16 17];
