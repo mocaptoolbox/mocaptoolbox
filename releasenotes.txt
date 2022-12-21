@@ -263,3 +263,15 @@ Improvements
 mcread: Following MocapToolbox conventions, markerName parameter has been now set as a column vector for data imported from Qualysis + Theia 3D markerless pose estimation.
 
 Bug fixes
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.6.9
+New functions
+
+Improvements
+
+mcplotframe: Backwards compatibility for data created in previous versions of Mocap Toolbox (i.e. before introducing 'hold' and 'visible' animpar structure parameters)
+
+Bug fixes
+
+mcplotframe: fix exit function when no plotting or animation is created

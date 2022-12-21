@@ -104,7 +104,12 @@ if p.animate && p.getparams==0 %BBADD20150303
 end
 
 
-
+if ~isfield(p,'hold') % for backwards compatibility
+    p.hold=0;
+end
+if ~isfield(p,'visible') % for backwards compatibility
+    p.visible=1;
+end
 
 par=p;
 
@@ -367,12 +372,6 @@ end
 
 fignr=1;
 
-if ~isfield(p,'hold') % for backwards compatibility
-    p.hold=0;
-end
-if ~isfield(p,'visible') % for backwards compatibility
-    p.visible=1;
-end
 if p.animate %20150720 / HJ: in animate case, set figure and axes outside main loop
     f = figure(fignr); clf;
     if p.visible==0;
