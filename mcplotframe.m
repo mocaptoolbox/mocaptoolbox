@@ -361,7 +361,7 @@ if p.getparams==1
     par=p;
     par = orderfields(par, {'type','scrsize','limits','az','el','msize','colors','markercolors',...
     'conncolors','tracecolors','numbercolors','cwidth','twidth','conn','conn2','trm','trl',...
-    'showmnum','numbers','showfnum','animate','fps','output','videoformat','createframes','getparams','perspective','pers'});
+    'showmnum','numbers','showfnum','animate','visible','hold','fps','output','videoformat','createframes','getparams','perspective','pers'});
     return
 end
 
