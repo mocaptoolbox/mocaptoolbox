@@ -645,12 +645,12 @@ for k=1:size(x,1) % main loop
             extra = p.msize*0.0025*om;
             lwidth = 2;
             hold on
-            Qx = quatrot([0-extra,0,0],Q);
-            Qy = quatrot([0,0-extra,0],Q);
-            Qz = quatrot([0,0,0+extra],Q);
-            quiver3(x(k,m),y(k,m),z(k,m),-Qx(1),Qx(2),Qx(3),'r','LineWidth',lwidth);
-            quiver3(x(k,m),y(k,m),z(k,m),Qy(1),-Qy(2),Qy(3),'g','LineWidth',lwidth);
-            quiver3(x(k,m),y(k,m),z(k,m),Qz(1),Qz(2),Qz(3),'b','LineWidth',lwidth);
+            Qx = quatrot([0+extra,0,0],Q);
+            Qy = quatrot([0,0+extra,0],Q);
+            Qz = quatrot([0,0,0-extra],Q);
+            quiver3(x(k,m),y(k,m),z(k,m),-Qx(1),Qx(2),-Qx(3),'r','LineWidth',lwidth,'ShowArrowHead', 'off');
+            quiver3(x(k,m),y(k,m),z(k,m),Qy(1),-Qy(2),-Qy(3),'g','LineWidth',lwidth,'ShowArrowHead', 'off');
+            quiver3(x(k,m),y(k,m),z(k,m),-Qz(1),-Qz(2),-Qz(3),'b','LineWidth',lwidth,'ShowArrowHead', 'off');
         end
     end
 
