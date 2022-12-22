@@ -482,7 +482,12 @@ for k=1:size(x,1) % main loop
         if p.animate %FIX20150720 Axis problem (see above)
         axis off
         else
-            axis([minxx maxxx minzz maxzz]); axis off;
+            if numel(x) == 1
+                % if there is only one marker, do not set axis limits
+                axis off
+            else
+                axis([minxx maxxx minzz maxzz]); axis off;
+            end
         end
 
     end
