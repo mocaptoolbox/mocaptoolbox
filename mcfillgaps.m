@@ -74,6 +74,9 @@ end
 if isfield(d,'type') && (strcmp(d.type, 'MoCap data') || strcmp(d.type, 'norm data'))
     d2 = d;
     d2.data = fill(d.data, maxfill, method);
+    if isfield(d,'other') & isfield(d.other,'quat') & ~isempty(d.other.quat)
+        d2.other.quat = fill(d.other.quat,maxfill,method);
+    end
 elseif isfield(d,'type') && strcmp(d.type, 'segm data')
     d2 = d;
     d2.roottrans = fill(d.roottrans, maxfill, method);
