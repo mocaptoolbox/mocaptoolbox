@@ -50,6 +50,12 @@ if isfield(d,'type') && strcmp(d.type, 'MoCap data')
     columns=[];
     for k=1:length(mnum)
         columns=[columns 3*mnum(k)+(-2:0)];
+        if isfield(d,'other') & isfield(d.other,'quat') & ~isempty(d.other.quat)
+            qcolumns = 4*mnum(k)+(-3:0);
+        end
+    end
+    if isfield(d,'other') & isfield(d.other,'quat') & ~isempty(d.other.quat)
+    d2.other.quat=d.other.quat(:,qcolumns);
     end
     d2.data = d.data(:, columns);
     d2.nMarkers = length(mnum);
