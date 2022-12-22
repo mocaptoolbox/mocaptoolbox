@@ -275,3 +275,25 @@ mcplotframe: Backwards compatibility for data created in previous versions of Mo
 Bug fixes
 
 mcplotframe: fix exit function when no plotting or animation is created
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.7.0
+New functions
+
+Improvements
+
+mcfillgaps: add support for quaternion data
+
+mcgetmarker: add support for quaternion data
+
+mcplotframe: add support for plotting a single marker
+
+mcplot3Dframe: add support for setting figure visibility off
+
+mcresample: add support for quaternion data
+
+Bug fixes
+
+mcplotframe: fix exit function when no plotting or animation is created
+
+mcplot3Dframe: fix 3D plotting of quaternion data
