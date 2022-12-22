@@ -428,7 +428,11 @@ end
 fignr=1;
 
 if p.animate %20150720 / HJ: in animate case, set figure and axes outside main loop
-    figure(fignr);
+    f = figure(fignr);
+    if p.visible==0;
+        f.Visible='off';
+            disp('Creating animation, please wait...');
+    end
     clf;
     set(gcf, 'WindowStyle','normal');
     set(gcf,'Position',[50 50 p.scrsize(1) p.scrsize(2)]) ; % DVD: w=720 h=420
@@ -468,6 +472,9 @@ for k=1:size(x,1) % main loop
         hold on;
     else
         figure(fignr);
+        if p.visible==0;
+            f.Visible='off';
+        end
         clf;
         set(gcf, 'WindowStyle','normal');
         set(gcf,'Position',[50 50 p.scrsize(1) p.scrsize(2)]) ; % DVD: w=720 h=420
