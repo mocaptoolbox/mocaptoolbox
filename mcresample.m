@@ -35,20 +35,27 @@ if ~isnumeric(newfreq)
 end
 
 
-
-
 if isfield(d,'type') && (strcmp(d.type, 'MoCap data') || strcmp(d.type, 'norm data'))
     if nargin==2
         method = 'linear';
     end
     d2 = d;
-    t1 = (0:(size(d.data,1)-1))/d.freq;
-    t2 = 0:(1/newfreq):t1(end);
-    d2.data = interp1(t1, d.data, t2, method);
+    data2 = resamp(d2.data,d2.freq,newfreq,method);
+    d2.data = data2;
     d2.freq = newfreq;
     d2.nFrames = size(d2.data,1);
+
+    if isfield(d,'other') & isfield(d.other,'quat') & ~isempty(d.other.quat)
+        d2.other.quat = resamp(d.other.quat,d2.freq,newfreq,method);
+    end
 else
     disp([10, 'The first input argument has to be a variable with MoCap data structure.', 10]);
     [y,fs] = audioread('mcsound.wav');
     sound(y,fs);
+end
+end
+function d2 = resamp(d1,freq,newfreq,method)
+    t1 = (0:(size(d1,1)-1))/freq;
+    t2 = 0:(1/newfreq):t1(end);
+    d2 = interp1(t1, d1, t2, method);
 end
