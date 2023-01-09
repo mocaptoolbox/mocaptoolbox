@@ -297,3 +297,15 @@ Bug fixes
 mcplotframe: fix exit function when no plotting or animation is created
 
 mcplot3Dframe: fix 3D plotting of quaternion data
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.7.0
+New functions
+
+Improvements
+
+mcread: add calculation of d.nAnalog and d.analogdata when reading c3d files
+
+Bug fixes
+
+mcread: fix error in nFrames when reading C3D files
