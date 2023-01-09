@@ -299,7 +299,7 @@ mcplotframe: fix exit function when no plotting or animation is created
 mcplot3Dframe: fix 3D plotting of quaternion data
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Version 1.7.0
+Version 1.7.1
 New functions
 
 Improvements
