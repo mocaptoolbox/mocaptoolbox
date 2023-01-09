@@ -15,7 +15,7 @@ data = readc3d(fn);
 % create MoCap structure
 d.type = 'MoCap data';
 d.filename = fn;
-d.nFrames = data.Header.EndVideoFrame;
+d.nFrames = d.nFrames = data.Header.EndVideoFrame - data.Header.FirstVideoFrame + 1;
 d.nCameras = 0;
 d.nMarkers = size(fieldnames(data.VideoData),1);
 d.freq = data.Header.VideoHZ;
