@@ -10,21 +10,21 @@ function d = mcreadc3d(fn);
 
 
 % read in data from */mocaptoolbox/private/readc3d.m
-data = readc3d(fn); 
-           
+data = readc3d(fn);
+
 % create MoCap structure
-d.type = 'MoCap data';        
+d.type = 'MoCap data';
 d.filename = fn;
 d.nFrames = data.Header.EndVideoFrame;
 d.nCameras = 0;
 d.nMarkers = size(fieldnames(data.VideoData),1);
 d.freq = data.Header.VideoHZ;
-d.nAnalog = [];%size(AnalogData,2);
+d.nAnalog = data.NumAnalogue;
 d.anaFreq= [];
 d.timederOrder = 0;
 d.markerName = [];
 d.data = [];
-d.analogdata = [];%data.AnalogData;
+d.analogdata = data.AnalogData;
 d.other = [];
 
 

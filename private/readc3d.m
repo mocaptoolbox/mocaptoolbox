@@ -4,7 +4,7 @@ function data =readc3d(fname,header)
 % data = readc3d(fname)
 % fname = the c3d file and path (as a string) eg: 'c:\documents\myfile.c3d'
 % data is a structured array
-% 
+%
 % see also writec3d.m
 %
 % CAUTION: machinetype variable may not be correct for intel or MIPS C3D files.
@@ -92,8 +92,8 @@ while 1
     if strcmp(gname,'EndVideoFrame')
         keyboard
     end
-    
-    
+
+
     index = ftell(fid);                             %this is the starting point for the offset
     nextgroup = fread(fid,1,'int16');               %nextgroup = offset to the next group/parameter
     if numchar < 0;                                 %a negative character length means the group is locked
@@ -102,25 +102,25 @@ while 1
         islock = 0;
     end
     fld = [];                                   %fld = structured field to add to the output
-    fld.id = id;                                %fld has fields id and description   
+    fld.id = id;                                %fld has fields id and description
     fld.islock = islock;
-    
-    if id < 0                                       %groups always have id <0 parameters are always >0  
+
+    if id < 0                                       %groups always have id <0 parameters are always >0
         dnum = fread(fid,1,'uint8');                %number of characters of the desctription
         desc = char(fread(fid,dnum,'uint8')');      %description of the group/parameter
         fld.description = desc;
         P.(gname)=fld;                              %add the field to the variable P
     else %it is a parameter
         dtype = fread(fid,1,'int8');                %what type of data -1 = char 1 = byte  2 = 16 bit integer 3 = 32 bit floating point
-        numdim = fread(fid,1,'uint8');              %number of dimensions (0 to 7 dimensions)        
+        numdim = fread(fid,1,'uint8');              %number of dimensions (0 to 7 dimensions)
         fld.datatype = dtype;                       %data type of the parameter -1=character, 1=byte, 2=integer, 3= floting point, 4=real
-        fld.numberDIM = numdim;                     %number of dimensions (0-7) 0 = scalar, 1=vector, 2=2D matrix,3=3D matrix,...etc 
+        fld.numberDIM = numdim;                     %number of dimensions (0-7) 0 = scalar, 1=vector, 2=2D matrix,3=3D matrix,...etc
         fld.DIMsize = fread(fid,numdim,'uint8');    %size of each dimension eg [2,3]= 2d matrix with 2 rows and 3 columns
         dsize = fld.DIMsize';                       %the fread function only reads row vectors
-        
+
         if isempty(dsize)                           %if dsize is empty then we read a scalar
             dsize = 1;
-        end            
+        end
         if length(dsize) > 2
             dsize = prod(dsize);                    %fread can only handle up to 2 dimensions
         end                                         %if it is greater than 2 dimensions, then just read all data in a single vector.
@@ -143,7 +143,7 @@ while 1
         end
         dnum = fread(fid,1,'uint8');             %number of characters in the description
         desc = char(fread(fid,dnum,'uint8')');      %description string
-        fld.description = desc;        
+        fld.description = desc;
         fld.data = pdata;                            %add data to parameter structured var
         P = setparameter(P,gname,fld);              %add parameter to the appropriate group
     end
@@ -173,7 +173,7 @@ if isfield(data.Parameter,'ANALOG')
 %         issigned = 1;
 %     else
         issigned = 0;
-%   end    
+%   end
 
 
 
@@ -193,11 +193,11 @@ if isfield(data.Parameter.POINT,'LABELS');
     Vlabels = cellstr(data.Parameter.POINT.LABELS.data');
 else
     Vlabels = {};
-end    
+end
 Vscale = data.Parameter.POINT.SCALE.data;
 numFrames = data.Parameter.POINT.FRAMES.data;
 
-inc = 4*numVideo+H.SamplesPerFrame;  
+inc = 4*numVideo+H.SamplesPerFrame;
 %inc is the increment.  Increment is the number of elements in a video
 %frame and this consist of:
 %The number of Video Channels*4 (xdata,ydata,zdata,and residual) + The
@@ -210,15 +210,15 @@ inc = 4*numVideo+H.SamplesPerFrame;
 numdatapts = numFrames*inc;
 %number of data points to read this is:
 %(Number of frames)*(Number of data per frame)
-                                                    
-                                                  
+
+
 %READING the DATA
 if Vscale >= 0   %integer format
     AVdata = fread(fid,numdatapts,'int16',machinetype);
 else            %floating point format
     AVdata = fread(fid,numdatapts,'float32',machinetype);
 end
-    
+
 
 V = struct;
 %data for all Video channels
@@ -239,16 +239,16 @@ for i = 1:numVideo
     Vdata.zdata = videoconvert(zd,Vscale,indx);
     Vdata.residual = residual;
     offset = offset+4;
-    V.(['channel',num2str(i)]) = Vdata;    
+    V.(['channel',num2str(i)]) = Vdata;
 end
 
 offset = 4*numVideo;  %offset is a pointer to the first data point of the first channel of Analog data
 A = struct;
-for i = 1:numAnalogue 
+for i = 1:numAnalogue
     Adata.label = Alabels{i};
     Aframedata = [];
     %A given analog channel can have multiple samples per frame of video
-    for j = 0:H.SamplesPerChannel-1 
+    for j = 0:H.SamplesPerChannel-1
         stindx = offset+i+j*numAnalogue;
         plate = AVdata(stindx:inc:end);
         Aframedata = [Aframedata,plate];
@@ -256,10 +256,11 @@ for i = 1:numAnalogue
     Adata.data = analogconvert(merge(Aframedata),Aoffset(i),Ascale(i),Gscale,issigned);  %recombine the multiple samples to one vector
     A.(['channel',num2str(i)]) = Adata;
 end
-    
+
 data.VideoData = V;
 data.AnalogData= A;
-    
+data.NumAnalogue = numAnalogue;
+
 fclose(fid);
 
 
@@ -279,7 +280,7 @@ end
 function r = merge(data)
 %this function will recombine the analogue data because the potential for multiple
 %samples per frame of video.
-%each row of "data" corresponds to a single video frame; 
+%each row of "data" corresponds to a single video frame;
 [rw,cl] = size(data);
 r = zeros(rw*cl,1);
 for i = 1:cl
@@ -320,5 +321,5 @@ for i = 2:3
     nindx = find(data(:,i)==0);
     indx = intersect(indx,nindx);
 end
-    
-r = indx;    
+
+r = indx;
