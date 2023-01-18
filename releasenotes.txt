@@ -309,3 +309,13 @@ mcread: add calculation of d.nAnalog and d.analogdata when reading c3d files
 Bug fixes
 
 mcread: fix error in nFrames when reading C3D files
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.7.2
+New functions
+
+mcmsi: Multivariate Synchronization Index between two MoCap or Norm data structures
+
+Improvements
+
+Bug fixes
