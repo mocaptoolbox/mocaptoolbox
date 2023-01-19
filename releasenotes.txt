@@ -319,3 +319,13 @@ mcmsi: Multivariate Synchronization Index between two MoCap or Norm data structu
 Improvements
 
 Bug fixes
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.7.3
+New functions
+
+Improvements
+
+Bug fixes
+
+mcmsi: Now the measure providing results in the range [0,1] and does not require an iterative procedure.

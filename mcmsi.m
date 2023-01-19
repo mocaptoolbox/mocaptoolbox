@@ -1,16 +1,13 @@
-function m = mcmsi(d1,d2,options)
+function m = mcmsi(d1,d2)
 % Multivariate Synchronization Index between two MoCap or Norm data structures.
 %
 % syntax
 %
 % m = mcmsi(d1,d2)
-% m = mcmsi(d1,d2,'iterations',...)
 %
 % input parameters
 %
 % d1, d2: MoCap or Norm data structures
-%
-% iterations: Name-value argument used to specify number of iterations for calculating Imin (optional). Default: mcmsi(...,'iterations',1000)
 %
 % output
 %
@@ -18,7 +15,7 @@ function m = mcmsi(d1,d2,options)
 %
 % examples
 %
-% m = mcmsi(d1,d2,'iterations',100)
+% m = mcmsi(d1,d2)
 %
 % comments
 %
@@ -33,16 +30,10 @@ function m = mcmsi(d1,d2,options)
     arguments
         d1(1,1) {mustBeMocapNormSegm(d1)}
         d2(1,1) {mustBeMocapNormSegm(d2)}
-        options.iterations = 1000
     end
-    for k = 1:options.iterations
-        rX1 = randn(size(d1.data));
-        rX2 = randn(size(d2.data));
-        rI(k) = Ifun(rX1,rX2);
-    end
-    Imin = min(rI);
     X1 = d1.data;
     X2 = d2.data;
+    Imin=min(Ifun(X1,X1),Ifun(X2,X2));
     [I R] = Ifun(X1,X2);
     lognn=log(2*size(R,1));
     m=(lognn-I)/(lognn-Imin);
