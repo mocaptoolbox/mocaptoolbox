@@ -42,7 +42,6 @@ end
 function [I R] = Ifun(X1,X2)
     C1=corr(X1);
     C2=corr(X2);
-    C12=corr(X1,X2);
 
     T1=sqrt(inv(C1));
     T2=sqrt(inv(C2));
