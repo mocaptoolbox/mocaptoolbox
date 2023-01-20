@@ -329,3 +329,13 @@ Improvements
 Bug fixes
 
 mcmsi: Now the measure providing results in the range [0,1] and does not require an iterative procedure.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.7.4
+New functions
+
+Improvements
+
+mcmsi: new 'Complex' option to specify whether to compute MSI in complex domain using Hilbert transform in order to tolerate phase differences
+
+Bug fixes
