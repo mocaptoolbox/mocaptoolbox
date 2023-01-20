@@ -1,15 +1,16 @@
-function m = mcmsi(d1,d2)
+function m = mcmsi(d1,d2,options)
 % Multivariate Synchronization Index between two MoCap or Norm data structures.
 %
 % syntax
 %
 % m = mcmsi(d1,d2)
+% m = mcmsi(d1,d2,'Complex',...)
 %
 % input parameters
 %
 % d1, d2: MoCap or Norm data structures
 %
-% output
+% 'Complex' (true | false): Name-value argument used to specify whether to compute MSI in complex domain using Hilbert transform in order to tolerate phase differences. Default: % m = mcmsi(...,'Complex',false)
 %
 % m: multivariate synchronization index, returned as a scalar.
 %
@@ -17,7 +18,7 @@ function m = mcmsi(d1,d2)
 %
 % m = mcmsi(d1,d2)
 %
-% comments
+% m = mcmsi(d1,d2,'Complex',true)
 %
 % see also
 %
@@ -30,9 +31,15 @@ function m = mcmsi(d1,d2)
     arguments
         d1(1,1) {mustBeMocapNormSegm(d1)}
         d2(1,1) {mustBeMocapNormSegm(d2)}
+        options.Complex = false
     end
-    X1 = d1.data;
-    X2 = d2.data;
+    if options.Complex == false
+        X1 = d1.data;
+        X2 = d2.data;
+    else
+        X1 = hilbert(d1.data);
+        X2 = hilbert(d2.data);
+    end
     Imin=min(Ifun(X1,X1),Ifun(X2,X2));
     [I R] = Ifun(X1,X2);
     lognn=log(2*size(R,1));
