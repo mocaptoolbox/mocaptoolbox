@@ -341,7 +341,7 @@ mcmsi: new 'Complex' option to specify whether to compute MSI in complex domain 
 Bug fixes
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Version 1.7.5
+Version 1.7.6
 New functions
 
 Improvements
