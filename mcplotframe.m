@@ -111,6 +111,14 @@ if ~isfield(p,'visible') % for backwards compatibility
     p.visible=1;
 end
 
+% video background
+if isfield(p,'background') & ~isempty(p.background);
+    [~,~,fEXT]=fileparts(p.background);
+    if matches(upper(fEXT),{'.AVI', '.MJ2', '.MPG', '.WMV', '.CUR', '.ASF', '.ASX', '.MP4', '.M4V','.MOV','.OGG'})
+        vidr = VideoReader(p.background);
+    end
+end
+
 par=p;
 
 % color management (compatibility): convert old string color definition into num array [BB20111031]
@@ -502,6 +510,16 @@ for k=1:size(x,1) % main loop
 %     text(maxxx-300, 0, {'Birgitta Burger', 'Jyv?skyl? Univ.', 'Finland'});
 %     text(minxx+40, minzz+0.97*(maxzz-minzz), 'High Sub-Band 2 Flux', 'FontSize', 16, 'FontWeight', 'bold');
 %     text(minxx+70, minzz+0.97*(maxzz-minzz)-75, {'high speed of head'}, 'FontSize', 12, 'FontWeight', 'bold');
+    if isfield(p,'background') & ~isempty(p.background);
+        hold on
+        if matches(upper(fEXT),{'.GIF', '.PGM', '.PBM', '.PPM', '.CUR', '.ICO', '.TIF', '.SVS', '.HDF4','.PNG','.BMP','.TIFF','.JPEG','.JPG','.RAS','.SVS'})
+            Img = imread(p.background);
+        elseif exist('vidr','var')
+            Img = readFrame(vidr);
+        end
+        hh = image([minxx maxxx],[maxzz minzz],Img);
+        uistack(hh,'bottom')
+    end
 
     drawnow
     hold off
@@ -538,7 +556,7 @@ end
 %return struct fields in the same order and way as the init params: #BB20150303
 par = orderfields(par, {'type','scrsize','limits','az','el','msize','colors','markercolors',...
     'conncolors','tracecolors','numbercolors','cwidth','twidth','conn','conn2','trm','trl',...
-    'showmnum','numbers','showfnum','animate','visible','hold','fps','output','videoformat','createframes','getparams','perspective','pers'});
+    'showmnum','numbers','showfnum','background','animate','visible','hold','fps','output','videoformat','createframes','getparams','perspective','pers'});
 
 
 

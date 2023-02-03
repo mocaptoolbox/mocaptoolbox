@@ -33,6 +33,7 @@ function p = mcinitanimpar(x)
 %   showmnum: show marker numbers, 1=yes, 0=no (0)
 %   numbers: array indicating the markers for which number is to be shown ([])
 %   showfnum: show frame numbers, 1=yes, 0=no (0)
+%   background: specify a background image (e.g. 'peppers.png') or a video ('xylophone.mp4') to be displayed as a background to the mocap data ([]). Note that, when using videos with mcplotframe, always the first video frame will be displayed. When videos are used with mcanimate, the videos will be played at the frame rate specified in the fps animation parameter strucutre field.
 %   animate: create animation, 1=yes, 0=no (0)
 %   visible: state of visibility of the figure, 1=yes, 0=no (1)
 %   hold: retain the current or the upcoming plot (similar functionality to 'hold on' in Matlab), 1=yes, 0=no (0)
@@ -107,7 +108,7 @@ p.trl = 0;
 p.showmnum = 0;
 p.numbers = [];
 p.showfnum = 0;
-
+p.background = [];
 p.animate = 0;
 p.visible = 1;
 p.hold = 0;
