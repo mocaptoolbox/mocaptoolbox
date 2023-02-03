@@ -346,6 +346,6 @@ New functions
 
 Improvements
 
-animpar structure: new 'background' option to specify a background image (e.g. 'peppers.png') or a video ('xylophone.mp4') to be displayed as a background to the mocap data ([]). Note that, when using videos with mcplotframe, always the first video frame will be displayed. When videos are used with mcanimate, the videos will be played at the frame rate specified in the fps animation parameter strucutre field.
+animpar structure: new 'background' option to specify a background image (e.g. 'peppers.png') or a video ('xylophone.mp4') to be displayed as a background to the mocap data ([]). Note that, when using videos with mcplotframe, always the first video frame will be displayed. When videos are used with mcanimate, the videos will be played at the frame rate specified in the fps animation parameter structure field.
 
 Bug fixes
