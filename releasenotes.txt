@@ -359,3 +359,13 @@ Improvements
 Bug fixes
 
 mcdemodata: add to 'mapar' and 'japar' the new 'background' option to specify a background image (e.g. 'peppers.png') or a video ('xylophone.mp4') to be displayed as a background to the mocap data
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.7.8
+New functions
+
+Improvements
+
+mcanimatedata: add support for image and video backgrounds (using the 'background' option in 'animpar' structures)
+
+Bug fixes
