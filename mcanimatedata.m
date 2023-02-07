@@ -117,6 +117,10 @@ function mcanimatedata(d,p,optionsData,optionsSR,optionsVisual,optionsLabel,opti
         % axis limits for plot
         p.limits = [midx-scrratio*1.2*range midx+scrratio*1.2*range midz-1.2*range midz+1.2*range];
     end
+    minxx = p.limits(1);
+    maxxx = p.limits(2);
+    minzz = p.limits(3);
+    maxzz = p.limits(4);
     if strcmp(p.videoformat,'avi')
         v = VideoWriter(p.output); %set file name
     else
@@ -147,8 +151,7 @@ function mcanimatedata(d,p,optionsData,optionsSR,optionsVisual,optionsLabel,opti
             elseif exist('vidr','var')
                 Img = readFrame(vidr);
             end
-            %hh = image([minxx maxxx],[maxzz minzz],Img);
-            hh = image([-1382.8345 1086.1495],[1688.3935 -163.3445],Img);
+            hh = image([minxx maxxx],[maxzz minzz],Img);
             uistack(hh,'bottom')
             uistack(hh,'up',1)
             drawnow
