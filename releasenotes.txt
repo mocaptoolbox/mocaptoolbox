@@ -369,3 +369,13 @@ Improvements
 mcanimatedata: add support for image and video backgrounds (using the 'background' option in 'animpar' structures)
 
 Bug fixes
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.7.9
+New functions
+
+Improvements
+
+Bug fixes
+
+mcanimatedata: fix support for image and video backgrounds
