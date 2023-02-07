@@ -129,11 +129,31 @@ function mcanimatedata(d,p,optionsData,optionsSR,optionsVisual,optionsLabel,opti
     if p.visible==0
         disp('Creating animation, please wait...');
     end
+    if isfield(p,'background') & ~isempty(p.background);
+        [~,~,fEXT]=fileparts(p.background);
+        if matches(upper(fEXT),{'.AVI', '.MJ2', '.MPG', '.WMV', '.CUR', '.ASF', '.ASX', '.MP4', '.M4V','.MOV','.OGG'})
+            vidr = VideoReader(p.background);
+        end
+    end
     for k = 1:size(d.data,1)
         ptemp=p;
         ptemp.showfnum=0;
         ptemp.visible=0;
         mcplotframe(d,k,ptemp);
+        if isfield(p,'background') & ~isempty(p.background);
+            hold on
+            if matches(upper(fEXT),{'.GIF', '.PGM', '.PBM', '.PPM', '.CUR', '.ICO', '.TIF', '.SVS', '.HDF4','.PNG','.BMP','.TIFF','.JPEG','.JPG','.RAS','.SVS'})
+                Img = imread(p.background);
+            elseif exist('vidr','var')
+                Img = readFrame(vidr);
+            end
+            %hh = image([minxx maxxx],[maxzz minzz],Img);
+            hh = image([-1382.8345 1086.1495],[1688.3935 -163.3445],Img);
+            uistack(hh,'bottom')
+            uistack(hh,'up',1)
+            drawnow
+            hold off
+        end
         ax1=gca;
         fg = figure(2);
         if p.visible==0
