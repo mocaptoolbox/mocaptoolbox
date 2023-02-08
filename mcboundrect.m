@@ -27,6 +27,9 @@ function br = mcboundrect(d, mnum, w, hop)
 % parameters. If the window and overlap length are to be changed, the
 % markers have to be always specified (e.g., all markers by [1:d.nMarkers]).
 %
+% see also
+% mcboundvol
+%
 % Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
