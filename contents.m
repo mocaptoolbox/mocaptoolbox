@@ -51,6 +51,7 @@
 % mccumdist -- calculates the cumulative distance traveled by each marker
 % mcmarkerdist -- calculates the distance of a marker pair
 % mcboundrect -- calculates the bounding rectangle
+% mcbound -- calculates the bounding volume
 % mccomplexity -- calculate the complexity of movement
 % mcfluidity -- calculate the fluidity/circularity of mocap data
 % mcrotationrange -- calculates rotation range between two markers
@@ -81,6 +82,7 @@
 % mcplotframe -- plots frames from MoCap data in 2D
 % mcplot3Dframe -- plot frames from MoCap data in 3D
 % mcanimate -- make an animation
+% mcanimatedata -- create an animation of both mocap data and plots or images of time series data
 % mcsimmat -- calculate similarity matrix
 % mcmocapgram -- plots mocapgram
 %
@@ -92,6 +94,7 @@
 %
 % COUPLING FUNCTIONS
 % mccoupling -- compute a number of coupling indices between MoCap data
+% mcmsi -- multivariate synchronization index between MoCap data
 % mcplsproj -- perform a PLS from two sets of MoCap data
 % mcgxwt -- perform a GXWT from two or more sets of MoCap data
 %
