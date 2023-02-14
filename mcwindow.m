@@ -30,7 +30,7 @@ function varargout = mcwindow(functionhandle, d, wlen, hop, timetype)
 % [per, ac, eac, lags] = mcwindow(@mcperiod, d);
 %
 % see also
-% mcmean, mcstd, mcvar, mcskewness, mckurtosis, mcperiod
+% mcmean, mcstd, mcvar, mcskewness, mckurtosis, mcperiod, mccomplexity, mcfluidity
 %
 % Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
@@ -41,7 +41,7 @@ end
 
 % initialize
 fn = func2str(functionhandle); % get function name
-if strcmp(fn,'mcmean') || strcmp(fn,'mcstd') || strcmp(fn,'mcvar') || strcmp(fn,'mcskewness') || strcmp(fn,'mckurtosis') %%BB20111017: extension with mcvar
+if strcmp(fn,'mcmean') || strcmp(fn,'mcstd') || strcmp(fn,'mcvar') || strcmp(fn,'mcskewness') || strcmp(fn,'mckurtosis') || strcmp(fn,'mccomplexity') || strcmp(fn,'mcfluidity')
     out1 = [];
 elseif strcmp(fn, 'mcperiod')
     pers = [];
@@ -98,7 +98,7 @@ if isfield(d,'type') && (strcmp(d.type, 'MoCap data') || strcmp(d.type, 'norm da
     wstart = (0:wstep:size(d.data,1)-wlen) / d.freq; % start times of windows in secs
 
     for k=1:wstep:size(d.data,1)-wlen+1
-        if strcmp(fn,'mcmean') || strcmp(fn,'mcvar') || strcmp(fn,'mcstd') || strcmp(fn,'mcskewness') || strcmp(fn,'mckurtosis')
+        if strcmp(fn,'mcmean') || strcmp(fn,'mcvar') || strcmp(fn,'mcstd') || strcmp(fn,'mcskewness') || strcmp(fn,'mckurtosis') || strcmp(fn,'mccomplexity') || strcmp(fn,'mcfluidity')
             out1 = [out1; functionhandle(mctrim(d, k, k+wlen-1, 'frame'))];
         elseif strcmp(fn, 'mcperiod')
             [per, ac, eac, lag] = functionhandle(mctrim(d, k, k+wlen-1, 'frame'));
@@ -115,7 +115,7 @@ else
     return;
 end
 
-if strcmp(fn,'mcmean') || strcmp(fn,'mcstd') || strcmp(fn,'mcvar') || strcmp(fn,'mcskewness') || strcmp(fn,'mckurtosis')
+if strcmp(fn,'mcmean') || strcmp(fn,'mcstd') || strcmp(fn,'mcvar') || strcmp(fn,'mcskewness') || strcmp(fn,'mckurtosis') || strcmp(fn,'mccomplexity') || strcmp(fn,'mcfluidity')
     varargout(1) = {out1};
     varargout(2) = {wstart};
 elseif strcmp(fn, 'mcperiod')
