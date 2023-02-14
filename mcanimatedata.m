@@ -90,6 +90,7 @@ function mcanimatedata(d,p,optionsData,optionsSR,optionsVisual,optionsLabel,opti
     end
     bgcol=colors(1,:); % set background color
     f = fieldnames(optionsData);
+    initfreq = d.freq;
     d = mcresample(d, p.fps);
     for k = 1:numel(f)
         dtemp = d;
@@ -97,7 +98,7 @@ function mcanimatedata(d,p,optionsData,optionsSR,optionsVisual,optionsLabel,opti
         if isfield(optionsSR,([f{k} 'SampleRate']))
             dtemp.freq = optionsSR.([f{k} 'SampleRate']);
         else
-            dtemp.freq = d.freq;
+            dtemp.freq = initfreq;
         end
         dtemp = mcresample(dtemp, p.fps);
         optionsData.(f{k}) = dtemp.data;
