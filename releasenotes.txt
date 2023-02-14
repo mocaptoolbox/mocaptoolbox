@@ -399,3 +399,13 @@ Improvements
 mcwindow: add support for mccomplexity and mcfluidity; clarify its documentation
 
 Bug fixes
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.8.2
+New functions
+
+Improvements
+
+Bug fixes
+
+mcanimatedata: fixed issue when data and animpar frame rates differ
