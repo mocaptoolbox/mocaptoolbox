@@ -14,12 +14,15 @@ function varargout = mcwindow(functionhandle, d, wlen, hop, timetype)
 % timetype: time type {'sec', 'frame'} (optional, default = 'sec')
 %
 % output
-% When used with the functions mcmean, mcstd, mcvar, mcskewness, and mckurtosis, the output
-% is a two-dimensional matrix where the first index corresponds to window
-% number and the second index to marker/dimension.
+% When used with the functions mcmean, mcstd, mcvar, mcskewness, and mckurtosis, the first output
+% is a column vector or matrix where each row corresponds to window
+% number and each column to marker/dimension. The second output contains the corresponding
+% window start positions (in seconds).
+% When used with mccomplexity and mcfluidity, the output is a column vector where each row corresponds
+% to window number. The second output contains the corresponding window start positions (in seconds).
 % When used with mcperiod, the function returns four output parameters
-% [per, ac, eac, lag], where per is a two-dimensional matrix with the first
-% index corresponding to window number and the second to marker/dimension.
+% [per, ac, eac, lag], where per is a is a column vector or matrix where each row corresponds to window
+% number and each column to marker/dimension.
 % Output parameters ac and eac are three-dimensional matrices, with the first
 % index corresponding to window number, the second to lag, and the third to marker/dimension.
 % The output parameter lag is a vector containing the lag values for the

@@ -389,3 +389,13 @@ mcboundvol: Calculates the convex hull volume (or its corresponding area on the 
 Improvements
 
 Bug fixes
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.8.1
+New functions
+
+Improvements
+
+mcwindow: add support for mccomplexity and mcfluidity; clarify its documentation
+
+Bug fixes
