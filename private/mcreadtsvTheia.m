@@ -62,8 +62,6 @@ function [d japar] = mcreadtsvTheia(fn);
     d.other = other;
     clI = find(matches(d.markerName,{'l_clavicle','r_clavicle'}));
     d = mcrmmarker(d,clI);% remove l_clavicle and r_clavicle because they only add two rotational degrees of freedom (about anterior-posterior and superior-inferior axes). Their position is identical to that of torso.
-    in = cell2mat(arrayfun(@(x) (1:4)+(x*4-4), clI','un',0));
-    d.other.quat(:,in) = [];
     load('mcdemodata.mat','m2jpar');
     m2jpar.nMarkers = 17;
     m2jpar.markerName([10,16,20]) = []; % remove midtorso and fingers
