@@ -409,3 +409,14 @@ Improvements
 Bug fixes
 
 mcanimatedata: fixed issue when data and animpar frame rates differ
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.8.3
+New functions
+
+Improvements
+
+Bug fixes
+
+mcgetmarker: get quaternions for all selected markers
+mcread: correctly import quaternion data from Qualysis + Theia 3D markerless pose estimation
