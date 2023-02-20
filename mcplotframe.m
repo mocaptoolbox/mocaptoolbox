@@ -514,10 +514,12 @@ for k=1:size(x,1) % main loop
         hold on
         if matches(upper(fEXT),{'.GIF', '.PGM', '.PBM', '.PPM', '.CUR', '.ICO', '.TIF', '.SVS', '.HDF4','.PNG','.BMP','.TIFF','.JPEG','.JPG','.RAS','.SVS'})
             Img = imread(p.background);
+            hh = image([minxx maxxx],[maxzz minzz],Img);
         elseif exist('vidr','var')
             Img = readFrame(vidr);
+            % hh = image([minxx maxxx],[maxzz minzz],Img); <- this will resize the video to fill the entire figure
+            hh = image([1 vidr.Width],[vidr.height,1],Img);
         end
-        hh = image([minxx maxxx],[maxzz minzz],Img);
         uistack(hh,'bottom')
     end
 
