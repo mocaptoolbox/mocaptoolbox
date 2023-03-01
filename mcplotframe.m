@@ -110,6 +110,10 @@ end
 if ~isfield(p,'visible') % for backwards compatibility
     p.visible=1;
 end
+if ~isfield(p,'background') % for backwards compatibility
+    p.background=[];
+end
+
 
 % video background
 if isfield(p,'background') & ~isempty(p.background);
@@ -553,7 +557,6 @@ if p.animate
     end
     cd(currdir);
 end
-
 
 %return struct fields in the same order and way as the init params: #BB20150303
 par = orderfields(par, {'type','scrsize','limits','az','el','msize','colors','markercolors',...

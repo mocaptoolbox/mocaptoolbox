@@ -430,3 +430,13 @@ Improvements
 mcplotframe: use native size video for background
 
 Bug fixes
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.8.5
+New functions
+
+Improvements
+
+Bug fixes
+
+mcplotframe: fix backwards compatibility (p.background)
