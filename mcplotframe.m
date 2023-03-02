@@ -111,15 +111,16 @@ if ~isfield(p,'visible') % for backwards compatibility
     p.visible=1;
 end
 if ~isfield(p,'background') % for backwards compatibility
-    p.background=[];
+    p.background.input=[];
 end
 
 
 % video background
-if isfield(p,'background') & ~isempty(p.background);
-    [~,~,fEXT]=fileparts(p.background);
+if isfield(p,'background') & ~isempty(p.background.input);
+    [~,~,fEXT]=fileparts(p.background.input);
     if matches(upper(fEXT),{'.AVI', '.MJ2', '.MPG', '.WMV', '.CUR', '.ASF', '.ASX', '.MP4', '.M4V','.MOV','.OGG'})
-        vidr = VideoReader(p.background);
+        vidr = VideoReader(p.background.input);
+        vidr.CurrentTime = p.background.starttime;
     end
 end
 
@@ -514,19 +515,26 @@ for k=1:size(x,1) % main loop
 %     text(maxxx-300, 0, {'Birgitta Burger', 'Jyv?skyl? Univ.', 'Finland'});
 %     text(minxx+40, minzz+0.97*(maxzz-minzz), 'High Sub-Band 2 Flux', 'FontSize', 16, 'FontWeight', 'bold');
 %     text(minxx+70, minzz+0.97*(maxzz-minzz)-75, {'high speed of head'}, 'FontSize', 12, 'FontWeight', 'bold');
-    if isfield(p,'background') & ~isempty(p.background);
+    if isfield(p,'background') & ~isempty(p.background.input);
         hold on
         if matches(upper(fEXT),{'.GIF', '.PGM', '.PBM', '.PPM', '.CUR', '.ICO', '.TIF', '.SVS', '.HDF4','.PNG','.BMP','.TIFF','.JPEG','.JPG','.RAS','.SVS'})
-            Img = imread(p.background);
-            hh = image([minxx maxxx],[maxzz minzz],Img);
-        elseif exist('vidr','var')
+            Img = imread(p.background.input);
+            if p.background.fillfigure==1
+                hh = image([minxx maxxx],[maxzz minzz],Img);
+            else
+                hh = image([0 size(Img,1)],[size(Img,2) 0],Img);
+            end
+            uistack(hh,'bottom')
+        elseif exist('vidr','var') & hasFrame(vidr)
             Img = readFrame(vidr);
-            % hh = image([minxx maxxx],[maxzz minzz],Img); <- this will resize the video to fill the entire figure
-            hh = image([1 vidr.Width],[vidr.height,1],Img);
+            if p.background.fillfigure==1
+                hh = image([minxx maxxx],[maxzz minzz],Img); % resize the video to fill the entire figure
+            else
+                hh = image([1 vidr.Width],[vidr.height,1],Img);
+            end
+            uistack(hh,'bottom')
         end
-        uistack(hh,'bottom')
     end
-
     drawnow
     hold off
     if p.animate

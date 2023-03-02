@@ -437,6 +437,8 @@ New functions
 
 Improvements
 
+mcplotframe, mcanimatedata: new background options for animpar structure `fillfigure` (resizes the image or video to fill the entire figure) and `starttime` (timestamp of the first video frame to read)
+
 Bug fixes
 
 mcplotframe: fix backwards compatibility (p.background)

@@ -134,10 +134,11 @@ function mcanimatedata(d,p,optionsData,optionsSR,optionsVisual,optionsLabel,opti
     if p.visible==0
         disp('Creating animation, please wait...');
     end
-    if isfield(p,'background') & ~isempty(p.background);
-        [~,~,fEXT]=fileparts(p.background);
+    if isfield(p,'background') & ~isempty(p.background.input);
+        [~,~,fEXT]=fileparts(p.background.input);
         if matches(upper(fEXT),{'.AVI', '.MJ2', '.MPG', '.WMV', '.CUR', '.ASF', '.ASX', '.MP4', '.M4V','.MOV','.OGG'})
-            vidr = VideoReader(p.background);
+            vidr = VideoReader(p.background.input);
+            vidr.CurrentTime = p.background.starttime;
         end
     end
     for k = 1:size(d.data,1)
@@ -145,20 +146,29 @@ function mcanimatedata(d,p,optionsData,optionsSR,optionsVisual,optionsLabel,opti
         ptemp.showfnum=0;
         ptemp.visible=0;
         mcplotframe(d,k,ptemp);
-        if isfield(p,'background') & ~isempty(p.background);
+        if isfield(p,'background') & ~isempty(p.background.input);
             hold on
             if matches(upper(fEXT),{'.GIF', '.PGM', '.PBM', '.PPM', '.CUR', '.ICO', '.TIF', '.SVS', '.HDF4','.PNG','.BMP','.TIFF','.JPEG','.JPG','.RAS','.SVS'})
-                Img = imread(p.background);
-                hh = image([minxx maxxx],[maxzz minzz],Img);
-            elseif exist('vidr','var')
-                Img = readFrame(vidr);
-            % hh = image([minxx maxxx],[maxzz minzz],Img); <- this will resize the video to fill the entire figure
-            hh = image([1 vidr.Width],[vidr.height,1],Img);
-            end
-
-            uistack(hh,'bottom')
-            uistack(hh,'up',1)
+                Img = imread(p.background.input);
+                if p.background.fillfigure==1
+                    hh = image([minxx maxxx],[maxzz minzz],Img);
+                else
+                    hh = image([0 size(Img,1)],[size(Img,2) 0],Img);
+                end
+                uistack(hh,'bottom')
+                uistack(hh,'up',1)
             drawnow
+            elseif exist('vidr','var') & hasFrame(vidr)
+                Img = readFrame(vidr);
+                if p.background.fillfigure==1
+                    hh = image([minxx maxxx],[maxzz minzz],Img); % resize the video to fill the entire figure
+                else
+                    hh = image([1 vidr.Width],[vidr.height,1],Img);
+                end
+                uistack(hh,'bottom')
+                uistack(hh,'up',1)
+                drawnow
+            end
             hold off
         end
         ax1=gca;
