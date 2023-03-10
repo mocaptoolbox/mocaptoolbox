@@ -452,3 +452,13 @@ Improvements
 Bug fixes
 
 mcreadc3d: fix assignment of d.nFrames
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.8.7
+New functions
+
+Improvements
+
+Bug fixes
+
+mcdemodata: add background structure to japar
