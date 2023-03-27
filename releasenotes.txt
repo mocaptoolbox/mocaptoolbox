@@ -462,3 +462,13 @@ Improvements
 Bug fixes
 
 mcdemodata: add background structure to japar
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.8.8
+New functions
+
+Improvements
+
+Bug fixes
+
+mcboundrect: fix input check and frame rate used when calculating hop size
