@@ -59,7 +59,7 @@ if nargin==3
     hop=2;
 end
 
-if ~isnumeric(w) || ~isnumeric(w) || length(hop)>1 || length(hop)>1
+if ~isnumeric(w) || ~isnumeric(hop) || length(hop)>1 || length(hop)>1
     disp([10, 'Window and hop arguments have to be single numerics.' 10])
     [y,fs] = audioread('mcsound.wav');
     sound(y,fs);
