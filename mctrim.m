@@ -45,6 +45,9 @@ if isfield(d,'type') && (strcmp(d.type, 'MoCap data') || strcmp(d.type, 'norm da
     end
     d2 = d;
     d2.data = d.data(t1:t2,:);
+    if ~isempty(d.other.quat)
+        d2.other.quat = d.other.quat(t1:t2,:);
+    end
     d2.nFrames = length(t1:t2);
 elseif isfield(d,'type') && strcmp(d.type, 'segm data')
     if strcmp(ttype,'sec')
@@ -71,6 +74,9 @@ elseif isfield(d,'type') && strcmp(d.type, 'segm data')
         if ~isempty(d.segm(m).quat)
             d2.segm(m).quat = d.segm(m).quat(t1:t2,:);
         end
+    end
+    if ~isempty(d.other.quat)
+        d2.other.quat = d.other.quat(t1:t2,:);
     end
     d2.nFrames = length(t1:t2);
 else
