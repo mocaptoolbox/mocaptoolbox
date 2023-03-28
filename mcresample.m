@@ -41,13 +41,13 @@ if isfield(d,'type') && (strcmp(d.type, 'MoCap data') || strcmp(d.type, 'norm da
     end
     d2 = d;
     data2 = resamp(d2.data,d2.freq,newfreq,method);
+    if isfield(d,'other') & isfield(d.other,'quat') & ~isempty(d.other.quat)
+        d2.other.quat = resamp(d.other.quat,d2.freq,newfreq,method);
+    end
     d2.data = data2;
     d2.freq = newfreq;
     d2.nFrames = size(d2.data,1);
 
-    if isfield(d,'other') & isfield(d.other,'quat') & ~isempty(d.other.quat)
-        d2.other.quat = resamp(d.other.quat,d2.freq,newfreq,method);
-    end
 else
     disp([10, 'The first input argument has to be a variable with MoCap data structure.', 10]);
     [y,fs] = audioread('mcsound.wav');
