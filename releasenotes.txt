@@ -472,3 +472,17 @@ Improvements
 Bug fixes
 
 mcboundrect: fix input check and frame rate used when calculating hop size
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.8.9
+New functions
+
+Improvements
+
+mctrim: add support for joint quaternions
+
+Bug fixes
+
+mcplot3Dframe: fix joint quaternion visualization
+
+mcresample: correctly resample joint quaternions
