@@ -461,7 +461,6 @@ if drawYWall && isfield(p,'par3D') && isfield(p.par3D,'wallimagey') && ~isempty(
         wallyscale = max(axesLimits(:,2)-axesLimits(:,1))/min(wallimgysize);
         wallimgy = flip(wallimgy ,1);
 end
-
 for k=1:size(x,1) % main loop
     if  p.animate
         clf;
@@ -631,7 +630,6 @@ for k=1:size(x,1) % main loop
 
 
     % plot markers
-
     [px,py,pz] = sphere(50); % generate coordinates for a 50 x 50 sphere
 
     px=px*p.msize*0.0015*om;
@@ -641,8 +639,7 @@ for k=1:size(x,1) % main loop
     for m=1:size(x,2)
         if isfield(p,'par3D') && isfield(p.par3D,'jointrotations') && p.par3D.jointrotations==1
             Q = d.other.quat(k,(1:4)+4*(m-1));% expressed as XYZW
-            Q = Q([4 1 2 3]); % reorder
-            Q(1) = -Q(1); % sign change for rotation according to right-hand rule
+            Q = Q([4 1 2 3]); % reorder to WXYZ
         end
         markerBall = surface(px+x(k,m), py+y(k,m),flip(pz)+z(k,m));
         markerBall.FaceColor = mcol(m,:);% p.colors(2);
@@ -651,13 +648,11 @@ for k=1:size(x,1) % main loop
         if isfield(p,'par3D') && isfield(p.par3D,'jointrotations') && p.par3D.jointrotations==1
             extra = p.msize*0.0025*om;
             lwidth = 2;
-            hold on
-            Qx = quatrot([0+extra,0,0],Q);
-            Qy = quatrot([0,0+extra,0],Q);
-            Qz = quatrot([0,0,0-extra],Q);
-            quiver3(x(k,m),y(k,m),z(k,m),-Qx(1),Qx(2),-Qx(3),'r','LineWidth',lwidth,'ShowArrowHead', 'off');
-            quiver3(x(k,m),y(k,m),z(k,m),Qy(1),-Qy(2),-Qy(3),'g','LineWidth',lwidth,'ShowArrowHead', 'off');
-            quiver3(x(k,m),y(k,m),z(k,m),-Qz(1),-Qz(2),-Qz(3),'b','LineWidth',lwidth,'ShowArrowHead', 'off');
+            or = [x(k,m),y(k,m),z(k,m)];
+            alx = (extra*quat2rotmat(Q))+or';
+            old = get( 0, 'defaultAxesColorOrder' );
+            set( 0, 'defaultAxesColorOrder', [0,0,1; 0,0.5,0; 1,0,0] );
+            plot3([repmat(or(1),1,3); alx(1,:,:,1) ], [repmat(or(2),1,3) ; alx(2,:,:,1)], [repmat(or(3),1,3); alx(3,:,:,1)], '-', 'LineWidth', lwidth );
         end
     end
 
