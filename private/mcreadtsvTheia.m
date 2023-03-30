@@ -65,7 +65,7 @@ function [d japar] = mcreadtsvTheia(fn);
     load('mcdemodata.mat','m2jpar');
     m2jpar.nMarkers = 17;
     m2jpar.markerName([10,16,20]) = []; % remove midtorso and fingers
-    m2jpar.markerNum = [{[1]} {[2]} {[3]} {[4]} {[5]} {[6]} {[7]} {[8]} {[9]} {[10]} {[17]} {[11]} {[12]} {[13]} {[14]} {[15]} {[16]}];
+    m2jpar.markerNum = [{[2 6]} {[2]} {[3]} {[4]} {[5]} {[6]} {[7]} {[8]} {[9]} {[11 14]} {[17]} {[11]} {[12]} {[13]} {[14]} {[15]} {[16]}]; % neck and root are based on shoulders and hips, respectively
     d = mcm2j(d,m2jpar);
     d.markerName = d.markerName(:);
     load('mcdemodata.mat','japar');
