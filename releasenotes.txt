@@ -486,3 +486,13 @@ Bug fixes
 mcplot3Dframe: fix joint quaternion visualization
 
 mcresample: correctly resample joint quaternions
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.9.0
+New functions
+
+Improvements
+
+Bug fixes
+
+mcread: fix root and neck joint representation (Theia3D markerless)
