@@ -377,9 +377,9 @@ maxzz = p.limits(4);
 % set of markers that look exactly like the videos with all markers
 if p.getparams==1
     par=p;
-    par = orderfields(par, {'type','scrsize','limits','az','el','msize','colors','markercolors',...
+par = orderfields(par, {'type','scrsize','limits','az','el','msize','colors','markercolors',...
     'conncolors','tracecolors','numbercolors','cwidth','twidth','conn','conn2','trm','trl',...
-    'showmnum','numbers','showfnum','animate','visible','hold','fps','output','videoformat','createframes','getparams','perspective','pers'});
+    'showmnum','numbers','showfnum','background','animate','visible','hold','fps','output','videoformat','createframes','getparams','perspective','pers'});
     return
 end
 
