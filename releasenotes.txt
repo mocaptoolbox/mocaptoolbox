@@ -506,3 +506,14 @@ Improvements
 Bug fixes
 
 mcplotframe: fix output when getparams is set to 1
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.9.2
+New functions
+
+Improvements
+
+Bug fixes
+
+mcanimatedata: create visible and background fields if not existing
+mcmerge: fix for mocap data that does not contain an 'other' field
