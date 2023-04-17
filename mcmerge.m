@@ -56,8 +56,10 @@ if isfield(d1,'type') && strcmp(d1.type, 'MoCap data') && isfield(d2,'type') && 
     d3.nMarkers = d1.nMarkers + d2.nMarkers;
     d3.markerName = [d1.markerName; d2.markerName];
     d3.data = [d1.data d2.data];
-    if isfield(d1.other,'quat') && isfield(d2.other,'quat')
-        d3.other.quat = [d1.other.quat d2.other.quat];
+    if isfield(d1.other) && isfield(d1.other)
+        if isfield(d1.other,'quat') && isfield(d2.other,'quat')
+            d3.other.quat = [d1.other.quat d2.other.quat];
+        end
     end
     %markercolors?
 elseif isfield(d1,'type') && strcmp(d1.type, 'norm data') && isfield(d2,'type') && strcmp(d2.type, 'norm data') %FIX BB20110113: norm data also mergeable now
