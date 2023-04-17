@@ -81,6 +81,14 @@ function mcanimatedata(d,p,optionsData,optionsSR,optionsVisual,optionsLabel,opti
         optionsTicks.westYTickLabels
     end
 % color management (compatibility): convert old string color definition into num array [BB20111031]
+    if ~isfield(p,'visible')
+        p.visible = 1;
+    end
+    if ~isfield(p,'background')
+        p.background.input = [];
+        p.background.fillfigure = 0;
+        p.background.starttime = 0;
+    end
     if ischar(p.colors)
         colors=NaN(5,3);
         for k=1:5
