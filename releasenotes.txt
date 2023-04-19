@@ -517,3 +517,13 @@ Bug fixes
 
 mcanimatedata: create visible and background fields if not existing
 mcmerge: fix for mocap data that does not contain an 'other' field
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.9.3
+New functions
+
+Improvements
+
+Bug fixes
+
+mcmerge: fix for mocap data that does not contain an 'other' field
