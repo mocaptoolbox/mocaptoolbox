@@ -47,8 +47,10 @@ if isfield(d1,'type') && strcmp(d1.type, 'MoCap data') && isfield(d2,'type') && 
         disp([10, 'Different number of frames in the structures. The longer structure will be cut.', 10])
         N = min(d1.nFrames, d2.nFrames);
         d1.data = d1.data(1:N,:); d2.data = d2.data(1:N,:);
-        if isfield(d1.other,'quat') && isfield(d2.other,'quat')
-            d1.other.quat = d1.other.quat(1:N,:); d2.other.quat = d2.other.quat(1:N,:);
+        if isfield(d1, 'other') && isfield(d1,'other')
+            if isfield(d1.other,'quat') && isfield(d2.other,'quat')
+                d1.other.quat = d1.other.quat(1:N,:); d2.other.quat = d2.other.quat(1:N,:);
+            end
         end
         d1.nFrames = N; d2.nFrames = N;
     end
