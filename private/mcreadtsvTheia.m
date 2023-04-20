@@ -71,8 +71,6 @@ function [d japar] = mcreadtsvTheia(fn);
     load('mcdemodata.mat','japar');
     japar.conn = japar.conn(1:10,:);
     japar.conn = [japar.conn; 10 12; 12 13; 13 14; 10 15; 15 16; 16 17];
-    % reorder the quaternions
     m2jpar.markerNum = [{[1]} {[2]} {[3]} {[4]} {[5]} {[6]} {[7]} {[8]} {[9]} {[10]} {[17]} {[11]} {[12]} {[13]} {[14]} {[15]} {[16]}];
-    qOrder = cell2mat(arrayfun(@(x) (1:4)+(x*4-4), cell2mat(m2jpar.markerNum),'un',0));
-    other.quat = other.quat(:,qOrder);
+
 end
