@@ -1,4 +1,4 @@
-function [xs f p1 p2] = mcgxwt(d,gxwt,cwt)
+function [xs f p1 p2] = mcgxwt(d,gxwt,cwt,visualization)
 % Generalized cross-wavelet transform between two or more MoCap or Norm data structures
 %
 % syntax
@@ -25,6 +25,9 @@ function [xs f p1 p2] = mcgxwt(d,gxwt,cwt)
 %     par.VoicesPerOctave = 4;
 %     par.TimeBandwidth = 120;
 %     [xs f p1 p2] = mcgxwt(dance1,dance2,type='pairwise',otherOpts=par);
+%
+%   visualization options:
+%    plot (optional): when set to true (default), mcgxwt produces a plot of the gxwt magnitudes in a linear frequency scale
 %
 % output
 %
@@ -65,6 +68,7 @@ arguments
     cwt.minf (1,1) {mustBeNonnegative} = 0;
     cwt.maxf (1,1) {mustBeNonnegative} = 10;
     cwt.otherOpts(1,1) struct
+    visualization.plot matlab.lang.OnOffSwitchState = 1
 end
 
 nsets=numel(d);
@@ -103,4 +107,16 @@ if nsets == 2
     [xs p1 p2] = genxwt(w,numel(w),gxwt.type{1});
 else
     xs = genxwt(w,numel(w),gxwt.type{1});
+end
+if visualization.plot == true
+    figure
+    linf = linspace(f(1),f(end),1000);
+    w = interp1(f,abs(xs),linf);
+    dfs = unique(cellfun(@(x) x.freq,d));
+    time = linspace(0,size(xs,2)/dfs,size(xs,2));
+    imagesc(time,linf,w);
+    ax = gca;
+    ax.YDir='normal';
+    ylabel('Frequency (Hz)');
+    xlabel('Time (s)');
 end
