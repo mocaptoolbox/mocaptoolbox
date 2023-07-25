@@ -527,3 +527,16 @@ Improvements
 Bug fixes
 
 mcmerge: fix for mocap data that does not contain an 'other' field
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.9.4
+New functions
+
+Improvements
+
+mcgxwt: add beat-relative GXWT and support for GXWT visualization
+mcread: set `timederorder` field for Theia3D tsv files
+
+Bug fixes
+
+mctrim: fixes after adding quaternion support
