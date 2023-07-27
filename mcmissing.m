@@ -1,7 +1,7 @@
 function [mf, mm, mgrid] = mcmissing(d,options)
 arguments
     d
-    options.plot matlab.lang.OnOffSwitchState = 1
+    options.plot matlab.lang.OnOffSwitchState = 0
 end
 % Reports missing data per marker and frame.
 %
@@ -11,7 +11,7 @@ end
 % input parameters
 % d: MoCap or norm data structure.
 %
-% 'plot' (optional): when set to true (default), mcmissing visualizes missing data
+% 'plot' (optional): when set to true, mcmissing visualizes missing data (default: false)
 %
 % output
 % mf: number of missing frames per marker

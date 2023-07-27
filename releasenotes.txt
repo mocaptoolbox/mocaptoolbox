@@ -560,3 +560,13 @@ Improvements
 mcmissing: add visualization
 
 Bug fixes
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.9.7
+New functions
+
+Improvements
+
+mcmissing: visualization set to false by default
+
+Bug fixes
