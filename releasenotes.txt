@@ -540,3 +540,13 @@ mcread: set `timederorder` field for Theia3D tsv files
 Bug fixes
 
 mctrim: fixes after adding quaternion support
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.9.5
+New functions
+
+Improvements
+
+mcgxwt: perform beat-relative scaling within each cwtensor iteration
+
+Bug fixes
