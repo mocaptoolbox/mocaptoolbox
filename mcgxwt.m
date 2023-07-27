@@ -20,6 +20,11 @@ function [xs f p1 p2] = mcgxwt(d,gxwt,cwt,beatRelOpts,visualization)
 %          corresponding channels in W1 and W2 (note: can only be
 %          computed when all sets have identical number of channels)
 %
+%   beat-relative GXWT options:
+%    BPM (optional): Tempo expressed in beats per minute (scalar). When BPM is set, mcgxwt computes a beat-relative GXWT
+%    metricRange (optional): Target range of metric levels, expressed in beat subdivisions or multiples (two-element scalar vector). Default values: [1/2 4]. To be used only when BPM is specified.
+%    freqBandsPerOctave (optional): number of frequency bands per octave used for interpolation (scalar). Larger values will increase frequency resolution. Default value = 2^4. To be used only when BPM is specified.
+%
 %   cwt options:
 %    otherOpts (optional): A structure containing name-value parameters recognized by the Matlab function cwt.m, e.g.:
 %     par.VoicesPerOctave = 4;
@@ -27,16 +32,15 @@ function [xs f p1 p2] = mcgxwt(d,gxwt,cwt,beatRelOpts,visualization)
 %     [xs f p1 p2] = mcgxwt(dance1,dance2,type='pairwise',otherOpts=par);
 %
 %   visualization options:
-%    plot (optional): when set to true (default), mcgxwt produces a plot of the gxwt magnitudes in a linear frequency scale
-%    BPM (optional): Tempo expressed in beats per minute (scalar). When filled, mcgxwt produces a plot of the gxwt magnitudes in a beat-relative scale
-%    metricRange (optional): Target range of metric levels, expressed in beat subdivisions or multiples (two-element scalar vector). Default values: [1/2 4]. To be used only when BPM is specified.
-%    freqBandsPerOctave (optional): number of frequency bands per octave used for rescaling (scalar). Larger values will increase frequency resolution. Default value = 2^4. To be used only when BPM is specified.
+%    plot (optional): when set to true (default), mcgxwt produces a plot of the gxwt magnitudes in a linear frequency scale or, if BPM parameter is specified, in a beat-relative scale
+%
 %
 % output
 %
-% xs = generalized cross spectrum (frequency x time)
+% xs = generalized cross spectrum (frequency x time) [or metric level x time when beat-relative GXWT is computed]
 %
-% p1, p2 = projection tensors (frequency x time x channel). In this
+% p1, p2 = projection tensors (frequency x time x channel [or metric
+%       level x time x channel when beat-relative GXWT is computed]). In this
 %       implementation, projection tensors can only be computed for the
 %       dyadic case (two wavelet tensors).
 %
@@ -101,11 +105,19 @@ function [xs f p1 p2] = mcgxwt(d,gxwt,cwt,beatRelOpts,visualization)
     if isfield(cwt,'otherOpts')
         c = namedargs2cell(cwt.otherOpts);
         for k = 1:numel(data)
-            [w{k},f] = cwtensor(data{k},cwt.fs,cwt.minf,cwt.maxf,c{:});
+            if isfield(beatRelOpts,'BPM')
+                [w{k},f] = cwtensor(data{k},cwt.fs,cwt.minf,cwt.maxf,beatRelOpts,c{:});
+            else
+                [w{k},f] = cwtensor(data{k},cwt.fs,cwt.minf,cwt.maxf,[],c{:});
+            end
         end
     else
         for k = 1:numel(data)
-            [w{k},f] = cwtensor(data{k},cwt.fs,cwt.minf,cwt.maxf);
+            if isfield(beatRelOpts,'BPM')
+                [w{k},f] = cwtensor(data{k},cwt.fs,cwt.minf,cwt.maxf,beatRelOpts);
+            else
+                [w{k},f] = cwtensor(data{k},cwt.fs,cwt.minf,cwt.maxf,[]);
+            end
         end
     end
     if nsets == 2
@@ -113,61 +125,27 @@ function [xs f p1 p2] = mcgxwt(d,gxwt,cwt,beatRelOpts,visualization)
     else
         xs = genxwt(w,numel(w),gxwt.type{1});
     end
-    if isfield(beatRelOpts,'BPM')
-        if visualization.plot == true
-            figflag = 'YesFigure';
-        else
-            figflag = 'NoFigure';
-        end
-        [xs f] = getBeatRelativeCWT(xs,f,beatRelOpts.BPM,beatRelOpts.metricRange,beatRelOpts.freqBandsPerOctave,cwt.fs,figflag);
-    end
-    if visualization.plot == true & ~isfield(beatRelOpts,'BPM')
+
+    if visualization.plot == true
         figure
-        linf = linspace(f(1),f(end),1000);
-        w = interp1(f,abs(xs),linf);
         dfs = unique(cellfun(@(x) x.freq,d));
         time = linspace(0,size(xs,2)/dfs,size(xs,2));
-        imagesc(time,linf,w);
-        ax = gca;
-        ax.YDir='normal';
         if ~isfield(beatRelOpts,'BPM')
+            linf = linspace(f(1),f(end),1000);
+            w = interp1(f,abs(xs),linf);
+            imagesc(time,linf,w);
+            ax = gca;
+            ax.YDir='normal';
             ylabel('Frequency (Hz)');
             xlabel('Time (s)');
+        else
+            imagesc(time, [], abs(xs))
+            i = 1:length(f);
+            yticks(i(1:beatRelOpts.freqBandsPerOctave:end))
+            yticklabels(f(1:beatRelOpts.freqBandsPerOctave:end))
+            title(['BPM = ' num2str(beatRelOpts.BPM)]);
+            ylabel('Metric level (beats)')
+            xlabel('Time (s)')
         end
     end
-end
-
-function [w ml] = getBeatRelativeCWT(w0,f0,BPM,metricRange,freqBandsPerOctave,fs,plotFigures)
-% INPUT ARGUMENTS:
-% w0 (matrix): Continuous wavelet transform obtained via cwt()
-% f0 (vector): Frequencies of the continuous wavelet transform in Hz
-% BPM (positive integer): beats per minute of the music danced to, e.g.: 120
-% metricRange (two-element scalar vector): target range of metric levels (in beat subdivisions or multiples), e.g.: [1/2 8]
-% freqBandsPerOctave (positive integer): number of frequency bands per octave (larger values will increase frequency resolution), e.g. = 2^4;
-% fs: sampling rate of the data
-% plotFigures ('YesFigure' | 'NoFigure'): Optional indicator to display the beat relative continuous wavelet transform. 'YesFigure' is the default option. 'NoFigure' only returns the output arguments.
-% OUTPUT ARGUMENTS:
-% w (matrix): Beat-relative continuous wavelet transform
-% ml (vector): Metric level (in beats) associated with each row of w
-    if nargin == 5
-        plotFigures = 'YesFigure';
-    end
-    tactusfreq = BPM/60;
-    numOctaves = log2(metricRange(2)/metricRange(1)); % Because octaves of a note occur at 2^n times the frequency of that note
-    ml=logspace(log10(metricRange(1)),log10(metricRange(2)),numOctaves*freqBandsPerOctave+1);
-    f = tactusfreq./ml;
-    w = interp1(f0,w0,f);
-    if strcmpi(plotFigures, 'YesFigure');
-        figure
-        time = linspace(0,size(w,2)/fs,size(w,2));
-        imagesc(time, [], abs(w))
-        i = 1:length(ml);
-        yticks(i(1:freqBandsPerOctave:end))
-        yticklabels(ml(1:freqBandsPerOctave:end))
-        title(['BPM = ' num2str(BPM)]);
-        ylabel('Metric level (beats)')
-        xlabel('Time (s)')
-    elseif strcmpi(plotFigures, 'NoFigure');
-    end
-    ml = ml';
 end
