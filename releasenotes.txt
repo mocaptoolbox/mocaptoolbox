@@ -550,3 +550,13 @@ Improvements
 mcgxwt: perform beat-relative scaling within each cwtensor iteration
 
 Bug fixes
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.9.6
+New functions
+
+Improvements
+
+mcmissing: add visualization
+
+Bug fixes
