@@ -39,8 +39,8 @@ end
 
 if options.plot == true
     figure
-    subplot(3,1,1), bar(mf), xlabel('Marker'), ylabel('Num. of Missing frames')
-    subplot(3,1,2), bar(mm), xlabel('Frame'), ylabel('Num. of Missing markers')
+    subplot(3,1,1), bar(mf), xlabel('Marker'), ylabel({'Number of'; 'missing frames'})
+    subplot(3,1,2), bar(mm), xlabel('Frame'), ylabel({'Number of'; 'missing markers'})
     c=gray(2);
     subplot(3,1,3), imagesc(-mgrid'), colormap(c), xlabel('Frame'), ylabel('Marker')
 end
