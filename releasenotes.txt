@@ -570,3 +570,13 @@ Improvements
 mcmissing: visualization set to false by default
 
 Bug fixes
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 1.9.8
+New functions
+
+Improvements
+
+mcboundvol: output in m^2 and m^3 instead of mm^2/mm^3
+
+Bug fixes

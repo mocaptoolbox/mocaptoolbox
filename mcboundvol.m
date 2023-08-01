@@ -10,7 +10,7 @@ function v = mcboundvol(d,options)
 %
 %
 % output
-% v: vector containing volume (or area) of each frame
+% v: vector containing volume in m^3 (or area in m^2) of each frame
 %
 % examples
 %
@@ -38,5 +38,10 @@ function v = mcboundvol(d,options)
             dd = [x(:) y(:) z(:)];
         end
         [~,v(j,:)] = boundary(dd,0);
+    end
+    if strcmpi(options.type,'area')
+        v = v/1000000;
+    elseif strcmpi(options.type,'volume')
+        v = v/1000000000;
     end
 end
