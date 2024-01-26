@@ -72,8 +72,8 @@ if isfield(d,'type') && (strcmp(d.type, 'MoCap data'))
     for k=1:d.nMarkers
         rtmp=[];
         for b=0:hop:(double(d.nFrames)/d.freq)-w
-            ind1=1+d.freq*b;
-            ind2=min(size(d.data,1), ind1+d.freq*w);
+            ind1=int16(1+d.freq*b);
+            ind2=int16(min(size(d.data,1), ind1+d.freq*w));
             tmp=d.data(ind1:ind2,k*3-2:k*3-1);%markers
             mintmp=min(tmp);
             maxtmp=max(tmp);
