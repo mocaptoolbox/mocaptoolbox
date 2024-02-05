@@ -94,6 +94,7 @@ p.limits = [];
 p.az = 0;
 p.el = 0;
 
+p.mshape = 'o';
 p.msize = 12;
 p.colors = 'kwwww';
 p.markercolors = [];

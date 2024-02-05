@@ -110,6 +110,9 @@ end
 if ~isfield(p,'visible') % for backwards compatibility
     p.visible=1;
 end
+if ~isfield(p,'mshape') % for backwards compatibility
+    p.mshape='o';
+end
 if ~isfield(p,'background') % for backwards compatibility
     p.background.input=[];
 end
@@ -377,7 +380,7 @@ maxzz = p.limits(4);
 % set of markers that look exactly like the videos with all markers
 if p.getparams==1
     par=p;
-par = orderfields(par, {'type','scrsize','limits','az','el','msize','colors','markercolors',...
+par = orderfields(par, {'type','scrsize','limits','az','el','mshape','msize','colors','markercolors',...
     'conncolors','tracecolors','numbercolors','cwidth','twidth','conn','conn2','trm','trl',...
     'showmnum','numbers','showfnum','background','animate','visible','hold','fps','output','videoformat','createframes','getparams','perspective','pers'});
     return
@@ -468,10 +471,10 @@ for k=1:size(x,1) % main loop
         %if x(k,m)~=0 & ~isnan(x(k,m)) % if marker visible
         if isfinite(x(k,m)) % if marker visible
             if p.perspective==0 % orthographic projection
-                plot(x(k,m),z(k,m),'o','MarkerSize',p.msize(min(m,length(p.msize))),'MarkerEdgeColor',mcol(m,:),'MarkerFaceColor',mcol(m,:))
+                plot(x(k,m),z(k,m),p.mshape,'MarkerSize',p.msize(min(m,length(p.msize))),'MarkerEdgeColor',mcol(m,:),'MarkerFaceColor',mcol(m,:))
             else % perspective projection
 %                plot(x(k,m),z(k,m),[mcol(m) 'o'],'MarkerSize',p.msize(min(m,length(p.msize))),'MarkerFaceColor',mcol(m))
-                plot(x(k,m),z(k,m),'o','MarkerSize',round(y(k,m)*p.msize(min(m,length(p.msize)))),'MarkerEdgeColor',mcol(m,:),'MarkerFaceColor',mcol(m,:))
+                plot(x(k,m),z(k,m),p.mshape,'MarkerSize',round(y(k,m)*p.msize(min(m,length(p.msize)))),'MarkerEdgeColor',mcol(m,:),'MarkerFaceColor',mcol(m,:))
             end
             if p.showmnum
                 if isempty(p.numbers)
@@ -567,7 +570,7 @@ if p.animate
 end
 
 %return struct fields in the same order and way as the init params: #BB20150303
-par = orderfields(par, {'type','scrsize','limits','az','el','msize','colors','markercolors',...
+par = orderfields(par, {'type','scrsize','limits','az','el','mshape','msize','colors','markercolors',...
     'conncolors','tracecolors','numbercolors','cwidth','twidth','conn','conn2','trm','trl',...
     'showmnum','numbers','showfnum','background','animate','visible','hold','fps','output','videoformat','createframes','getparams','perspective','pers'});
 
