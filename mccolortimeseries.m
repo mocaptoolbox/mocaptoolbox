@@ -4,7 +4,7 @@ function mapar2 = mccolortimeseries(d,mapar,options,vectorOptions,matrixOptions,
 %
 % syntax
 % par2 = mccolortimeseries(d, par);
-% par2 = mccolortimeseries(__, Name, Value); specifies options using one or more name-value pair arguments in addition to the input arguments in the previous syntax
+% par2 = mccolortimeseries(__, Name, Value); % specifies options using one or more name-value pair arguments in addition to the input arguments in the previous syntax
 %
 %
 % input parameters
@@ -17,15 +17,14 @@ function mapar2 = mccolortimeseries(d,mapar,options,vectorOptions,matrixOptions,
 % - a vector containing shared HEX color values across markers for each time point (requires setting option 'Hex' to 1 and specifying the number of target markers via option 'nMarkers').
 % p: animpar structure
 % Name-value arguments: Specify optional pairs of arguments as Name1=Value1,...,NameN=ValueN, where Name is the argument name and Value is the corresponding value. Name-value arguments must appear after other arguments, but the order of the pairs does not matter.
-%
-% type: specify whether to assign colors to markers ('markers'), connectors ('connectors'), or both ('both'). Connectors are assigned colors based on the mean value assigend to their two corresponding markers. Default: 'markers'
-% colormap: name of the MATLAB colormap to be used, either specified as a character array or a string array. When d contains color values, this option is ignored. Default: 'jet'
-% mappingtype: Set all markers to have the same color map scale ('all') or or to have different scales ('independent'). Default: 'all'
-% Hex: Used to specify whether HEX color values are used when d is an input vector (0 | 1). Default value is 0, meaning that the values of d are meant to be mapped into colors.
-% RGB: Used to specify whether RGB color values are used when d is a matrix (0 | 1). Default value is 0, meaning that the values of d are meant to be mapped into colors.
+%  type: specify whether to assign colors to markers ('markers'), connectors ('connectors'), or both ('both'). Connectors are assigned colors based on the mean value assigend to their two corresponding markers. Default: 'markers'
+%  colormap: name of the MATLAB colormap to be used, either specified as a character array or a string array. When d contains color values, this option is ignored. Default: 'jet'
+%  mappingtype: Set all markers to have the same color map scale ('all') or or to have different scales ('independent'). Default: 'all'
+%  Hex: Used to specify whether HEX color values are used when d is an input vector (0 | 1). Default value is 0, meaning that the values of d are meant to be mapped into colors.
+%  RGB: Used to specify whether RGB color values are used when d is a matrix (0 | 1). Default value is 0, meaning that the values of d are meant to be mapped into colors.
 %
 % output
-% par: animpar structure used for plotting the frames (if color strings were used, they will converted to RGB triplets)
+% par: animpar structure used for plotting or animating a MoCap data structure
 %
 % examples
 %
