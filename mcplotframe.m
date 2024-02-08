@@ -401,7 +401,12 @@ if p.animate %20150720 / HJ: in animate case, set figure and axes outside main l
     colormap([ones(64,1) zeros(64,1) zeros(64,1)]);
 end
 
-
+if ndims(mcol) == 3
+    mcol = permute(mcol,[3,2,1]);
+end
+if ndims(ccol) == 3
+    ccol = permute(ccol,[3,2,1]);
+end
 for k=1:size(x,1) % main loop
     if p.animate
         clf;
@@ -429,10 +434,15 @@ for k=1:size(x,1) % main loop
 
     % plot marker-to-marker connections
     if ~isempty(p.conn)
+        if ndims(ccol) == 3
+            i = k;
+        else
+            i = 1;
+        end
         for m=1:size(p.conn,1)
             %if x(k,p.conn(m,1))*x(k,p.conn(m,2))~=0
             if isfinite(x(k,p.conn(m,1))*x(k,p.conn(m,2)))
-                plot([x(k,p.conn(m,1)) x(k,p.conn(m,2))], [z(k,p.conn(m,1)) z(k,p.conn(m,2))], '-','Color',ccol(m,:),'LineWidth', p.cwidth(m));
+                plot([x(k,p.conn(m,1)) x(k,p.conn(m,2))], [z(k,p.conn(m,1)) z(k,p.conn(m,2))], '-','Color',ccol(m,:,i),'LineWidth', p.cwidth(m));
             end
         end
     end
@@ -446,7 +456,7 @@ for k=1:size(x,1) % main loop
                 tmpx2 = (x(k,p.conn2(m,3))+x(k,p.conn2(m,4)))/2;
                 tmpy1 = (z(k,p.conn2(m,1))+z(k,p.conn2(m,2)))/2;
                 tmpy2 = (z(k,p.conn2(m,3))+z(k,p.conn2(m,4)))/2;
-                plot([tmpx1 tmpx2], [tmpy1 tmpy2], '-','Color',ccol(m,:),'LineWidth', p.cwidth(m));
+                plot([tmpx1 tmpx2], [tmpy1 tmpy2], '-','Color',ccol(m,:,i),'LineWidth', p.cwidth(m));
             end
         end
     end
@@ -470,11 +480,16 @@ for k=1:size(x,1) % main loop
     for m=1:size(x,2)
         %if x(k,m)~=0 & ~isnan(x(k,m)) % if marker visible
         if isfinite(x(k,m)) % if marker visible
+            if ndims(mcol) == 3
+                i = k;
+            else
+                i = 1;
+            end
             if p.perspective==0 % orthographic projection
-                plot(x(k,m),z(k,m),p.mshape,'MarkerSize',p.msize(min(m,length(p.msize))),'MarkerEdgeColor',mcol(m,:),'MarkerFaceColor',mcol(m,:))
+                plot(x(k,m),z(k,m),p.mshape,'MarkerSize',p.msize(min(m,length(p.msize))),'MarkerEdgeColor',mcol(m,:,i),'MarkerFaceColor',mcol(m,:,i))
             else % perspective projection
 %                plot(x(k,m),z(k,m),[mcol(m) 'o'],'MarkerSize',p.msize(min(m,length(p.msize))),'MarkerFaceColor',mcol(m))
-                plot(x(k,m),z(k,m),p.mshape,'MarkerSize',round(y(k,m)*p.msize(min(m,length(p.msize)))),'MarkerEdgeColor',mcol(m,:),'MarkerFaceColor',mcol(m,:))
+                plot(x(k,m),z(k,m),p.mshape,'MarkerSize',round(y(k,m)*p.msize(min(m,length(p.msize)))),'MarkerEdgeColor',mcol(m,:,i),'MarkerFaceColor',mcol(m,:,i))
             end
             if p.showmnum
                 if isempty(p.numbers)

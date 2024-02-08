@@ -72,8 +72,19 @@ if nargin<2
     p = mcinitanimpar;
 end
 
+% resample color data if time series
+if ~isempty(p.markercolors) & ndims(p.markercolors == 3)
+    p.markercolors = resamp(p.markercolors,d.freq,p.fps,'linear');
+end
+if ~isempty(p.conncolors) & ndims(p.conncolors == 3)
+    p.conncolors = resamp(p.conncolors,d.freq,p.fps,'linear');
+end
+
 % resample for p.fps fps movie
 d2 = mcresample(d, p.fps);
+
+
+
 
 p.animate = 1;
 
@@ -81,4 +92,5 @@ if isfield(p,'par3D')
     p = mcplot3Dframe(d2,1:d2.nFrames,p);
 else
     p = mcplotframe(d2,1:d2.nFrames,p); % output parameter added 240608
+end
 end
