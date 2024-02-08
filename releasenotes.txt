@@ -592,3 +592,13 @@ mcplotframe, mcinitanimpar, mapar: add mshape animation parameter
 Bug fixes
 
 mcboundrect: fix warnings by making each marker an integer value
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 2.0.0
+New functions
+
+mccolortimeseries: Attaches a color time series to a MoCap animation parameter structure, allowing marker and/or connectors to change their colors over time in animations.
+
+Improvements
+
+Bug fixes
