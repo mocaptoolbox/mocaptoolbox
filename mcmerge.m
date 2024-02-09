@@ -427,13 +427,13 @@ end
 p2.numbercolors=ncol2;
 
 if ndims(p1.markercolors) == 3 & ndims(p2.markercolors) == 3
-    p3.markercolors=cat(3,p1.markercolors,p2.markercolors)
+    p3.markercolors=cat(3,p1.markercolors,p2.markercolors);
 else
     p3.markercolors=[p1.markercolors; p2.markercolors];
 end
 
 if ndims(p1.conncolors) == 3 & ndims(p2.conncolors) == 3
-    p3.conncolors=cat(3,p1.conncolors,p2.conncolors)
+    p3.conncolors=cat(3,p1.conncolors,p2.conncolors);
 else
     p3.conncolors=[p1.conncolors; p2.conncolors];
 end
