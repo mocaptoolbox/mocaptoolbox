@@ -94,48 +94,33 @@ function mapar2 = mccolortimeseries(d,mapar,options,vectorOptions,matrixOptions,
         figure
         cmap = colormap(options.colormap);
         close
-        if options.mappingtype == "independent"
-            % option 1: each marker is independent
-            % markers
-            for k = 1:width(data)
-                m = data(:,k);
-                ran=range(m); %finding range of data
-                min_val=min(m);%finding maximum value of data
-                max_val=max(m);%finding minimum value of data
-                y(:,k)=floor(((m-min_val)/ran)*(height(cmap)-1))+1;
-                for i=1:height(m)
-                    a=y(i,k);
-                    mcol(i,:,k)=cmap(a,:);
-                end
-            end
-            % now we need to assign markers to connections
-            % mean across markers for each connector
-            for k = 1:height(mapar.conn) % for each connection
-                for i=1:height(m)
-                    a=[y(i,mapar.conn(k,1)) y(i,mapar.conn(k,2))];
-                    ccol(i,:,k)=mean(cmap(a,:));
-                end
-            end
-        elseif options.mappingtype == "all"
-            % option 2: a common max and min for the whole marker set
-            % markers
+        if options.mappingtype == "all"
             m = data(:);
+            % option 1: a common max and min for the whole marker set
             ran=range(m); %finding range of data
             min_val=min(m);%finding maximum value of data
             max_val=max(m);%finding minimum value of data
-            for k = 1:width(data)
-                m = data(:,k);
-                y(:,k)=floor(((m-min_val)/ran)*(height(cmap)-1))+1;
-                for i=1:height(m)
-                    a=y(i,k);
-                    mcol(i,:,k)=cmap(a,:);
-                end
+        end
+        for k = 1:width(data)
+            m = data(:,k);
+            if options.mappingtype == "independent"
+                % option 2: each marker is independent
+                ran=range(m); %finding range of data
+                min_val=min(m);%finding maximum value of data
+                max_val=max(m);%finding minimum value of data
             end
-            for k = 1:height(mapar.conn) % for each connection
-                for i=1:height(m)
-                    a=[y(i,mapar.conn(k,1)) y(i,mapar.conn(k,2))];
-                    ccol(i,:,k)=mean(cmap(a,:));
-                end
+            y(:,k)=floor(((m-min_val)/ran)*(height(cmap)-1))+1;
+            for i=1:height(m)
+                a=y(i,k);
+                mcol(i,:,k)=cmap(a,:);
+            end
+        end
+        % now we need to assign markers to connections
+        % mean across markers for each connector
+        for k = 1:height(mapar.conn) % for each connection
+            for i=1:height(m)
+                a=[y(i,mapar.conn(k,1)) y(i,mapar.conn(k,2))];
+                ccol(i,:,k)=mean(cmap(a,:));
             end
         end
     end
