@@ -10,7 +10,7 @@ function mapar2 = mccolortimeseries(d,mapar,options,vectorOptions,matrixOptions,
 % input parameters
 % d: Values to be mapped into colors or the color values themselves. d can be:
 % - a norm data structure
-% - a matrix containing values to be mapped into colors for each marker
+% - a matrix (time x marker) containing values to be mapped into colors for each marker
 % - a vector containing shared values to be mapped into colors across markers (requires specifying the number of target markers via option 'nMarkers')
 % - a tensor (time x RGB channel x marker) containing RGB color values for each timepoint and marker
 % - a matrix (time x RGB channel) containing shared RGB color values across markers for each time point (requires setting option 'RGB' to 1 and specifying the number of target markers via option 'nMarkers')
