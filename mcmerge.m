@@ -427,6 +427,10 @@ end
 p2.numbercolors=ncol2;
 
 if ndims(p1.markercolors) == 3 & ndims(p2.markercolors) == 3
+    if exist('N','var')
+        p1.markercolors = p1.markercolors(1:N,:,:);
+        p2.markercolors = p2.markercolors(1:N,:,:);
+    end
     p3.markercolors=cat(3,p1.markercolors,p2.markercolors);
 else
     p3.markercolors=[p1.markercolors; p2.markercolors];
