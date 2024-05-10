@@ -20,42 +20,48 @@ function d2 = mcfixrigidbody(d)
 %
 % mcfillgaps
 %
-% Part of the Motion Capture Toolbox, Copyright 2022,
+% Part of the Motion Capture Toolbox, Copyright 2024,
 % University of Jyvaskyla, Finland
+warning('off', 'stats:regress:RankDefDesignMat')
 d2=d;
 
-if sum(mcmissing(d))==0 %return if there's nothing to fill
+if sum(mcmissing(d))==0
     return
 end
+mat = d.data;
 
-
-
-% find frames for which all markers are visible, use these for training the
-% regression model
-trainframes=find(sum(isnan(d.data),2)==0);
-
-for marker=1:d.nMarkers
-
-    % make independent variable
-    ivd=mcgetmarker(d,setdiff(1:d.nMarkers,marker));
-    iv=ivd.data;
-
-    % make dependent variable
-    dvd=mcgetmarker(d,marker);
-    dv=dvd.data;
-
-    % train regression model for each of the three dimensions separately
-    b=zeros((d.nMarkers-1)*3+1,3);
-    for dim=1:3
-        b(:,dim)=regress(dv(trainframes,dim),[iv(trainframes,:) ones(length(trainframes),1)]);
+lm = 1:width(mat)/3;
+lc = 1:width(mat);
+for k = lm
+    dv = mat(:,ismember(lc,k*3-2:k*3));
+    if anynan(dv)
+        iv = mat(:,~ismember(lc,k*3-2:k*3));
+        nandv = isnan(dv);
+        naniv = isnan(iv);
+        nantypes = unique([nandv naniv],'rows');
+        i = 1;
+        clear dv2
+        for j = 1:height(nantypes)
+            if any(nantypes(j,1:3))
+                trainframesl = ~ismember([nandv naniv], nantypes(j,:),'rows');
+                keepLogic = ~nantypes(j,4:end);
+                iv2 = iv(:,keepLogic);
+                [iv3 removeLogic] = rmmissing(iv2,2);
+                b = nan(size(iv3,2)+1,3);
+                for dim=1:3
+                    b(:,dim)=regress(dv(trainframesl,dim),[iv3(trainframesl,:) ones(sum(trainframesl),1)]);
+                end
+                pred=[iv3 ones(size(iv3,1),1)]*b;
+                dv2(:,:,i)=dv;
+                dv2(~trainframesl,:,i) = pred(~trainframesl,:);
+                i = i+1;
+            end
+        end
+    else
+        dv2 = dv;
     end
-
-    % predict
-    pred=[iv ones(size(iv,1),1)]*b;
-
-    % find frames where DV is invisible and all IVs are visible
-    predframes=find((sum(isnan(iv),2)==0) & (sum(isnan(dv),2)>0));
-
-    % fill those frames with predicted values
-    d2.data(predframes,3*marker+(-2:0))=pred(predframes,:);
+    s = sort(dv2,3);
+    dv3(:,k*3-2:k*3) = s(:,:,1);
 end
+d2.data = dv3;
+warning('on', 'stats:regress:RankDefDesignMat')
