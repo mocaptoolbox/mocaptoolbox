@@ -602,3 +602,15 @@ mccolortimeseries: Attaches a color time series to a MoCap animation parameter s
 Improvements
 
 Bug fixes
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 2.0.1
+New functions
+
+Improvements
+
+mcboundrect: The function can alternatively calculate the bounding box (rectangular cuboid) of each marker trajectory, i.e. the smallest right rectangular prism volume containing it. The function now uses Name-value optional arguments (note: not backwards compatible).
+
+mcfixrigidbody: The function now maximizes the number of frames used for training. While the previous version of the function ran a single regression per faulty marker dimension, this version also performs multiple regressions on temporal splits of the data.
+
+Bug fixes
