@@ -614,3 +614,13 @@ mcboundrect: The function can alternatively calculate the bounding box (rectangu
 mcfixrigidbody: The function now maximizes the number of frames used for training. While the previous version of the function ran a single regression per faulty marker dimension, this version also performs multiple regressions on temporal splits of the data.
 
 Bug fixes
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 2.0.2
+New functions
+
+Improvements
+
+mcfixrigidbody: Version 2.0.1 introduced a new algorithm that maximized the number of frames used for training. However, this was at the cost of removing variables, and performed worse than the previous algorithm in some scenarios. Hence, we bring back the original algorithm, which yields the same results when a single rigid body marker needs to be fixed, it is simpler, and faster.
+
+Bug fixes
