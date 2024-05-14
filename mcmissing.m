@@ -18,6 +18,12 @@ end
 % mm: number of missing markers per frame
 % mgrid: matrix showing missing data per marker and frame (rows correspond to frames and columns to markers
 %
+% examples
+%
+% [mf, mm, mgrid] = mcmissing(d);
+%
+% [mf, mm, mgrid] = mcmissing(d,plot=true);
+%
 % Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
