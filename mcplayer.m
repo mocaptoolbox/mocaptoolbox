@@ -28,7 +28,7 @@ function mcplayer(d,options)
 %
 % comments
 % It is recommended to close all figures before running mcplayer. The function uses p.markercolors to set the marker colors (p.colors is not used).
-% Created by Mickaël Tits, numediart Institute, University of Mons, Belgium (21/12/2017)
+% Created by Mickaël Tits, numediart Institute, University of Mons, Belgium (21/12/2017). Original version of this function was called mc3dplot.m (https://github.com/numediart/MocapRecovery/tree/master/MoCapToolboxExtension)
 %
 % see also
 % mcanimate, mcplotframe, mcplot3Dframe, mcinitanimpar, mcanimatedata

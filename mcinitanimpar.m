@@ -78,7 +78,7 @@ function p = mcinitanimpar(x)
 % plotting the first two markers in gray: par.markercolors=[.5 .5 .5; .5 .5 .5];
 %
 % see also
-% mccreateconnmatrix, mcplotframe, mcanimate, mcanimatedata, mcplot3Dframe
+% mccreateconnmatrix, mcplotframe, mcanimate, mcanimatedata, mcplot3Dframe, mcplayer
 %
 % Download the MoCap Toolbox from
 % https://www.jyu.fi/hytk/fi/laitokset/mutku/en/research/materials/mocaptoolbox

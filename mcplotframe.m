@@ -27,7 +27,7 @@ function par = mcplotframe(d, n, p, proj)
 % automatically so that all the markers fit into all frames.
 %
 % see also
-% mcplot3Dframe, mcanimate, mcanimatedata, mcinitanimpar
+% mcplot3Dframe, mcanimate, mcanimatedata, mcinitanimpar, mcplayer
 %
 % ? Part of the Motion Capture Toolbox, Copyright ?2022,
 % University of Jyvaskyla, Finland

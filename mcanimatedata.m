@@ -41,7 +41,7 @@ function mcanimatedata(d,p,optionsData,optionsSR,optionsVisual,optionsLabel,opti
 % The Y axis direction for images is reversed (i.e., it goes from bottom to top) when plotting on north and south locations.
 %
 % see also
-% mcanimate, mcplotframe, mcplot3Dframe, mcinitanimpar
+% mcanimate, mcplotframe, mcplot3Dframe, mcinitanimpar, mcplayer
     arguments
         d
         p = mcinitanimpar

@@ -57,7 +57,7 @@ function p = mcanimate(d, p, proj)
 % If the joint animation parameter field par3D.jointrotations is set to 1, mcanimate draws axes in each joint to represent rotations with respect to the global coordinate system defined in calibration (for data imported from Qualysis + Theia 3D markerless pose estimation)
 %
 % see also
-% mcplotframe, mcplot3Dframe, mcinitanimpar, mcanimatedata
+% mcplotframe, mcplot3Dframe, mcinitanimpar, mcanimatedata, mcplayer
 %
 % Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
