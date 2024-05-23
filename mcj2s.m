@@ -62,10 +62,10 @@ if isfield(d,'type') && strcmp(d.type, 'MoCap data') && isfield(par,'type') && s
         end
     end
 
-    % segment angles
+    % joint angles
     for k = 1:length(par.parent)
         if par.parent(k) > 0 && par.parent(par.parent(k)) > 0
-            d2.segm(k).angle = (180/pi)*atan2(mcnorm(cross(d2.segm(k).eucl,d2.segm(par.parent(k)).eucl)),dot(d2.segm(k).eucl,d2.segm(par.parent(k)).eucl,2));
+            d2.segm(k).angle = (180/pi)*atan2(mcnorm(cross(d2.segm(k).eucl,-d2.segm(par.parent(k)).eucl)),dot(d2.segm(k).eucl,-d2.segm(par.parent(k)).eucl,2));
         end
     end
     % Euler angles (2 B added)
