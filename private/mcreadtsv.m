@@ -45,6 +45,7 @@ s=fgetl(ifp); other.timeStamp=s;
 s=fscanf(ifp,'%s',1);
 s=fscanf(ifp,'%s',1); other.dataIncluded = s;
 
+
 s=fscanf(ifp,'%s',1); % 20080811 fixed bug that prevented reading non-annotated tsv files
 tmp=fgetl(ifp); % 'MARKER_NAMES'
 d.markerName=cell(d.nMarkers,1);
@@ -57,11 +58,17 @@ end
 
 %BB: QTM export option "column headers" - 20100201 fix
 tmp=fgetl(ifp); % read next line - either Column headers or first line of mocap data
+
+tmp0 = strread(tmp,'%[^\n\r\t]'); % 20240917 fix
+if strcmp(tmp0{1},'TRAJECTORY_TYPES')
+    tmp=fgetl(ifp);
+end
+
 if isletter(tmp(1))==1; %is first character is letter?
-    tmp=textscan(ifp,'%f','delimiter','\t'); %yes: skip that line and read in data
+    tmp=textscan(ifp,'%f','delimiter','\t','TreatAsEmpty',{'NA','NaN'});% 20240917 fix
     tmp=tmp{1};
 else %no -> line is already data
-    tmp1=textscan(ifp,'%f','delimiter','\t'); %read in rest of data
+    tmp1=textscan(ifp,'%f','delimiter','\t','TreatAsEmpty',{'NA','NaN'}); %read in rest of data
     tmp1=tmp1{1};
     tmp=str2num(tmp);
     tmp=[tmp tmp1']; %concatenate first line of data (tmp) and rest
@@ -74,7 +81,6 @@ end
 %Data is on the vector tmp. Length is EITHER nFrames * 3*nMarkers OR nFrames *  3*nMarkers + nFrames*2
 if strcmp(other.dataIncluded, '3D') || strcmp(other.dataIncluded, '')
     if length(tmp) > d.nFrames*3*d.nMarkers %test if exported with time and frame AND SOMETHING ELSE AS OF QTM12 OR SO...
-
         if length(tmp)~=d.nFrames*3*d.nMarkers+2*d.nFrames %BBFIX 20120112, for not exported gaps
             disp([10,'Warning: Data inconsistent with amount of markers. Please export complete data. Data set to NaN',10])
             d.data=0;
@@ -86,7 +92,6 @@ if strcmp(other.dataIncluded, '3D') || strcmp(other.dataIncluded, '')
         d.data = reshape(tmp', 3*d.nMarkers+2, d.nFrames)';
         d.data(:,[1 2]) = []; %delete first two columns (frame and time)
     else %no time and frame exported
-
         if length(tmp)~=d.nFrames*3*d.nMarkers %BBFIX 20120112, for not exported gaps
             disp([10,'Warning: Data inconsistent with amount of markers. Please export complete data. Data set to NaN',10])
             d.data=0;
