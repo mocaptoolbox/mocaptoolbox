@@ -1,5 +1,6 @@
 function data2 = mcrecovery(data1, options)
 %{
+Fill missing data using a combination of gap filling approaches
 
 Created by Mickaël Tits, numediart Institute, University of Mons, Belgium
 21/12/2017
