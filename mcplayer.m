@@ -1,5 +1,5 @@
 function mcplayer(d,options)
-% 3D playback of motion capture data.
+% Preview motion capture data.
 %
 % syntax
 %
