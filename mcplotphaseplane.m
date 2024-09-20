@@ -23,6 +23,9 @@ function mcplotphaseplane(d1, d2, p1, p2)
 % mcplotphaseplane(s1, s2, 5:10, 'eucl') % for segm data structure
 % mcplotphaseplane(s1, s2, [12 14], 'quat') % for segm data structure
 %
+% see also
+% mcperiod, mccoupling, mcorderpar
+%
 % Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
 
