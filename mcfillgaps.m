@@ -27,7 +27,7 @@ function d2 = mcfillgaps(d, maxfill, method)
 % d2 = mcfillgaps(d, 60, 'fillall');
 %
 % comments
-% Uses linear interpolation. More sophisticated algorithms will be implemented in the future.
+% Uses piecewise cubic hermite interpolating polynomial interpolation.
 %
 % Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
