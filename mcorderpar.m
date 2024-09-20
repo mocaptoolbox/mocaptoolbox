@@ -21,7 +21,7 @@ function [MRVL MRVA] = mcorderpar(d,tempo,options)
 %       Default value is [0.5, 1, 2], corresponding to 1/2-beat level, 1 beat level, and 2-beat level.
 %   bandpass (optional): Applies bandpass filtering using a bandwidth of 40% of the center frequency (default: true)
 %   plot (optional): When set to true, the function produces a polar plot for each combination of marker and movement direction,
-%       displaying the phase difference separately for each metric level.
+%       displaying the phase difference separately for each metric level (default: `false`).
 %
 % Output
 % MRVL: Mean resultant vector length of directional data at beat locations or at locations of beat multiples of subdivisions. MRVL ranges between 0 and 1.
@@ -39,12 +39,14 @@ function [MRVL MRVA] = mcorderpar(d,tempo,options)
 %
 %
 % See Also
-% mcperiod
+% mcperiod, mccoupling, mcplotphaseplane
 %
 % References
 % Phillips-Silver, J., Toiviainen, P., Gosselin, N., Piché, O., Nozaradan, S., Palmer, C., & Peretz, I. (2011).
 % Born to dance but beat deaf: A new form of congenital amusia. Neuropsychologia, 49(5), 961-969.
-
+%
+% Part of the Motion Capture Toolbox, Copyright 2024,
+% University of Jyvaskyla, Finland
     arguments
         d struct {mustNotBePos}
         tempo (1,1) {mustBeNumeric,mustBePositive,mustBeFinite}
