@@ -20,7 +20,8 @@ function [MRVL MRVA] = mcorderpar(d,tempoOrBeatTimes,options)
 %       Default value = 0.
 %   metricLevel (optional): Metric level(s) of analysis to use.
 %       Default value is [0.5, 1, 2], corresponding to 1/2-beat level, 1 beat level, and 2-beat level. Note: metric level should be set only when tempoOrBeatTimes is a scalar.
-%   bandpass (optional): Applies bandpass filtering using a bandwidth of 40% of the center frequency (default: true). Note: bandpass filtering is only applied when when tempoOrBeatTimes is a scalar.
+%   bandpass (optional): Applies bandpass filtering using a bandwidth of a fraction of the center frequency (default: true). When tempoOrBeatTimes is a scalar, a wavelet transform -based dynamic bandpass filtering is applied.
+%   bwRatio (optional): Sets the relative bandwidth of the bandpass filter (default: 0.4). For instance, when specifying a relative bandwidth of .3, the bandpass filter will use a bandwidth of 30% of the center frequency. To be used only when bandpass is set to true.
 %   plot (optional): When set to true, the function produces a polar plot for each combination of marker and movement direction,
 %       displaying the phase difference separately for each metric level (default: `false`).
 %
@@ -34,6 +35,10 @@ function [MRVL MRVA] = mcorderpar(d,tempoOrBeatTimes,options)
 % [l, a] = mcorderpar(d, 120, 'plot', true);
 %
 % [l, a] = mcorderpar(d, 120, 'plot', true, 't0', -1, 'metricLevel', 1:2);
+%
+% g = mcgetmarker(walk1, 'Ankle_R');
+% AnkleRStep = [1.01667 2.1 3.28333 4.38333 5.51667];
+% mcorderpar(mctimeder(g),AnkleRStep)
 %
 % Comments
 %
@@ -54,6 +59,7 @@ function [MRVL MRVA] = mcorderpar(d,tempoOrBeatTimes,options)
         options.t0 (1,1) {mustBeNumeric,mustBeFinite} = 0 % delay of cosine wave in seconds
         options.metricLevel {mustBeNumeric,mustBeVector} = [.5 1 2] % metric level; default: 1/2-beat, 1-beat, 2-beat
         options.bandpass logical = true
+        options.bwRatio (1,1) {mustBeFinite,mustBePositive} = .4
         options.plot logical = false
     end
     if isscalar(tempoOrBeatTimes)
@@ -64,7 +70,7 @@ function [MRVL MRVA] = mcorderpar(d,tempoOrBeatTimes,options)
     if isscalar(tempoOrBeatTimes)
         f0 = tempo/60;% beat frequency in hertz
         if true(options.bandpass)
-            d = mcbandpass(d,.8*f0, 1.2*f0);
+            d = mcbandpass(d,(1-options.bwRatio/2)*f0, (1+options.bwRatio/2)*f0);
         end
     end
 
@@ -90,10 +96,32 @@ function [MRVL MRVA] = mcorderpar(d,tempoOrBeatTimes,options)
         pha = unwrap(angle(hilbert(dd))); % get analytic signal and then unwrapped phase
     elseif exist('beat_times')
         coef = 1;
+
+        if true(options.bandpass)
+            nbtt = numel(beat_times)-1;
+            % estimate instantaneous beat frequency in Hz for each mocap time point
+            t = (0:(1/d.freq):durs)';
+            phase = interp1(beat_times,0:nbtt,t,'spline');
+            f=diff(phase)*d.freq;
+            % calculate WT of movement data
+            for j = 1:width(dd)
+                [wt wfreq] =cwt(dd(:,j),d.freq);
+                for k = 1:size(wt,2)
+                    scale(:,k)=normpdf(wfreq,f(k),options.bwRatio*f(k));
+                    scale(:,k)=scale(:,k)/max(scale(:,k));
+                    wt2(:,k)=wt(:,k).*scale(:,k);
+                end
+                wt2(isnan(wt2)) = 0;
+                dd2(:,j) = icwt(wt2);
+            end
+            dd = dd2;
+        end
+
         hil = hilbert(dd);
-        hil = hil./abs(hil);
+        hil = hil./abs(hil); % makes the magnitude of the directional vectors equal to 1
         pha = angle(hil); % get analytic signal
     end
+
 
     for j = 1:numel(coef) % each beat level
         mb = coef(j)*durs; % number of beats
