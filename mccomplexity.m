@@ -1,6 +1,5 @@
 function c = mccomplexity(d, mnum)
-% Calculates the omega complexity of movement based on entropy of the proportion
-% of variance contained in the principal components.
+% Calculates the omega complexity (effective dimensionality) of movement based the Shannon entropy of simplex-normalised movement data eigenvalues. A high value indicates a high complexity, whereas a low value indicates low complexity.
 %
 % syntax
 % c = mccomplexity(d, mnum);
@@ -26,6 +25,11 @@ function c = mccomplexity(d, mnum)
 % Burger, B., Saarikallio, S., Luck, G., Thompson, M. R. & Toiviainen, P. (2013).
 % Relationships between perceived emotions in music and music-induced movement.
 % Music Perception 30(5), 519-535.
+%
+% Del Giudice M. Effective Dimensionality: A Tutorial.
+% Multivariate Behav Res. 2021 May-Jun;56(3):527-542.
+% doi: 10.1080/00273171.2020.1743631.
+% Epub 2020 Mar 29. PMID: 32223436.
 %
 % Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
@@ -60,4 +64,3 @@ end
 [pc,p]=mcpcaproj(tmp,1:(3*tmp.nMarkers));
 p.l=max(p.l,eps);
 c=exp(-sum(p.l.*log(p.l)));
-c=c*sum(var(tmp.data)); %BBEDIT20201110: reduce noise in recordings with little movement / scale data according to their variance / distribution
