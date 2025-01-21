@@ -21,10 +21,10 @@ function mcplayer(d,options)
 %
 % examples
 %
-% mc3dplot(d)
-% mc3dplot(d, p=mapar, play=false)
-% mc3dplot(d, p=mapar, play=true,speed=3)
-% myfig=figure; mc3dplot(d, p=mapar, speed=7, play=true,figurehandle=myfig)
+% mcplayer(d)
+% mcplayer(d, p=mapar, play=false)
+% mcplayer(d, p=mapar, play=true,speed=3)
+% myfig=figure; mcplayer(d, p=mapar, speed=7, play=true,figurehandle=myfig)
 %
 % comments
 % It is recommended to close all figures before running mcplayer. The function uses p.markercolors to set the marker colors (p.colors is not used).
@@ -136,7 +136,6 @@ end
 
 
 axis([p.minx p.maxx p.miny p.maxy p.minz p.maxz]);
-
 view(az,el);
 try
     drawnow;
