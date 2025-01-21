@@ -44,9 +44,10 @@ function [d japar] = mcreadtsvTheia(fn);
     i = 1;
     for k = 1:size(allData,1)
         dataRow = str2num(fgetl(ifp));
-        if ~isempty(dataRow)
-            allData(i,:)=dataRow;
-            i = i+1;
+        if ~isempty(dataRow) & size(dataRow,2) == width(allData)
+                allData(i,:)=dataRow;
+                i = i+1;
+        else
         end
     end
     fclose(ifp);
