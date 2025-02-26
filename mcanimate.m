@@ -73,10 +73,10 @@ if nargin<2
 end
 
 % resample color data if time series
-if ~isempty(p.markercolors) & ndims(p.markercolors == 3)
+if ~isempty(p.markercolors) & ndims(p.markercolors) == 3
     p.markercolors = resamp(p.markercolors,d.freq,p.fps,'linear');
 end
-if ~isempty(p.conncolors) & ndims(p.conncolors == 3)
+if ~isempty(p.conncolors) & ndims(p.conncolors) == 3
     p.conncolors = resamp(p.conncolors,d.freq,p.fps,'linear');
 end
 
