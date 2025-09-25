@@ -31,7 +31,6 @@ function par = mcplotframe(d, n, p, proj)
 %
 % ? Part of the Motion Capture Toolbox, Copyright ?2022,
 % University of Jyvaskyla, Finland
-
 par=[];
 
 if isfield(d,'type') && strcmp(d.type, 'MoCap data') || isfield(d,'type') && strcmp(d.type, 'norm data') || isfield(d,'type') && strcmp(d.type, 'segm data')
@@ -558,11 +557,11 @@ for k=1:size(x,1) % main loop
     if p.animate
         if p.createframes==1
             fn=['frame', sprintf('%0.4d',k),'.png']; %old version: create frames
-            imwrite(frame2im(getframe),fn,'png');
+            imwrite(frame2im(getframe(gcf)),fn,'png');
 %             fn=['frame', sprintf('%0.4d',k),'.eps'];
 %             saveas(gcf, fn, 'eps');
         elseif p.createframes==2 %MH20200312 (animated gif)
-            im=frame2im(getframe);
+            im=frame2im(getframe(gcf));
             [imind,cm]=rgb2ind(im,256);
             if k == 1
                 imwrite(imind,cm,fn,'gif','Loopcount',inf,'DelayTime',1/p.fps)

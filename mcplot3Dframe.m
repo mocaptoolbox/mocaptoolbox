@@ -83,6 +83,8 @@ if p.animate && p.getparams==0 %BBADd0150303
     if p.createframes==1
         mkdir(p.output) %BB20150507 in case frames (series of png files) are needed, and not video file
         cd(p.output)
+    elseif p.createframes==2 %MH20201201 (animated gif)
+        fn=[p.output '.gif'] ;
     else %VideoWriter is used with video file output %BB20150507
         fn=p.output; %BB_NEW_20140212 for VideoWriter
         if strcmp(p.videoformat,'avi')
@@ -685,9 +687,17 @@ for k=1:size(x,1) % main loop
     if p.animate
         if p.createframes==1
             fn=['frame', sprintf('%0.4d',k),'.png']; %old version: create frames
-            imwrite(frame2im(getframe),fn,'png');
+            imwrite(frame2im(getframe(gcf)),fn,'png');
 %             fn=['frame', sprintf('%0.4d',k),'.eps'];
 %             saveas(gcf, fn, 'eps');
+        elseif p.createframes==2 %MH20200312 (animated gif)
+            im=frame2im(getframe(gcf));
+            [imind,cm]=rgb2ind(im,256);
+            if k == 1
+                imwrite(imind,cm,fn,'gif','Loopcount',inf,'DelayTime',1/p.fps)
+            else
+                imwrite(imind,cm,fn,'gif','WriteMode','append','DelayTime',1/p.fps)
+            end
         else
             writeVideo(movObj,getframe(gcf)); %BB_NEW_20140212 for VideoWriter
         end

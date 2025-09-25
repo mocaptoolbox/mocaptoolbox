@@ -137,6 +137,9 @@ end
 
 axis([p.minx p.maxx p.miny p.maxy p.minz p.maxz]);
 view(az,el);
+xlabel('x')
+ylabel('y')
+zlabel('z')
 try
     drawnow;
 catch

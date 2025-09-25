@@ -5,7 +5,6 @@ function [MRVL MRVA] = mcorderpar(d,tempoOrBeatTimes,options)
 %
 % Syntax
 % [mrvl, mrva] = mcorderpar(d, tempo);
-% [xs, f, p1, p2] = mcgxwt(___, Name, Value);
 %
 % Input Parameters
 % d: MoCap or Norm data structure
@@ -26,8 +25,8 @@ function [MRVL MRVA] = mcorderpar(d,tempoOrBeatTimes,options)
 %       displaying the phase difference separately for each metric level (default: `false`).
 %
 % Output
-% MRVL: Mean resultant vector length of directional data at beat locations or at locations of beat multiples of subdivisions. MRVL ranges between 0 and 1.
-% MRVA: Mean resultant vector angle of directional data at beat locations or at locations of beat multiples of subdivisions (in radians). MRVA ranges between -pi and pi.
+% MRVL: Mean resultant vector length of directional data at beat locations or at locations of beat multiples or subdivisions. MRVL ranges between 0 and 1.
+% MRVA: Mean resultant vector angle of directional data at beat locations or at locations of beat multiples or subdivisions (in radians). MRVA ranges between -pi and pi.
 %
 % Examples
 % g = mcgetmarker(dance2, {'Head_FL', 'Head_FR', 'Finger_L', 'Finger_R'});
@@ -117,9 +116,9 @@ function [MRVL MRVA] = mcorderpar(d,tempoOrBeatTimes,options)
             dd = dd2;
         end
 
-        hil = hilbert(dd);
+        hil = hilbert(dd); % get analytic signal
         hil = hil./abs(hil); % makes the magnitude of the directional vectors equal to 1
-        pha = angle(hil); % get analytic signal
+        pha = angle(hil);
     end
 
 
