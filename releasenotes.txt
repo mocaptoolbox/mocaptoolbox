@@ -659,4 +659,4 @@ Improvements
 
 Bug fixes
 
-mcorderparam: correct number of beats to analyze when tempo is provided
+mcorderpar: correct number of beats to analyze when tempo is provided
