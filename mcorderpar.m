@@ -123,9 +123,9 @@ function [MRVL MRVA] = mcorderpar(d,tempoOrBeatTimes,options)
 
 
     for j = 1:numel(coef) % each beat level
-        mb = coef(j)*durs; % number of beats
         BF = coef(j);
         if exist('tempo','var')
+            mb = coef(j)*durs*tempo/60; % number of beats
             BL = 60/(BF*tempo);% beat length in seconds for a given beat level
             beats=(0:mb)*BL; % beat location in seconds
             dph = BF*ph-pha; % difference between unwrapped phase of cosine wave (scaled to target beat level) and unwrapped phase of data
