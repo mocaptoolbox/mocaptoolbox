@@ -636,3 +636,15 @@ Improvements
 Bug fixes
 
 mcanimate: fix bug affecting marker and conncolors
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 2.0.6
+New functions
+
+
+
+Improvements
+
+Bug fixes
+
+mcboundrect: fix bug
