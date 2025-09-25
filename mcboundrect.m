@@ -1,4 +1,4 @@
-function b = mcboundrect(d, options)
+function bb = mcboundrect(d, options)
 % Calculates the bounding rectangle (the smallest rectangular area that contains the
 % projection of the trajectory of each marker on the horizontal plane (i.e., floor). The function can alternatively calculate the bounding box (rectangular cuboid) of each marker trajectory, i.e. the smallest right rectangular prism volume containing it.
 %
@@ -53,7 +53,7 @@ end
 type=options.type;
 w=options.w;
 hop=options.hop;
-b=[];
+bb=[];
 
 if isfield(d,'type') && (strcmp(d.type, 'MoCap data'))
     for k=1:d.nMarkers
@@ -75,7 +75,7 @@ if isfield(d,'type') && (strcmp(d.type, 'MoCap data'))
             end
         end
         rtmp=rtmp';
-        b = [b rtmp];
+        bb = [bb rtmp];
     end
 else
     disp([10, 'The first input argument has to be a variable with MoCap data structure.', 10]);
