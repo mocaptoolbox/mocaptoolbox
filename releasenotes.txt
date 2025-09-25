@@ -648,3 +648,15 @@ Improvements
 Bug fixes
 
 mcboundrect: fix bug
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 2.0.7
+New functions
+
+
+
+Improvements
+
+Bug fixes
+
+mcorderparam: correct number of beats to analyze when tempo is provided
