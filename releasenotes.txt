@@ -624,3 +624,15 @@ Improvements
 mcfixrigidbody: Version 2.0.1 introduced a new algorithm that maximized the number of frames used for training. However, this was at the cost of removing variables, and performed worse than the previous algorithm in some scenarios. Hence, we bring back the original algorithm, which yields the same results when a single rigid body marker needs to be fixed, it is simpler, and faster.
 
 Bug fixes
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 2.0.3
+New functions
+
+mcorderpar: Computes phase locking of MoCap data
+
+Improvements
+
+Bug fixes
+
+mcanimate: fix bug affecting marker and conncolors
