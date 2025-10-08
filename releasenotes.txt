@@ -660,3 +660,15 @@ Improvements
 Bug fixes
 
 mcorderpar: correct number of beats to analyze when tempo is provided
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Version 2.0.8
+New functions
+
+mcpropsyncmag: Computes proportion of synchronized magnitude of MoCap data
+
+Improvements
+
+Bug fixes
+
+mcrecovery: fix documentation
