@@ -2,7 +2,7 @@ function p = mcpropsyncmag(d,tempoOrBeatTimes,options)
 % Computes proportion of synchronized magnitude of MoCap data for a target tempo in BPM or for a target vector with individual beat times (in seconds). A wavelet transform -based dynamic bandpass filtering is applied.
 %
 % Syntax
-% p = mcorderpar(d, beatTimes);
+% p = mcpropsyncmag(d, tempoOrBeatTimes);
 %
 % Input Parameters
 % d: MoCap or Norm data structure

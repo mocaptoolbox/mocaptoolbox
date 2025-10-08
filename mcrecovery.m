@@ -1,66 +1,65 @@
 function data2 = mcrecovery(data1, options)
-%{
-Fill missing data using a combination of gap filling approaches
+% Fill missing data using a combination of gap filling approaches
 
-Created by Mickaël Tits, numediart Institute, University of Mons, Belgium
-21/12/2017
-Contact: mickaeltits@gmail.com or mickael.tits@umons.ac.be
+% Created by Mickaël Tits, numediart Institute, University of Mons, Belgium
+% 21/12/2017
+% Contact: mickaeltits@gmail.com or mickael.tits@umons.ac.be
 
-Inputs :
-- data1: MoCap data structure from the MoCap Toolbox
-- Name-value arguments: Specify optional pairs of arguments as Name1=Value1,...,NameN=ValueN, where Name is the argument name and Value is the corresponding value. Name-value arguments must appear after other arguments, but the order of the pairs does not matter.
+% Inputs :
+% - data1: MoCap data structure from the MoCap Toolbox
+% - Name-value arguments: Specify optional pairs of arguments as Name1=Value1,...,NameN=ValueN, where Name is the argument name and Value is the corresponding value. Name-value arguments must appear after other arguments, but the order of the pairs does not matter.
 
- *binary (0 = no, any other value = yes):
-    - verbose: print/display debug information. (default: 0)
-    - quiet: nothing is printed/displayed (override verbose). (default: 0)
-    - method: specify any individual recovery method to use. "method1" to "method5", or "all" (default: "all").
-        o method1: local interpolation
-        o method2: local polynomial regression
-        o method3: local GRNN
-        o method4: global linear regression
-        o method5: weighted PCA (Gloersen et al. 2016 PLoS One)
+%  *binary (0 = no, any other value = yes):
+%     - verbose: print/display debug information. (default: 0)
+%     - quiet: nothing is printed/displayed (override verbose). (default: 0)
+%     - method: specify any individual recovery method to use. "method1" to "method5", or "all" (default: "all").
+%         o method1: local interpolation
+%         o method2: local polynomial regression
+%         o method3: local GRNN
+%         o method4: global linear regression
+%         o method5: weighted PCA (Gloersen et al. 2016 PLoS One)
 
-    - spaceconstraint: use space constraint. (default: 1)
-    - tripleconstraint: use space constraint with 3 neighbours. If 0, only
-    the distance with the first neighbour is considered. (default: 1)
-    - timeconstraint: use time constraint. (default: 1)
-    - recursivefilling: each filled trajectory can be used for
-    reconstruction of the next trajectory to fill (markers with smallest
-    gaps are reconstructed first). (default: 1)
-    - filtering: filter input data before process, and filter and recovered data
-    (median and average symmetric sliding adaptive windows). (default: 1)
-    - filterref: filter local references. (default: 1)
-    - advancedordering: (under development) order possible references both
-    considering maximal windowed standard deviation, and maximal distance (default:
-    0)
-    - advancedorderingweight: (under development) weight to ponderate
-    either windowed standard deviation, or maximal distance criteria for
-    ordering references (default: 20). Not used if advancedordering = 0.
-    The bigger it is, the more we consider maximal windowed standard deviation over
-    maximal distance
+%     - spaceconstraint: use space constraint. (default: 1)
+%     - tripleconstraint: use space constraint with 3 neighbours. If 0, only
+%     the distance with the first neighbour is considered. (default: 1)
+%     - timeconstraint: use time constraint. (default: 1)
+%     - recursivefilling: each filled trajectory can be used for
+%     reconstruction of the next trajectory to fill (markers with smallest
+%     gaps are reconstructed first). (default: 1)
+%     - filtering: filter input data before process, and filter and recovered data
+%     (median and average symmetric sliding adaptive windows). (default: 1)
+%     - filterref: filter local references. (default: 1)
+%     - advancedordering: (under development) order possible references both
+%     considering maximal windowed standard deviation, and maximal distance (default:
+%     0)
+%     - advancedorderingweight: (under development) weight to ponderate
+%     either windowed standard deviation, or maximal distance criteria for
+%     ordering references (default: 20). Not used if advancedordering = 0.
+%     The bigger it is, the more we consider maximal windowed standard deviation over
+%     maximal distance
 
- *other:
-    - window: filters sliding window size. Note that
-    full-body motion useful information is generally below 10-20Hz. Finer
-    movement may need a higher rate (e.g. finger movements). (default: 0.07)
-    - presenceMin [0 - 100]: markers less present than presenceMin (in percent of
-    available frames) are removed from the sequence before the process.
-    (default: 30)
-    - threshold: threshold on the distance variation (standard deviation) between the
-    marker to fill and a potential reference. If the standard deviation >
-    threshold, the reference is not valid for reconstruction. It can be
-    used to avoid unreliable recovery. (default: inf)
-    - combined_threshold: threshold on the summed distance variation (standard deviation)
-    between the marker to fill and three potential references. If the sum of the standard
-    deviations > combined_threshold, the references are not valid together for
-    reconstruction. (default: inf)
-    - smooth: smoothing parameter for grnn regression (default: 0.3)
-    - weightThres: weight threshold parameter for global linear regression
-    method (default: 50 mm)
+%  *other:
+%     - window: filters sliding window size. Note that
+%     full-body motion useful information is generally below 10-20Hz. Finer
+%     movement may need a higher rate (e.g. finger movements). (default: 0.07)
+%     - presenceMin [0 - 100]: markers less present than presenceMin (in percent of
+%     available frames) are removed from the sequence before the process.
+%     (default: 30)
+%     - threshold: threshold on the distance variation (standard deviation) between the
+%     marker to fill and a potential reference. If the standard deviation >
+%     threshold, the reference is not valid for reconstruction. It can be
+%     used to avoid unreliable recovery. (default: inf)
+%     - combined_threshold: threshold on the summed distance variation (standard deviation)
+%     between the marker to fill and three potential references. If the sum of the standard
+%     deviations > combined_threshold, the references are not valid together for
+%     reconstruction. (default: inf)
+%     - smooth: smoothing parameter for grnn regression (default: 0.3)
+%     - weightThres: weight threshold parameter for global linear regression
+%     method (default: 50 mm)
 
-Output: recovered sequence
+% Output: recovered sequence
 
-%}
+
 arguments
     data1
     options.verbose = 0
