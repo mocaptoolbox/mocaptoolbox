@@ -125,7 +125,7 @@ end
 
 d1.type=type;
 d1.filename=fn;
-d1.nFrames=length(data);
+d1.nFrames=height(data);
 d1.nCameras=NaN;
 if strcmp(type,'norm data')
     d1.nMarkers=size(data,2);
