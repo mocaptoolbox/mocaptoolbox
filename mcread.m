@@ -1,4 +1,8 @@
-function [d japar] = mcread(fn)
+function [d japar] = mcread(fn,options)
+arguments
+    fn
+    options.freq = 25
+end
 % Reads a motion capture data file and returns a MoCap structure.
 %
 % syntax
@@ -7,8 +11,12 @@ function [d japar] = mcread(fn)
 % [d japar] = mcread(fn); % only for Qualysis .tsv exports based on Theia 3D markerless pose estimation
 %
 % input parameters
-% fn: file name; tsv, c3d, bvh, mat, or wii format. If no input parameter is given, a file open dialog opens.
+% fn: file name (tsv, c3d, bvh, mat, or wii format) or folder name (JSON OpenPose format). If no input parameter is given, a file open dialog opens.
 %
+%  Name-value arguments: Specify optional pairs of arguments as Name1=Value1,...,NameN=ValueN, where Name is the argument name and Value is the corresponding value. Name-value arguments must appear after other arguments, but the order of the pairs does not matter.
+%   OpenPose JSON output options:
+%     - freq: Video frame rate (default value: 25)
+
 % output
 % d: MoCap structure containing parameter values and data
 %
@@ -18,6 +26,7 @@ function [d japar] = mcread(fn)
 % d = mcread('filename.bvh');
 % d = mcread('filename.mat');
 % d = mcread('filename.wii');
+% d = mcread('foldername', freq=30); % for OpenPose JSON folder
 % d = mcread;
 %
 % comments
@@ -37,6 +46,8 @@ function [d japar] = mcread(fn)
 % http://staffwww.dcs.shef.ac.uk/people/N.Lawrence/mocap/ (mocap and ndlutil).
 %
 % mcread can import Qualysis .tsv exports based on Theia 3D markerless pose estimation (https://www.theiamarkerless.ca/). In this case it generates an 'other.quat' field containing a time by component matrix where each joint rotation (with respect to the global coordinate system defined in calibration) is represented in quaternions using the 'scalar last' convention (X Y Z W). Besides the joint structure, mcread generates in this case a second output japar with corresponding joint animation parameters.
+%
+% mcread can import a folder of JSON files created by OpenPose using the body_25 or body_25b model. It can only be used to import 2D keypoints (located in the pose_keypoints_2d field of the JSON data). In this case it generates an 'other.conf' field containing the confidence estimates obtained by OpenPose for each keypoint.
 %
 % Part of the Motion Capture Toolbox, Copyright 2022,
 % University of Jyvaskyla, Finland
@@ -78,6 +89,15 @@ if fn ~= 0
             disp([10, 'This file format is not supported!',10]);
             [y,fs] = audioread('mcsound.wav');
             sound(y,fs);
+        end
+    elseif exist(fn,'dir')
+        dr = dir(fn);
+        if any(contains(arrayfun(@(x) x.name,dr,'un',0),'json')) % if folder contains at least one json file
+            d = mcreadjsonfolder(dr,options.freq);
+        else
+            [y,fs] = audioread('mcsound.wav');
+            sound(y,fs);
+            error('Folder does not contain any JSON files')
         end
     else
         disp([10, 'File not found!',10]); %BB 20111109
