@@ -177,11 +177,16 @@ return
 function der = differentiate(d, n, f)
 
 
+if n > 0
+    pol = n+1; % polynomial order %BBFIX 20110207: pol now dependent on the order of derivative
+elseif n == 1
+    pol = 3; % DanaS Fix 20251106 smoothing with polynomial order 3 when using Savitzky-Golay filter in mcsmoothen
+end
 
-pol = n+1; % polynomial order %BBFIX 20110207: pol now dependent on the order of derivative
 
-f = 4*n+f-4; %%BBFIX 20110207: increase window size relative to the order of derivative
-
+if n > 0 % ensure specified frame length is not affected for mcsmoothen.m calls
+    f = 4*n+f-4; %%BBFIX 20110207: increase window size relative to the order of derivative
+end
 tmp = [];
 
 fprintf('Calculating');
