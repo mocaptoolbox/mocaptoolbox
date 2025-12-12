@@ -179,7 +179,7 @@ function der = differentiate(d, n, f)
 
 if n > 0
     pol = n+1; % polynomial order %BBFIX 20110207: pol now dependent on the order of derivative
-elseif n == 1
+elseif n == 0
     pol = 3; % DanaS Fix 20251106 smoothing with polynomial order 3 when using Savitzky-Golay filter in mcsmoothen
 end
 
