@@ -68,8 +68,8 @@ function p = mcpropsyncmag(d,tempoOrBeatTimes,options)
     end
     % calculate WT of movement data
     for j = 1:width(dd)
-        [wt{j} wfreq{j}] =cwt(dd(:,j),d.freq);
-        for k = 1:size(wt{j},2)
+        [wt{j} wfreq{j}] = cwt(dd(:,j),d.freq);
+       for k = 1:size(wt{j},2)
             scale(:,k)=normpdf(wfreq{j},f(k),options.bwRatio*f(k));
             scale(:,k)=scale(:,k)/max(scale(:,k));
             wt2{j}(:,k)=wt{j}(:,k).*scale(:,k);
