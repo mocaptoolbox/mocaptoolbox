@@ -164,10 +164,26 @@ fseek(fid,(data.Parameter.POINT.DATA_START.data-1)*512,'bof');
 %Analogue data parameters
 if isfield(data.Parameter,'ANALOG')
     numAnalogue = data.Parameter.ANALOG.USED.data;
-    Alabels = cellstr(data.Parameter.ANALOG.LABELS.data');
-    Ascale = data.Parameter.ANALOG.SCALE.data;
-   Gscale = data.Parameter.ANALOG.GEN_SCALE.data;
-    Aoffset = data.Parameter.ANALOG.OFFSET.data;
+    if isfield(data.Parameter.ANALOG,'LABELS')
+        Alabels = cellstr(data.Parameter.ANALOG.LABELS.data');
+    else
+        Alabels = [];
+    end
+    if isfield(data.Parameter.ANALOG,'SCALE')
+        Ascale = data.Parameter.ANALOG.SCALE.data;
+    else
+        Ascale = [];
+    end
+    if isfield(data.Parameter.ANALOG,'GEN_SCALE')
+        Gscale = data.Parameter.ANALOG.GEN_SCALE.data;
+    else
+        Gscale = [];
+    end
+    if isfield(data.Parameter.ANALOG,'OFFSET')
+        Aoffset = data.Parameter.ANALOG.OFFSET.data;
+    else
+        Aoffset = [];
+    end
 %   issigned = data.Parameter.ANALOG.FORMAT.data';            %comment 161, 162,163,164,166 if error
 %     if strcmp(issigned,'SIGNED');
 %         issigned = 1;
